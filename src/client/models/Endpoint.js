@@ -1,4 +1,5 @@
 import {observable} from 'mobx';
+import Header from './Header';
 
 export default class Endpoint {
   @observable url;
@@ -23,5 +24,13 @@ export default class Endpoint {
 
   setResponse(response) {
     this.response.content = response;
+  }
+  
+  addEmptyHeader() {
+    this.headers.push(new Header('', ''));
+  }
+  
+  removeHeader(index) {
+    this.headers.splice(index, 1);
   }
 }

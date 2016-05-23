@@ -3,6 +3,7 @@ import Container from './Container';
 import Header from './Header';
 import SideBar from './SideBar';
 import RequestPanel from './RequestPanel';
+import LogPanel from './LogPanel';
 import {observer} from 'mobx-react';
 
 @observer
@@ -22,10 +23,13 @@ class App extends Component {
                  setCurrentEndpoint={this.props.state.setCurrentEndpoint}
                />
              </div>
-             <div className="twelve wide column">
+             <div className="thirteen wide column">
                <RequestPanel endpoint={this.props.state.currentRequest} />
              </div>
-           </div>
+             {/*<div className="sixteen wide column">
+              <LogPanel />
+            </div>*/}
+           </div>           
         </div>
       </Container>
     );

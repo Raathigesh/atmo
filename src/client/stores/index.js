@@ -36,8 +36,6 @@ class AppState {
       endpoints: mobx.toJSON(this.endpoints),
       port: this.port
     };
-
-    debugger
     return payload;
   }
 

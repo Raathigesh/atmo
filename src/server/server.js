@@ -8,7 +8,7 @@ var io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
 var apiServer = require('./apiServer');
 
-app.use(express.static(__dirname + '../../dist'));
+app.use(express.static(__dirname + '../../../dist'));
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
 });

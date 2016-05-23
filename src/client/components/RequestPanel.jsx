@@ -10,7 +10,7 @@ const Request = ({endpoint}) => {
       <div className="row">
          <div className="sixteen wide column">
             <Url endpoint={endpoint} />
-            <ResponseHeaders headers={endpoint.headers}/>
+            <ResponseHeaders endpoint={endpoint}/>
             <Response endpoint={endpoint}/>
          </div>
        </div>

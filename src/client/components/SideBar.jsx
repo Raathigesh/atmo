@@ -12,7 +12,7 @@ const SideBar = (props) => {
   });
 
   return (
-    <div className="ui vertical menu">
+    <div className="ui vertical fluid menu">
       {request}
       <div className="item">
         <div className="menu">

@@ -10,23 +10,33 @@ class Header extends Component {
   handleValueChange = (e) => {
     this.props.header.setValue(e.target.value);
   }
+  
+  handleTextBoxClick = () => {
+    if (this.props.isLastHeader) {
+      this.props.onLastHeaderHighlight();
+    }
+  }
+  
+  handleRemoveHeaderClick = () => {
+    this.props.onRemoveEndpoint(this.props.index);
+  }
 
   render () {
     return (
       <tr>
         <td>
           <div className="ui transparent input">
-            <input type="text" placeholder="Key" value={this.props.header.key} onChange={this.handleKeyChange}/>
+            <input type="text" placeholder="Key" value={this.props.header.key} onChange={this.handleKeyChange} onClick={this.handleTextBoxClick}/>
           </div>
         </td>
         <td>
           <div className="ui transparent input">
-            <input type="text" placeholder="Value" value={this.props.header.value} onChange={this.handleValueChange}/>
+            <input type="text" placeholder="Value" value={this.props.header.value} onChange={this.handleValueChange} onClick={this.handleTextBoxClick}/>
           </div>
         </td>
-        <td>
+        {this.props.showClose && <td onClick={this.handleRemoveHeaderClick}>
           <i className="close link icon"></i>
-        </td>
+        </td>}
       </tr>
     );
   }
