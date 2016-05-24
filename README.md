@@ -13,10 +13,10 @@
     <img src="https://img.shields.io/npm/v/hermes-control.svg?style=flat-square"
          alt="NPM Version">
   </a>
+   <h4 align="center">Still under active developement</h4>
 </p>
 <br>
 
-#### Still under active developement
 
 ## Installation
 ```
@@ -24,7 +24,7 @@ $ npm install hermes-control -g
 ```
 
 ## Usage
-Execute following command
+Execute the following command
 ```
 $ hermes-control
 ```
