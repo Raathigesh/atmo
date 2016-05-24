@@ -28,4 +28,12 @@ Execute the following command
 ```
 $ hermes-control
 ```
-Browse http://localhost:3000
+Browse http://localhost:3000 and you shoud see a UI like below.
+
+<p align="center">
+   <img src="https://raw.githubusercontent.com/Raathigesh/Hermes/master/docs/UI.PNG" alt="UI" />
+</p>
+
+## License
+MIT © [Raathigeshan](https://twitter.com/Raathigeshan)
+
