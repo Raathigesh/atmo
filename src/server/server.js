@@ -10,7 +10,7 @@ var apiServer = require('./apiServer');
 
 app.use(express.static(__dirname + '../../../dist'));
 server.listen(port, function () {
-  console.log('Server listening at port %d', port);
+  console.log('API Server listening at port %d', port);
 });
 
 var api = apiServer.createApiServer(5000);

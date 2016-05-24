@@ -11,7 +11,7 @@ module.exports = {
 	],
   output: {
     path: dir_dist, // for standalone building
-    publicPath: '/assets/', // for hot building
+    publicPath: '/', // for hot building
     filename: 'bundle.js'
   },
   resolve: {
@@ -38,7 +38,5 @@ module.exports = {
   ],
   stats: {
     colors: true // Nice colored output
-  },
-  // Create Sourcemaps for the bundle
-  devtool: 'source-map'
+  }
 };

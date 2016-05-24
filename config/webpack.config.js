@@ -13,7 +13,7 @@ module.exports = {
 	],
   output: {
     path: dir_dist, // for standalone building
-    publicPath: '/assets/', // for hot building
+    publicPath: '/', // for hot building
     filename: 'bundle.js'
   },
   resolve: {

@@ -13,7 +13,7 @@ class App extends Component {
       <Container>
         <div className="ui grid">
           <div className="row">
-            <Header onDeploy={this.props.state.deployChanges} />
+            <Header onDeploy={this.props.state.deployChanges} port={this.props.state.port} onPortChange={this.props.state.updatePort}/>
           </div>
           <div className="row hermesDashboard" style={{width: '90% !important'}}>
              <div className="three wide column">

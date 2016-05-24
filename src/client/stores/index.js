@@ -42,6 +42,10 @@ class AppState {
   deployChanges = () => {
     this.beamer.deployChanges(this.getPayload());
   }
+  
+  updatePort = (port) => {
+    this.port = port;
+  }
 };
 
 export default new AppState();
