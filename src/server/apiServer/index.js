@@ -14,12 +14,8 @@ function createApiServer(port){
     res.send('API server running.');
   });
   
-  freeport(function(err, port) {
-    if (err) throw err;
- 
-    server.listen(port, function () {
+  server.listen(port, function () {
       console.log(chalk.green('API is available at: http://localhost:' + port));
-    });
   });
 
   return server;

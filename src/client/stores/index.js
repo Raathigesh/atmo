@@ -9,13 +9,16 @@ import Beamer from '../lib/Beamer';
 class AppState {
   @observable endpoints = [];
   @observable currentRequest;
-  @observable port = 5000;
+  @observable port = 0;
 
   constructor() {
     this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response('json', '{}')));
     this.currentRequest = this.endpoints[0];
 
-    this.beamer = new Beamer('http://localhost:3000');
+    this.beamer = new Beamer('http://localhost:3333');
+    this.beamer.onStart((port) => {
+      this.port = port;
+    });
   }
 
   setCurrentEndpoint = (index) => {
