@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var http = require('http');
 var removeRoute = require('express-remove-route');
+var freeport = require('freeport');
+var chalk = require('chalk');
 
 /**
  * Creates the API server with the specified port.
@@ -11,9 +13,13 @@ function createApiServer(port){
    app.get('/_status', function internalStaus(req, res){
     res.send('API server running.');
   });
-
-  server.listen(port, function () {
-    console.log('Server listening at port %d', port);
+  
+  freeport(function(err, port) {
+    if (err) throw err;
+ 
+    server.listen(port, function () {
+      console.log(chalk.green('API is available at: http://localhost:' + port));
+    });
   });
 
   return server;

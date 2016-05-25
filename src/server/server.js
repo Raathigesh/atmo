@@ -5,13 +5,19 @@ var app = express();
 var http = require('http');
 var server = http.createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
 var apiServer = require('./apiServer');
+var chalk = require('chalk');
+var freeport = require('freeport');
 
 app.use(express.static(__dirname + '../../../dist'));
-server.listen(port, function () {
-  console.log('API Server listening at port %d', port);
-});
+
+  freeport(function(err, port) {
+    if (err) throw err; 
+    server.listen(port, function () {
+      console.log(chalk.blue('Hermes dashboard is available at: http://localhost:' + port));
+    });
+  });
+
 
 var api = apiServer.createApiServer(5000);
 io.on('connection', function(socket) {
@@ -20,8 +26,3 @@ io.on('connection', function(socket) {
     apiServer.deploy(data);
   });
 });
-
-if (module.parent) {
-  server.listen(3000);
-  console.log('listening on port 3000...');
-}
