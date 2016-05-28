@@ -17,7 +17,7 @@ const SideBar = (props) => {
       <div className="item">
         <div className="menu">
           <a className="item" href="#" onClick={props.createEndPoint}>
-            Create Endpoint
+               <i className="plus icon"></i>Create Endpoint
           </a>
         </div>
       </div>

@@ -5,6 +5,9 @@ import SideBar from './SideBar';
 import RequestPanel from './RequestPanel';
 import LogPanel from './LogPanel';
 import {observer} from 'mobx-react';
+import Status from './Status';
+import '../semantic/semantic';
+
 
 @observer
 class App extends Component {
@@ -24,12 +27,14 @@ class App extends Component {
                />
              </div>
              <div className="thirteen wide column">
-               <RequestPanel endpoint={this.props.state.currentRequest} />
+               <RequestPanel 
+                 endpoint={this.props.state.currentRequest} 
+                 responseTypes={this.props.state.responseTypes}
+                 deleteEndpoint={this.props.state.deleteEndpoint}
+                 totalEndpoints={this.props.state.totalEndpoints}/>
+               <Status status={this.props.state.status}/>
              </div>
-             {/*<div className="sixteen wide column">
-              <LogPanel />
-            </div>*/}
-           </div>           
+           </div>
         </div>
       </Container>
     );

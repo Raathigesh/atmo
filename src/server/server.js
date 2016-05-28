@@ -31,7 +31,9 @@ freeport(function(err, port) {
 io.on('connection', function(socket) {
   socket.emit('onStart', apiServerPort)
   socket.on('deploy', function (data) {
-    console.log(data);
-    apiServer.deploy(data);
+    console.log(data.endpoints[0].headers);
+    apiServer.deploy(data, function() {
+        socket.emit('deploymentComplete')
+    });
   });
 });

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {observer} from 'mobx-react';
+import classnames from 'classnames';
 
 @observer
 class Url extends Component {
@@ -29,7 +30,7 @@ class Url extends Component {
              <option value="POST">POST</option>
              <option value="UPDATE">UPDATE</option>
            </select>
-          <div type="button" className="ui blue button">Save</div>
+          <div type="button" className={classnames('ui red button ', {'disabled': this.props.totalEndpoints === 1})} onClick={this.props.deleteEndpoint}>Delete</div>
         </div>
       );
   }

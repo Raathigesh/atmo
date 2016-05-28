@@ -24,17 +24,17 @@ class Header extends Component {
   render () {
     return (
       <tr>
-        <td>
-          <div className="ui transparent input">
+        <td className="six wide">
+          <div className="ui fluid transparent input">
             <input type="text" placeholder="Key" value={this.props.header.key} onChange={this.handleKeyChange} onClick={this.handleTextBoxClick}/>
           </div>
         </td>
-        <td>
-          <div className="ui transparent input">
+        <td className="six wide">
+          <div className="ui fluid transparent input">
             <input type="text" placeholder="Value" value={this.props.header.value} onChange={this.handleValueChange} onClick={this.handleTextBoxClick}/>
           </div>
         </td>
-        {this.props.showClose && <td onClick={this.handleRemoveHeaderClick}>
+        {this.props.showClose && <td  className="one wide center aligned" onClick={this.handleRemoveHeaderClick}>
           <i className="close link icon"></i>
         </td>}
       </tr>

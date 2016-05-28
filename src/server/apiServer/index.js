@@ -24,10 +24,12 @@ function createApiServer(port){
 /**
  * Deployes the new endpoints provided by the UI
  */
-function deploy(spec) {
+function deploy(spec, done) {
   for(var i = 0; i< spec.endpoints.length; i++) {
     addRoute(spec.endpoints[i]);
-  }  
+  } 
+  
+  done();
 }
 
 /**
@@ -38,10 +40,14 @@ function addRoute(endpoint) {
 
   if (endpoint.method === 'GET') {
     app.get(endpoint.url, function(req, res){
+      setHeaders(res, endpoint.headers);
+      setContentTypeHeader(res, endpoint.response.contentType.contentType);
       res.send(endpoint.response.content);
     });
   } else if (endpoint.method === 'POST') {
     app.post(endpoint.url, function(req, res){
+      setHeaders(res, endpoint.headers);
+      setContentTypeHeader(res, endpoint.response.contentType.contentType);
       res.send(endpoint.response.content);
     });
   }
@@ -54,6 +60,16 @@ function removeRouteIfAvailable(endpoint) {
    if(removeRoute.findRoute(app, endpoint.url)) {
        removeRoute(app, endpoint.url);  
     }
+}
+
+function setHeaders(res, headers) {
+  headers.forEach(function(header) {
+    res.set(header.key, header.value);
+  });
+}
+
+function setContentTypeHeader(res, contentType) {
+  res.set('Content-Type', contentType);
 }
 
 module.exports = {
