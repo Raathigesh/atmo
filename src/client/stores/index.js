@@ -6,7 +6,7 @@ import Response from '../models/Response';
 import DevTools from 'mobx-react-devtools';
 import Beamer from '../lib/Beamer';
 import contentTypes from '../models/ContentTypes';
-import { deploying, deployed, failed } from '../models/Statuses';
+import { initial, deploying, deployed, failed } from '../models/Statuses';
 
 class AppState {
   @observable endpoints = [];
@@ -19,12 +19,11 @@ class AppState {
     this.responseTypes = contentTypes;
     this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response('json', '{}')));
     this.currentRequest = this.endpoints[0];
-    this.status = deploying;
+    this.status = initial;
 
     this.beamer = new Beamer('http://localhost:3333');
     this.beamer.onStart((port) => {
       this.port = port;
-      this.status = deployed;
     });
     
     this.beamer.onDeploymentCompletion(() => {

@@ -25,10 +25,18 @@ class Url extends Component {
         <div className="ui right action left icon fluid input">
           <i className="send outline icon"></i>
           <input type="text" placeholder="Url" value={this.props.endpoint.url} onChange={this.handleUrlChange}/>
-          <select ref="requestTypeDropdown" className="ui compact selection dropdown" value={this.props.endpoint.method} onChange={this.handleMethodChange}>
+          <select ref="requestTypeDropdown" className="ui compact selection dropdown endpointTypeDropdown" value={this.props.endpoint.method} onChange={this.handleMethodChange}>
              <option value="GET">GET</option>
              <option value="POST">POST</option>
-             <option value="UPDATE">UPDATE</option>
+             <option value="PUT">PUT</option>
+             <option value="PATCH">PATCH</option>
+             <option value="DELETE">DELETE</option>
+             <option value="COPY">COPY</option>
+             <option value="HEAD">HEAD</option>
+             <option value="OPTIONS">OPTIONS</option>
+             <option value="PURGE">PURGE</option>
+             <option value="LOCK">LOCK</option>
+             <option value="UNLOCK">UNLOCK</option>
            </select>
           <div type="button" className={classnames('ui red button ', {'disabled': this.props.totalEndpoints === 1})} onClick={this.props.deleteEndpoint}>Delete</div>
         </div>

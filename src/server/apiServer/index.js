@@ -40,17 +40,55 @@ function addRoute(endpoint) {
 
   if (endpoint.method === 'GET') {
     app.get(endpoint.url, function(req, res){
-      setHeaders(res, endpoint.headers);
-      setContentTypeHeader(res, endpoint.response.contentType.contentType);
-      res.send(endpoint.response.content);
+      responseCallback(req, res, endpoint);
     });
   } else if (endpoint.method === 'POST') {
     app.post(endpoint.url, function(req, res){
-      setHeaders(res, endpoint.headers);
-      setContentTypeHeader(res, endpoint.response.contentType.contentType);
-      res.send(endpoint.response.content);
+      responseCallback(req, res, endpoint);
+    });
+  } else if (endpoint.method === 'PUT') {
+    app.put(endpoint.url, function(req, res){
+      responseCallback(req, res, endpoint);
+    });
+  } else if (endpoint.method === 'PATCH') {
+    app.patch(endpoint.url, function(req, res){
+      responseCallback(req, res, endpoint);
+    });
+  } else if (endpoint.method === 'DELETE') {
+    app.delete(endpoint.url, function(req, res){
+      responseCallback(req, res, endpoint);
+    });
+  } else if (endpoint.method === 'COPY') {
+    app.copy(endpoint.url, function(req, res){
+      responseCallback(req, res, endpoint);
+    });
+  } else if (endpoint.method === 'HEAD') {
+    app.head(endpoint.url, function(req, res){
+      responseCallback(req, res, endpoint);
+    });
+  } else if (endpoint.method === 'OPTIONS') {
+    app.options(endpoint.url, function(req, res){
+      responseCallback(req, res, endpoint);
+    });
+  } else if (endpoint.method === 'PURGE') {
+    app.purge(endpoint.url, function(req, res){
+      responseCallback(req, res, endpoint);
+    });
+  } else if (endpoint.method === 'LOCK') {
+    app.lock(endpoint.url, function(req, res){
+      responseCallback(req, res, endpoint);
+    });
+  } else if (endpoint.method === 'UNLOCK') {
+    app.unlock(endpoint.url, function(req, res){
+      responseCallback(req, res, endpoint);
     });
   }
+}
+
+function responseCallback(req, res, endpoint) {
+  setHeaders(res, endpoint.headers);
+  setContentTypeHeader(res, endpoint.response.contentType.contentType);
+  res.send(endpoint.response.content);
 }
 
 /**

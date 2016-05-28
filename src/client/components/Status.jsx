@@ -10,9 +10,9 @@ class Status extends Component {
 						{this.props.status.message}
 					</div>
 				</div>
-				<a className={`ui ${this.props.status.color} basic label`}>
+				{this.props.status.miniMessage !== '' && <a className={`ui ${this.props.status.color} basic label`}>
 					{this.props.status.miniMessage}
-				</a> 
+				</a> }
 			</div>
 		);
 	}
