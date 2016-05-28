@@ -24,6 +24,7 @@ class App extends Component {
                  requests={this.props.state.endpoints}
                  createEndPoint={this.props.state.createEndPoint}
                  setCurrentEndpoint={this.props.state.setCurrentEndpoint}
+                 currentEndpoint={this.props.state.currentRequest}
                />
              </div>
              <div className="thirteen wide column">

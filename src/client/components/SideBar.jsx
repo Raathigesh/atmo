@@ -1,12 +1,13 @@
 import React, {PropTypes} from 'react';
 import {observer} from 'mobx-react';
+import classnames from 'classnames';
 
 const SideBar = (props) => {
   let request = props.requests.map((request, index) => {
     return (
-      <a className="item" href="#" onClick={() => { props.setCurrentEndpoint(index) }}>
+      <a className={classnames("item", {active: request === props.currentEndpoint}) }href="#" onClick={() => { props.setCurrentEndpoint(index) }}>
           <div className="ui blue label">{request.method}</div>
-          {request.url}
+          <span className="endpointSidebarLabel">{request.url}</span>
       </a>
     )
   });

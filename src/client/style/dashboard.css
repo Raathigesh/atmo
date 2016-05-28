@@ -14,3 +14,11 @@ body {
 .endpointTypeDropdown {
   width: 105px;
 }
+
+.endpointSidebarLabel {
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  width:190px;
+  display:inline-block;
+}
