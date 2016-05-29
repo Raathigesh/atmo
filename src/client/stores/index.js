@@ -64,6 +64,23 @@ class AppState {
     this.port = port;
   }
   
+  loadSpec = (spec) => {
+    this.endpoints = [];
+    for(let endpoint of spec.endpoints) {
+      let response = new Response(endpoint.response.type, endpoint.response.content);
+      this.endpoints.push(new Endpoint(endpoint.url, endpoint.method, this.getHeadersFromJson(endpoint), response));
+    }
+    this.currentRequest = this.endpoints[0];
+  }
+  
+  getHeadersFromJson = (endpoint) => {
+    let headers = [];
+    for(let header of endpoint.headers) {
+      headers.push(new Header(header.key, header.value));
+    }
+    return headers;
+  }
+  
   deleteEndpoint = () => {
     this.endpoints.forEach((endpoint, index) => {
       if (endpoint === this.currentRequest) {

@@ -22,3 +22,12 @@ body {
   width:190px;
   display:inline-block;
 }
+
+.deployButton {  
+    color: white !important;
+    background-color: #155DCC !important;
+}
+
+.exportImportLabel {
+  color: #91D0FF !important;
+}

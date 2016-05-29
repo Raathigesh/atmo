@@ -4,7 +4,7 @@ const responseTypse = [
 	new ContentType('json', 'application/json'),
 	new ContentType('html', 'application/html'),
 	new ContentType('txt', 'application/txt'),
-	new ContentType('custom', '')
+	new ContentType('none', '')
 ];
 
 export default responseTypse;
