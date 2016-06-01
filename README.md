@@ -26,6 +26,12 @@
 ```
 $ npm install hermes-control -g
 ```
+## Features
+- Http endpoints
+- Static content serving 
+- Export/Import project
+- Sleek UI
+- Much more in development
 
 ## Usage
 Execute the following command
@@ -36,10 +42,6 @@ $ hermes-control
 #### Cli Options
 - `--port` will launch the API server in a specific port (`hermes-control --port 3000`)
 - `--static` will expose the current working directory as static content folder (`hermes-control --static`)
-
-<p align="center">
-   <img src="https://raw.githubusercontent.com/Raathigesh/Hermes/master/docs/UI.PNG" alt="UI" />
-</p>
 
 ## License
 MIT © [Raathigeshan](https://twitter.com/Raathigeshan)
