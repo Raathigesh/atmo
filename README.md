@@ -32,7 +32,10 @@ Execute the following command
 ```
 $ hermes-control
 ```
-Browse http://localhost:3000 and you shoud see a UI like below.
+
+#### Cli Options
+- `--port` will launch the API server in a specific port (`hermes-control --port 3000`)
+- `--static` will expose the current working directory as static content folder (`hermes-control --static`)
 
 <p align="center">
    <img src="https://raw.githubusercontent.com/Raathigesh/Hermes/master/docs/UI.PNG" alt="UI" />
