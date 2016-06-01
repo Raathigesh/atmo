@@ -17,7 +17,7 @@
     <img src="https://img.shields.io/npm/v/hermes-control.svg?style=flat-square"
          alt="NPM Version">
   </a>
-   <h4 align="center">Still under active developement</h4>
+   <h4 align="center">Still under active development</h4>
 </p>
 <br>
 
