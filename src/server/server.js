@@ -8,6 +8,7 @@ var io = require('socket.io')(server);
 var apiServer = require('./apiServer');
 var chalk = require('chalk');
 var freeport = require('freeport');
+var argv = require('yargs').argv;
 
 app.use(express.static(__dirname + '../../../dist'));
 
@@ -24,7 +25,7 @@ var apiServerPort;
 freeport(function(err, port) {
   if (err) throw err;
   apiServerPort = port;
-  api = apiServer.createApiServer(port);
+  api = apiServer.createApiServer(port, argv.static);
 });
 
 

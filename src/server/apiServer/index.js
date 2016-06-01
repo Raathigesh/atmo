@@ -8,8 +8,14 @@ var chalk = require('chalk');
 /**
  * Creates the API server with the specified port.
  */
-function createApiServer(port){
+function createApiServer(port, static){
   var server = http.createServer(app);
+ 
+  if (static) {
+    console.log(process.cwd());
+    app.use(express.static(process.cwd()));  
+  }
+  
    app.get('/_status', function internalStaus(req, res){
     res.send('API server running.');
   });

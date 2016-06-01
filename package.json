@@ -23,7 +23,8 @@
     "express": "^4.13.4",
     "express-remove-route": "^0.1.1",
     "freeport": "^1.0.5",
-    "socket.io": "^1.4.5"
+    "socket.io": "^1.4.5",
+    "yargs": "^4.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
