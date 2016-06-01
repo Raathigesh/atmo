@@ -88,6 +88,7 @@ function addRoute(endpoint) {
 function responseCallback(req, res, endpoint) {
   setHeaders(res, endpoint.headers);
   setContentTypeHeader(res, endpoint.response.contentType.contentType);
+  res.status(endpoint.response.responseCode);
   res.send(endpoint.response.content);
 }
 

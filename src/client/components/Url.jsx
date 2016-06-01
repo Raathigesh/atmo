@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import {observer} from 'mobx-react';
 import classnames from 'classnames';
+import ResponseCode from './ResponseCode';
 
 @observer
 class Url extends Component {
@@ -18,6 +19,10 @@ class Url extends Component {
 
   handleMethodChange = (e) => {
     this.props.endpoint.setMethod(e.target.value);
+  }
+  
+  handleResponseCodeChange = (code) => {
+    this.props.endpoint.response.setResponseCode(code);
   }
 
   render () {
@@ -38,6 +43,7 @@ class Url extends Component {
              <option value="LOCK">LOCK</option>
              <option value="UNLOCK">UNLOCK</option>
            </select>
+          <ResponseCode selectedValue={this.props.endpoint.response.responseCode} onChange={this.handleResponseCodeChange}/>
           <div type="button" className={classnames('ui red button ', {'disabled': this.props.totalEndpoints === 1})} onClick={this.props.deleteEndpoint}>Delete</div>
         </div>
       );
