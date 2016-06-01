@@ -14,8 +14,8 @@ app.use(express.static(__dirname + '../../../dist'));
 
 freeport(function(err, port) {
   if (err) throw err; 
-  server.listen(3333, function () {
-    console.log(chalk.blue('Hermes dashboard is available at: http://localhost:' + 3333));
+  server.listen(port, function () {
+    console.log(chalk.blue('Hermes dashboard is available at: http://localhost:' + port));
   });
 });
 
