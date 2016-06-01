@@ -7,7 +7,7 @@
 			"request": "launch",
 			"program": "${workspaceRoot}/src/server/index.js",
 			"stopOnEntry": false,
-			"args": [],
+			"args": ["--static", "--port", ""],
 			"cwd": "${workspaceRoot}",
 			"preLaunchTask": null,
 			"runtimeExecutable": null,

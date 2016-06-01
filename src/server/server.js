@@ -22,10 +22,12 @@ freeport(function(err, port) {
 
 var api;
 var apiServerPort;
+
 freeport(function(err, port) {
   if (err) throw err;
-  apiServerPort = port;
-  api = apiServer.createApiServer(port, argv.static);
+  console.log(argv.port)
+  apiServerPort = argv.port || port;
+  api = apiServer.createApiServer(apiServerPort, argv.static);
 });
 
 
