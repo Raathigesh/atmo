@@ -1,13 +1,16 @@
 import React, {PropTypes} from 'react';
+import AddEndpoint from './AddEndpoint';
 import {observer} from 'mobx-react';
 import classnames from 'classnames';
 
 const SideBar = (props) => {
   let request = props.requests.map((request, index) => {
     return (
-      <a className={classnames("item", {active: request === props.currentEndpoint}) }href="#" onClick={() => { props.setCurrentEndpoint(index) }}>
-          <div className="ui blue label">{request.method}</div>
-          <span className="endpointSidebarLabel">{request.url}</span>
+      <a className={classnames("item", {active: request === props.currentEndpoint}) }href="#" onClick={() => { props.setCurrentEndpoint(index) }}>          
+          {request.type === 'http' && <div className="ui blue label">{request.method}</div>}
+          {request.type === 'http' && <span className="endpointSidebarLabel"><i className="world icon"></i>{request.url}</span>}
+          {request.type === 'socket' && <span className="endpointSidebarLabel"><i className="lightning icon"></i>{request.eventName}</span>}
+          {request.type === 'gql' && <span className="endpointSidebarLabel"><i className="rocket icon"></i>{request.url}</span>}
       </a>
     )
   });
@@ -16,9 +19,9 @@ const SideBar = (props) => {
     <div className="ui vertical fluid menu">
       {request}
       <div className="item">
-        <div className="menu">
-          <a className="item" href="#" onClick={props.createEndPoint}>
-               <i className="plus icon"></i>Create Endpoint
+        <div className="menu">        
+          <a className="item" href="#" >
+             <AddEndpoint onClick={props.createEndPoint} onCreateSocketEndpoint={props.createSocketEndpoint} createGraphqlEndpoint={props.createGraphqlEndpoint}/>
           </a>
         </div>
       </div>

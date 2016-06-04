@@ -6,13 +6,14 @@ import Response from '../models/Response';
 import DevTools from 'mobx-react-devtools';
 import Beamer from '../lib/Beamer';
 import contentTypes from '../models/ContentTypes';
+import SocketEndpoint from '../models/socket/SocketEndpoint';
+import GraphqlEndpoint from '../models/graphql/GraphqlEndpoint';
 import { initial, deploying, deployed, failed } from '../models/Statuses';
 
 class AppState {
   @observable endpoints = [];
   @observable currentRequest;
   @observable port = 0;
-  @observable reponseTypes;
   @observable status = null;
 
   constructor() {
@@ -22,8 +23,9 @@ class AppState {
     this.status = initial;
 
     this.beamer = new Beamer('http://localhost:3333');
-    this.beamer.onStart((port) => {
-      this.port = port;
+    this.beamer.onStart((data) => {
+      this.port = data.port;
+      this.loadSpec(data.spec);
     });
     
     this.beamer.onDeploymentCompletion(() => {
@@ -42,16 +44,44 @@ class AppState {
     this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response('json', '{}')));
     this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
+  
+  createSocketEndpoint = () => {
+    this.endpoints.push(new SocketEndpoint('', '', '{}'));
+    this.currentRequest = this.endpoints[this.endpoints.length - 1];
+  }
+  
+  createGraphqlEndpoint = () => {
+    this.endpoints.push(new GraphqlEndpoint('', ''));
+    this.currentRequest = this.endpoints[this.endpoints.length - 1];
+  }
 
   updateUrl = (url, index) => {
     this.endpoints[index].url = url;
   }
 
   getPayload = () => {
+    let httpEndpoints = [];
+    let socketEndpoints = [];
+    let graphqlEndpoints = [];
+
+    for(let endpoint of this.endpoints) {
+      if (endpoint.type === 'http') {
+        httpEndpoints.push(endpoint);
+      } else if (endpoint.type === 'socket') {
+        socketEndpoints.push(endpoint);
+      } else if (endpoint.type === 'gql') {
+        graphqlEndpoints.push(endpoint);
+      }
+    }
+
     let payload = {
-      endpoints: mobx.toJSON(this.endpoints),
+      endpoints: mobx.toJSON(httpEndpoints),
+      socketEndpoints: mobx.toJSON(socketEndpoints),
+      graphqlEndpoints: mobx.toJSON(graphqlEndpoints),
       port: this.port
     };
+    
+    
     return payload;
   }
 

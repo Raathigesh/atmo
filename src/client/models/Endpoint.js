@@ -6,12 +6,14 @@ export default class Endpoint {
   @observable method;
   @observable headers;
   @observable response;
+  type;
 
   constructor(url, method, headers, response) {
     this.url = url;
     this.method = method;
     this.headers = headers;
     this.response = response;
+    this.type = 'http';
   }
 
   setUrl(url) {

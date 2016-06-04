@@ -9,11 +9,14 @@ var apiServer = require('./apiServer');
 var chalk = require('chalk');
 var freeport = require('freeport');
 var argv = require('yargs').argv;
+var fs = require('fs');
+var path = require('path');
 
 app.use(express.static(__dirname + '../../../dist'));
 
 freeport(function(err, port) {
   if (err) throw err; 
+  port = 3333;
   server.listen(port, function () {
     console.log(chalk.blue('Hermes dashboard is available at: http://localhost:' + port));
   });
@@ -32,7 +35,11 @@ freeport(function(err, port) {
 
 
 io.on('connection', function(socket) {
-  socket.emit('onStart', apiServerPort)
+  var cacheSpec = JSON.parse(fs.readFileSync(path.join(process.cwd(), '/cache/spec.json')));
+  socket.emit('onStart', {
+      port: apiServerPort,
+      spec: cacheSpec
+    })
   socket.on('deploy', function (data) {
     console.log(data.endpoints[0].headers);
     apiServer.deploy(data, function() {

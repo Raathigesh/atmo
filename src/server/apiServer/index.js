@@ -4,13 +4,63 @@ var http = require('http');
 var removeRoute = require('express-remove-route');
 var freeport = require('freeport');
 var chalk = require('chalk');
+var server = http.createServer(app);
+var io = require('socket.io')(server);
+var apollo = require('apollo-server');
+var fs = require('fs');
+var path = require('path');
+
+const typeDefinitions = `
+type Author {
+  id: Int! # the ! means that every author object _must_ have an id
+  firstName: String
+  lastName: String
+  posts: [Post] # the list of Posts by this author
+}
+type Post {
+  id: Int!
+  tags: [String]
+  title: String
+  text: String
+  views: Int
+  author: Author
+}
+# the schema allows the following two queries:
+type RootQuery {
+  author(firstName: String, lastName: String): Author
+  fortuneCookie: String
+}
+# this schema allows the following two mutations:
+type RootMutation {
+  createAuthor(
+    firstName: String!
+    lastName: String!
+  ): Author
+  createPost(
+    tags: [String!]!
+    title: String!
+    text: String!
+    authorId: Int!
+  ): Post
+}
+# we need to tell the server which types represent the root query
+# and root mutation types. We call them RootQuery and RootMutation by convention.
+schema {
+  query: RootQuery
+  mutation: RootMutation
+}
+`;
+
+const mocks = {
+  String: function() {
+    return "It works!"
+  }
+};
 
 /**
  * Creates the API server with the specified port.
  */
-function createApiServer(port, static){
-  var server = http.createServer(app);
- 
+function createApiServer(port, static) { 
   if (static) {
     console.log(process.cwd());
     app.use(express.static(process.cwd()));  
@@ -18,11 +68,13 @@ function createApiServer(port, static){
   
    app.get('/_status', function internalStaus(req, res){
     res.send('API server running.');
-  });
+  }); 
+
   
   server.listen(port, function () {
       console.log(chalk.green('API is available at: http://localhost:' + port));
   });
+  
 
   return server;
 }
@@ -33,8 +85,10 @@ function createApiServer(port, static){
 function deploy(spec, done) {
   for(var i = 0; i< spec.endpoints.length; i++) {
     addRoute(spec.endpoints[i]);
-  } 
-  
+  }  
+  initializeSocker(spec.socketEndpoints);  
+  registerGraphqlEndpoints(app, spec.graphqlEndpoints);
+  fs.writeFileSync(path.join(process.cwd(), '/cache/spec.json'), JSON.stringify(spec));
   done();
 }
 
@@ -115,6 +169,35 @@ function setHeaders(res, headers) {
 
 function setContentTypeHeader(res, contentType) {
   res.set('Content-Type', contentType);
+}
+
+function initializeSocker(endpoints) {
+  console.log(endpoints);
+  io.on('connection', function(socket) {
+    for(var i = 0; i < endpoints.length; i++) {
+      registerEvent(endpoints[i], socket);
+    }
+  });
+}
+
+function registerEvent(endpoint, socket) {
+  socket.removeAllListeners();
+  socket.on(endpoint.eventName, function(data) {
+    console.log(data);
+    socket.emit(endpoint.eventToEmit, endpoint.payload);
+  });
+}
+
+function registerGraphqlEndpoints(app, endpoints) {
+  if(endpoints[0]) {
+    removeRouteIfAvailable(endpoints[0]);
+    app.use(endpoints[0].url, apollo.apolloServer({
+      graphiql: true,
+        pretty: true,
+        schema: endpoints[0].schema,
+        mocks: mocks
+    }));
+  }    
 }
 
 module.exports = {
