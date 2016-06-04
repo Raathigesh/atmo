@@ -25,7 +25,6 @@
     "express-remove-route": "^0.1.1",
     "freeport": "^1.0.5",
     "graphql": "^0.6.0",
-    "graphql-tools": "^0.5.0",
     "socket.io": "^1.4.5",
     "yargs": "^4.7.1"
   },
