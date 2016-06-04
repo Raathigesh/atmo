@@ -1,5 +1,5 @@
 <h1 align="center">
-  <!--<img src="https://raw.githubusercontent.com/Raathigesh/Hermes/master/docs/Hermes.png" alt="Dazzle" height="300"> -->
+  <img src="https://raw.githubusercontent.com/Raathigesh/Hermes/master/docs/AtmoLogo.png" alt="Dazzle" height="300">
    <br>
   <h4 align="center">UI based Mock API creator</h4>
 </h1>
