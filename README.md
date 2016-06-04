@@ -24,7 +24,7 @@
 
 ## Installation
 ```
-$ npm install hermes-control -g
+$ npm install atmo -g
 ```
 ## Features
 - Http endpoints
@@ -36,12 +36,12 @@ $ npm install hermes-control -g
 ## Usage
 Execute the following command
 ```
-$ hermes-control
+$ atmo
 ```
 
 #### Cli Options
-- `--port` will launch the API server in a specific port (`hermes-control --port 3000`)
-- `--static` will expose the current working directory as static content folder (`hermes-control --static`)
+- `--port` will launch the API server in a specific port (`atmo --port 3000`)
+- `--static` will expose the current working directory as static content folder (`atmo --static`)
 
 ## License
 MIT © [Raathigeshan](https://twitter.com/Raathigeshan)
