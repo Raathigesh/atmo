@@ -27,11 +27,16 @@
 $ npm install atmo -g
 ```
 ## Features
-- Http endpoints
+- Mock Http endpoints
+- Mock Socker endpoints
+- Mock GraphQl endpoints (Experimental)
 - Static content serving 
 - Export/Import project
 - Sleek UI
-- Much more in development
+
+## The Future
+- [Ability to generate a Node JS project](https://github.com/Raathigesh/Atmo/issues/10)
+- [Easy deployment with Zeit's Now](https://github.com/Raathigesh/Atmo/issues/14)
 
 ## Usage
 Execute the following command
