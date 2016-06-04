@@ -28,8 +28,8 @@ $ npm install atmo -g
 ```
 ## Features
 - Mock Http endpoints
-- Mock Socker endpoints
-- Mock GraphQl endpoints (Experimental)
+- Mock Socket endpoints
+- Mock GraphQL endpoints (Experimental)
 - Static content serving 
 - Export/Import project
 - Sleek UI
