@@ -34,10 +34,6 @@ $ npm install atmo -g
 - Export/Import project
 - Sleek UI
 
-## The Future
-- [Ability to generate a Node JS project](https://github.com/Raathigesh/Atmo/issues/10)
-- [Easy deployment with Zeit's Now](https://github.com/Raathigesh/Atmo/issues/14)
-
 ## Usage
 Execute the following command
 ```
@@ -47,6 +43,11 @@ $ atmo
 #### Cli Options
 - `--port` will launch the API server in a specific port (`atmo --port 3000`)
 - `--static` will expose the current working directory as static content folder (`atmo --static`)
+
+
+## The Future
+- [Ability to generate a Node JS project](https://github.com/Raathigesh/Atmo/issues/10)
+- [Easy deployment with Zeit's Now](https://github.com/Raathigesh/Atmo/issues/14)
 
 ## License
 MIT © [Raathigeshan](https://twitter.com/Raathigeshan)
