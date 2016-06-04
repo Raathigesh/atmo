@@ -5,11 +5,11 @@
 </h1>
 
 <p align="center">
-  <a href="https://travis-ci.org/Raathigesh/Hermes">
-    <img src="https://img.shields.io/travis/Raathigesh/Hermes.svg?style=flat-square"
+  <a href="https://travis-ci.org/Raathigesh/Atmo">
+    <img src="https://img.shields.io/travis/Raathigesh/Atmo.svg?style=flat-square"
          alt="Travis Build">
   </a>
-  <a href="https://github.com/Raathigesh/Hermes/blob/master/LICENSE">
+  <a href="https://github.com/Raathigesh/Atmo/blob/master/LICENSE">
     <img src="https://img.shields.io/npm/l/express.svg?maxAge=2592000&style=flat-square"
          alt="License">
   </a>
