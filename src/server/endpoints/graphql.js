@@ -12,15 +12,16 @@ var mocks = {
 };
 
 function registerGraphqlEndpoints(app, endpoints) {
-  if(endpoints[0]) {
-    util.removeRouteIfAvailable(app, endpoints[0]);
-    app.use(endpoints[0].url, apollo.apolloServer({
-      graphiql: true,
-        pretty: true,
-        schema: endpoints[0].schema,
-        mocks: mocks
-    }));
-  }    
+	for (var i = 0; i < endpoints.length; i++) {
+		var endpoint = endpoints[i];
+		util.removeRouteIfAvailable(app, endpoint);
+		app.use(endpoint.url, apollo.apolloServer({
+			graphiql: true,
+			pretty: true,
+			schema: endpoint.schema,
+			mocks: mocks
+		}));
+	}
 }
 
 module.exports = graphqlModule;

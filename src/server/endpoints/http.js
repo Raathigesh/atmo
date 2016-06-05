@@ -2,7 +2,7 @@ var util = require('../apiServer/util');
 
 function httpModule(app, spec) {
 	addStaticDirectory(app, spec);
-	for(var i = 0; i< spec.endpoints.length; i++) {
+	for (var i = 0; i< spec.endpoints.length; i++) {
     	addRoute(app, spec.endpoints[i]);
   	}	  
 }
