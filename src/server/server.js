@@ -28,8 +28,7 @@ var apiServerPort;
 
 freeport(function(err, port) {
   if (err) throw err;
-  console.log(argv.port)
-  apiServerPort = argv.port || port;
+  apiServerPort = argv.port || 3334;
   api = apiServer.createApiServer(apiServerPort, argv.static);
 });
 
@@ -40,12 +39,13 @@ io.on('connection', function(socket) {
     port: apiServerPort,
     spec: cacheSpec
   });
+
   socket.on('deploy', function (data) {
     apiServer.deploy(data, function() {
         socket.emit('deploymentComplete')
     });
   });
-  
+   
   socket.on('save', function (spec) {
     fs.writeFileSync(path.join(process.cwd(), '/cache/spec.json'), JSON.stringify(spec));
   });
