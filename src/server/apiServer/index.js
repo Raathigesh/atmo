@@ -88,7 +88,6 @@ function deploy(spec, done) {
   }  
   initializeSocker(spec.socketEndpoints);  
   registerGraphqlEndpoints(app, spec.graphqlEndpoints);
-  fs.writeFileSync(path.join(process.cwd(), '/cache/spec.json'), JSON.stringify(spec));
   done();
 }
 

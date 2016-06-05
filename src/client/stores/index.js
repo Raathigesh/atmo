@@ -18,8 +18,7 @@ class AppState {
 
   constructor() {
     this.responseTypes = contentTypes;
-    this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response('json', '{}')));
-    this.currentRequest = this.endpoints[0];
+    this.initialize();
     this.status = initial;
 
     this.beamer = new Beamer('http://localhost:3333');
@@ -80,14 +79,17 @@ class AppState {
       graphqlEndpoints: mobx.toJSON(graphqlEndpoints),
       port: this.port
     };
-    
-    
+
     return payload;
   }
 
   deployChanges = () => {
     this.status = deploying;
     this.beamer.deployChanges(this.getPayload());
+  }
+  
+  saveChanges = () => {
+    this.beamer.saveChanges(this.getPayload());
   }
   
   updatePort = (port) => {
@@ -122,6 +124,12 @@ class AppState {
         }
       }   
     });   
+  }
+  
+  initialize = () => {
+    this.endpoints = [];
+    this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response('json', '{}')));
+    this.currentRequest = this.endpoints[0];
   }
   
   @computed get totalEndpoints() {

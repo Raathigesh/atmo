@@ -37,13 +37,16 @@ freeport(function(err, port) {
 io.on('connection', function(socket) {
   var cacheSpec = JSON.parse(fs.readFileSync(path.join(process.cwd(), '/cache/spec.json')));
   socket.emit('onStart', {
-      port: apiServerPort,
-      spec: cacheSpec
-    })
+    port: apiServerPort,
+    spec: cacheSpec
+  });
   socket.on('deploy', function (data) {
-    console.log(data.endpoints[0].headers);
     apiServer.deploy(data, function() {
         socket.emit('deploymentComplete')
     });
+  });
+  
+  socket.on('save', function (spec) {
+    fs.writeFileSync(path.join(process.cwd(), '/cache/spec.json'), JSON.stringify(spec));
   });
 });

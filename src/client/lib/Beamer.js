@@ -14,6 +14,10 @@ export default class Beamer {
     this.connection.emit('deploy', payload);
   }
   
+  saveChanges = (spec) => {
+    this.connection.emit('save', spec);
+  }
+  
   
   onDeploymentCompletion(callback) {
      this.connection.on('deploymentComplete', callback);

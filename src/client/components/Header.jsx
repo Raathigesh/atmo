@@ -8,7 +8,6 @@ class Header extends Component {
 
   componentDidMount() {
     this.refs.importInput.addEventListener('change', (event) => {
-      debugger
       var input = event.target;
 
       var reader = new FileReader();
@@ -44,6 +43,20 @@ class Header extends Component {
               </a>
             </div>
           </div>
+          <div className="item">
+            <div className="ui small icon" >
+              <a className="ui upload grey inverted basic icon button" onClick={this.props.save}>
+                <i className="icon save"></i> Save
+              </a>
+            </div>
+          </div>
+          <div className="item">
+            <div className="ui small icon" >
+              <a className="ui upload grey inverted basic icon button" onClick={this.props.initialize}>
+                <i className="icon erase"></i> Reset
+              </a>
+            </div>
+          </div>          
           <a href="#" className="right item deployButton" onClick={this.props.onDeploy} >
               <i className="icon send outline"></i>
               Deploy
