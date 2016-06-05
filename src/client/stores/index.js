@@ -102,6 +102,15 @@ class AppState {
       let response = new Response(endpoint.response.type, endpoint.response.content);
       this.endpoints.push(new Endpoint(endpoint.url, endpoint.method, this.getHeadersFromJson(endpoint), response));
     }
+
+    for(let endpoint of spec.socketEndpoints) {
+      this.endpoints.push(new SocketEndpoint(endpoint.eventName, endpoint.eventToEmit, endpoint.payload));
+    }
+
+    for(let endpoint of spec.graphqlEndpoints) {
+      this.endpoints.push(new GraphqlEndpoint(endpoint.url, endpoint.schema));
+    }
+
     this.currentRequest = this.endpoints[0];
   }
   
