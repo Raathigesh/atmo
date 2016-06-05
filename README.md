@@ -46,7 +46,7 @@ $ atmo
 
 ## Sleek UI huh?
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/UI.PNG" alt="Atmo" >   
+  <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoUi.PNG" alt="Atmo" >   
 </h1>
 
 ## The Future
