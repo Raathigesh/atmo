@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/Raathigesh/Hermes/master/docs/AtmoLogo.png" alt="Atmo" height="300">
+  <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoLogo.png" alt="Atmo" height="300">
    <br>
   <h4 align="center">Mock Http, Socket, Graphql Endpoints with ease</h4>
 </h1>
@@ -44,6 +44,10 @@ $ atmo
 - `--port` will launch the API server in a specific port (`atmo --port 3000`)
 - `--static` will expose the current working directory as static content folder (`atmo --static`)
 
+## Sleek UI huh?
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/UI.PNG" alt="Atmo" >   
+</h1>
 
 ## The Future
 - [Ability to generate a Node JS project](https://github.com/Raathigesh/Atmo/issues/10)
