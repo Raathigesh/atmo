@@ -25,9 +25,9 @@ class Header extends Component {
     return (
       <div className="ui fluid small menu hermesHeader">
         <div className="ui container"  style={{width: '90% !important'}}>
-        {/*<div className="item">
-          <img src={require("../asset/DashboardLogo.png")} />
-        </div>*/}
+        {<div className="item">
+          <img src={require("../asset/Logo.png")} style={{width: '135px', height: '45px'}}/> 
+        </div>}
           <div className="item">
             <div>
               <label htmlFor="file" className="ui icon blue basic button"  style={{color: '#91D0FF !important'}}>
