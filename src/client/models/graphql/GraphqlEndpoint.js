@@ -6,9 +6,9 @@ export default class GraphqlEndpoint {
   type;
 
   constructor(url, schema) {
-    this.url = schema;
+    this.url = url;
     this.schema = schema;
-	this.type = 'gql';
+	  this.type = 'gql';
   }
 
   setUrl(url) {

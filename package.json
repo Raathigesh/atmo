@@ -1,7 +1,7 @@
 {
   "name": "atmo",
-  "version": "0.3.0",
-  "description": "Mock API server with UI",
+  "version": "0.4.0",
+  "description": "Mocking Http, Socket, Graphql Endpoints made with ease through UI",
   "main": "src/server/index.js",
   "scripts": {
     "start": "nodemon src/server/index.js",
