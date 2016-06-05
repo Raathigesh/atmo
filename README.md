@@ -45,9 +45,7 @@ $ atmo
 - `--static` will expose the current working directory as static content folder (`atmo --static`)
 
 ## Sleek UI huh?
-<h1 align="center">
-  <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoUi.PNG" alt="Atmo" >   
-</h1>
+<img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoUi.PNG" alt="Atmo" >
 
 ## The Future
 - [Ability to generate a Node JS project](https://github.com/Raathigesh/Atmo/issues/10)
