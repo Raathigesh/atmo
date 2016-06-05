@@ -4,6 +4,8 @@ import AceEditor from 'react-ace';
 
 import 'brace/mode/json';
 import 'brace/mode/html';
+import 'brace/mode/xml';
+import 'brace/mode/markdown';
 import 'brace/theme/tomorrow';
 
 class Response extends React.Component {
@@ -12,13 +14,15 @@ class Response extends React.Component {
   }
   
   getMode = () => {
-    let mode = '';
+    let mode = 'markdown';
     let contentType = this.props.endpoint.response.contentType.type;
     
-    if (contentType === 'json') {
+    if (contentType === 'JSON') {
       mode = 'json';
-    } else if (contentType === 'html') {
+    } else if (contentType === 'Html') {
       mode = 'html';
+    } else if (contentType === 'XML') {
+      mode = 'xml';
     }
     
     return mode;
@@ -35,6 +39,7 @@ class Response extends React.Component {
             width="100%"
             onChange={this.handleChange}
             value={this.props.endpoint.response.content}
+            enableBasicAutocompletion={true}
           />
         </div>
       )
