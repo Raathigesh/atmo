@@ -7,9 +7,9 @@ class AddEndpoint extends Component {
 
     render() {
         return (
-        <div className="ui fluid blue buttons">
+        <div className="ui inverted blue buttons">
             <div className="ui button" onClick={this.props.onClick}>
-                Http Endpoint
+                New Http Endpoint
             </div>
             <div  ref="createEndpointDropdown" className="ui floating dropdown icon button">
                 <i className="dropdown icon"></i>

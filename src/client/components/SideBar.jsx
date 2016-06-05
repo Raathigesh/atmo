@@ -18,13 +18,6 @@ const SideBar = (props) => {
   return (
     <div className="ui vertical fluid menu">
       {request}
-      <div className="item">
-        <div className="menu">        
-          <a className="item" href="#" >
-             <AddEndpoint onClick={props.createEndPoint} onCreateSocketEndpoint={props.createSocketEndpoint} createGraphqlEndpoint={props.createGraphqlEndpoint}/>
-          </a>
-        </div>
-      </div>
     </div>
   );
 }

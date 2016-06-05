@@ -26,20 +26,20 @@ class App extends Component {
               state={this.props.state}
               initialize={this.props.state.initialize}
               save={this.props.state.saveChanges}
+              createEndPoint={this.props.state.createEndPoint}
+              createSocketEndpoint={this.props.state.createSocketEndpoint}
+              createGraphqlEndpoint={this.props.state.createGraphqlEndpoint}
             />
           </div>
           <div className="row hermesDashboard" style={{width: '90% !important'}}>
-             <div className="three wide column">
+             <div className="four wide column">
                <SideBar
-                 requests={this.props.state.endpoints}
-                 createEndPoint={this.props.state.createEndPoint}
-                 setCurrentEndpoint={this.props.state.setCurrentEndpoint}
                  currentEndpoint={this.props.state.currentRequest}
-                 createSocketEndpoint={this.props.state.createSocketEndpoint}
-                 createGraphqlEndpoint={this.props.state.createGraphqlEndpoint}
+                 requests={this.props.state.endpoints}
+                 setCurrentEndpoint={this.props.state.setCurrentEndpoint}                
                />
              </div>
-             <div className="thirteen wide column">
+             <div className="twelve wide column">
                {this.props.state.currentRequest.type === 'http' && <HttpRequestPanel 
                  endpoint={this.props.state.currentRequest} 
                  responseTypes={this.props.state.responseTypes}
