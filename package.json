@@ -1,6 +1,6 @@
 {
   "name": "atmo",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Mocking Http, Socket, Graphql Endpoints made with ease through UI",
   "main": "src/server/index.js",
   "scripts": {
@@ -23,6 +23,7 @@
     "chalk": "^1.1.3",
     "express": "^4.13.4",
     "express-remove-route": "^0.1.1",
+    "file-exists": "^1.0.0",
     "freeport": "^1.0.5",
     "graphql": "^0.5.0",
     "socket.io": "^1.4.5",
@@ -56,7 +57,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "bin": {
-    "atmo": "src/server/index.js"    
+    "atmo": "src/server/index.js"
   },
   "babel": {
     "presets": [

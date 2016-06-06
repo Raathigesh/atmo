@@ -11,6 +11,8 @@ var freeport = require('freeport');
 var argv = require('yargs').argv;
 var fs = require('fs');
 var path = require('path');
+var fileExists = require('file-exists');
+var cacheFilePath = path.join(__dirname, '../../cache/spec.json');
 
 app.use(express.static(__dirname + '../../../dist'));
 
@@ -32,9 +34,12 @@ freeport(function(err, port) {
   api = apiServer.createApiServer(apiServerPort, argv.static);
 });
 
-
 io.on('connection', function(socket) {
-  var cacheSpec = JSON.parse(fs.readFileSync(path.join(process.cwd(), '/cache/spec.json')));
+ var cacheSpec = {};
+ if (fileExists(cacheFilePath)) {
+   cacheSpec = JSON.parse(fs.readFileSync(cacheFilePath));
+ }
+  
   socket.emit('onStart', {
     port: apiServerPort,
     spec: cacheSpec
@@ -47,6 +52,6 @@ io.on('connection', function(socket) {
   });
    
   socket.on('save', function (spec) {
-    fs.writeFileSync(path.join(process.cwd(), '/cache/spec.json'), JSON.stringify(spec));
+    fs.writeFileSync(cacheFilePath, JSON.stringify(spec));
   });
 });
