@@ -6,6 +6,7 @@ import Response from '../models/Response';
 import DevTools from 'mobx-react-devtools';
 import Beamer from '../lib/Beamer';
 import contentTypes from '../models/ContentTypes';
+import ContentType from '../models/ContentType';
 import SocketEndpoint from '../models/socket/SocketEndpoint';
 import GraphqlEndpoint from '../models/graphql/GraphqlEndpoint';
 import { initial, deploying, deployed, failed } from '../models/Statuses';
@@ -40,7 +41,7 @@ class AppState {
   }
 
   createEndPoint = () => {
-    this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response('json', '{}')));
+    this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response(contentTypes[0], '{}')));
     this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
   
@@ -98,9 +99,8 @@ class AppState {
   
   loadSpec = (spec) => {
     this.endpoints = [];
-    for(let endpoint of spec.endpoints) {
-      
-      let response = new Response(endpoint.response.type, endpoint.response.content);
+    for(let endpoint of spec.endpoints) {      
+      let response = new Response(new ContentType(endpoint.response.contentType.type, endpoint.response.contentType.contentType), endpoint.response.content);
       this.endpoints.push(new Endpoint(endpoint.url, endpoint.method, this.getHeadersFromJson(endpoint), response));
     }
 
@@ -138,7 +138,7 @@ class AppState {
   
   initialize = () => {
     this.endpoints = [];
-    this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response('json', '{}')));
+    this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response(contentTypes[0], '{}')));
     this.currentRequest = this.endpoints[0];
   }
   

@@ -6,10 +6,6 @@ class ResponseType extends Component {
   componentDidMount() {
     $(this.refs.responseTypeDowndrop).dropdown();
   }
-
- /* componentDidUpdate() {
-    $(this.refs.responseTypeDowndrop).dropdown('set selected', this.props.responseType);
-  }*/
 	
 	changeContentType = (index) => {
 		this.props.response.setContentType(this.props.responseTypes[index]);
@@ -21,13 +17,13 @@ class ResponseType extends Component {
   
 	render() {
 		let items = this.props.responseTypes.map((reponseType, index) => {
-			 	let className = 'item';
-				
-				if (reponseType.type === this.props.contentType.type) {
-					className += ' active selected';
-				} 
-				
-				return <div className={className} onClick={() => {this.changeContentType(index)}}>{reponseType.type}</div>
+			let className = 'item';
+			
+			if (reponseType.type === this.props.contentType.type) {
+				className += ' active selected';
+			} 
+			
+			return <div className={className} onClick={() => {this.changeContentType(index)}}>{reponseType.type}</div>
 		});
 
 		return (
