@@ -13,8 +13,10 @@ var fs = require('fs');
 var path = require('path');
 var fileExists = require('file-exists');
 var cacheFilePath = path.join(__dirname, '../../cache/spec.json');
+var pack = require('../../package.json');
 
 app.use(express.static(__dirname + '../../../dist'));
+
 
 freeport(function(err, port) {
   if (err) throw err; 
