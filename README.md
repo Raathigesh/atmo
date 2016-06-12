@@ -32,7 +32,8 @@ $ npm install atmo -g
 - Mock GraphQL endpoints (Experimental)
 - Static content serving 
 - Export/Import project
-- Code generation
+- Code generation through generators
+- Easy deployment with https://zeit.co/now
 - Sleek UI
 
 ### Generators
@@ -46,7 +47,7 @@ $ atmo
 ```
 
 #### Cli Options
-- `--port` will launch the API server in a specific port (`atmo --port 3000`)
+- `--port` will launch the API server in a specific port. Default port is 3334. (`atmo --port 3000`)
 - `--static` will expose the current working directory as static content folder (`atmo --static`)
 
 ## Sleek UI huh?
