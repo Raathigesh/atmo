@@ -41,6 +41,11 @@ class AppState {
       this.msg = `${response.generatorName} is installed`;
       this.generators = response.generators;
     });
+
+    this.beamer.onMessage((message) => {
+      this.msg = message;
+      this.msg = '';
+    });
   }
 
   setCurrentEndpoint = (index) => {
@@ -149,7 +154,7 @@ class AppState {
 
   initialize = () => {
     this.endpoints = [];
-    this.endpoints.push(new Endpoint('/', 'GET', [new Header('cross-origin', '*')], new Response(contentTypes[0], '{}')));
+    this.endpoints.push(new Endpoint('/', 'GET', [new Header('Access-Control-Allow-Origin', '*')], new Response(contentTypes[0], '{}')));
     this.currentRequest = this.endpoints[0];
   }
 

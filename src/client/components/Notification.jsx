@@ -3,7 +3,7 @@ import ReactNotification from 'react-notification-system';
 
 class Notification extends Component {
 	componentWillReceiveProps(nextProps) {
-			if(this.props.msg !== nextProps.msg) {
+			if(this.props.msg !== nextProps.msg && nextProps.msg !== '') {
 				this.refs.notifications.addNotification({
 				message: nextProps.msg,
 				level: 'success'

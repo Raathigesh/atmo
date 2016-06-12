@@ -34,4 +34,8 @@ export default class Beamer {
   onNewGeneratorInstallation(callback) {
     this.connection.on('generatorInstalled', callback);
   }
+
+  onMessage(callback) {
+    this.connection.on('message', callback);
+  }
 }

@@ -55,12 +55,14 @@ if (argv.generator) {
 
     socket.on('deploy', function (data) {
       apiServer.deploy(data, function() {
-          socket.emit('deploymentComplete')
+          socket.emit('deploymentComplete');
+          socket.emit('message', 'Your changes are deployed!')
       });
     });
     
     socket.on('save', function (spec) {
       fs.writeFileSync(cacheFilePath, JSON.stringify(spec));
+      socket.emit('message', 'Your changes are saved locally.')
     });
 
     socket.on('generate', function (payload) {
@@ -78,7 +80,6 @@ function addGenarator(name) {
   var generatorsData = jsonfile.readFileSync(generatorsDataFile);
   generatorsData.generators.push(name);
   jsonfile.writeFileSync(generatorsDataFile, generatorsData);
-
   return generatorsData;
 }
 
@@ -93,15 +94,13 @@ function installGenerator(name, socket) {
   };
   npmi(options, function (err, result) {
       if (err) {
-          if      (err.code === npmi.LOAD_ERR)    console.log('npm load error');
-          else if (err.code === npmi.INSTALL_ERR) console.log('npm install error');
-          return console.log(err.message);
+          socket.emit('message', err.message)
+      } else {
+        var generators = addGenarator(name);
+        socket.emit('generatorInstalled', {
+          generatorName: options.name,
+          generators: generators.generators
+        });
       }
-
-      var generators = addGenarator(name);
-      socket.emit('generatorInstalled', {
-        generatorName: options.name,
-        generators: generators.generators
-      })
   });
 }
