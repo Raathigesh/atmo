@@ -31,7 +31,8 @@ $ npm install atmo -g
 - Mock Socket endpoints
 - Mock GraphQL endpoints (Experimental)
 - Static content serving 
-- Export/Import project
+- Export and share your project through a single json file
+- Import an atmo project from your colleague or team
 - Code generation through generators
 - Easy deployment with https://zeit.co/now
 - Sleek UI
