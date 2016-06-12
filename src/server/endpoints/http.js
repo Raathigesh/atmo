@@ -1,16 +1,9 @@
 var util = require('../apiServer/util');
 
 function httpModule(app, spec) {
-	addStaticDirectory(app, spec);
 	for (var i = 0; i< spec.endpoints.length; i++) {
     	addRoute(app, spec.endpoints[i]);
   	}	  
-}
-
-function addStaticDirectory(app, spec) {
-	if(spec.static) {
-		app.use(express.static(process.cwd()));  
-	}
 }
 
 /**

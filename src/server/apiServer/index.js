@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var http = require('http');
+var path = require('path');
 var chalk = require('chalk');
 var server = http.createServer(app);
 var io = require('socket.io')(server);
@@ -15,7 +16,12 @@ var graphqlModule = require('../endpoints/graphql');
 function createApiServer(port, static) {  
    app.get('/_status', function internalStaus(req, res){
     res.send('API server running.');
-  });  
+  });
+
+  if(static) {
+		app.use(express.static(path.join(process.cwd(), 'public')));  
+	}
+
   server.listen(port, function () {
       console.log(chalk.green('API is available at: http://localhost:' + port));
   });
