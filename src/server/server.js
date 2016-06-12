@@ -24,7 +24,7 @@ freeport(function(err, port) {
   if (err) throw err; 
   port = 3333;
   server.listen(port, function () {
-    console.log(chalk.blue('Hermes dashboard is available at: http://localhost:' + port));
+    console.log(chalk.blue('Atmo dashboard is available at: http://localhost:' + port));
   });
 });
 
@@ -55,6 +55,7 @@ io.on('connection', function(socket) {
         socket.emit('deploymentComplete');
         socket.emit('message', 'Your changes are deployed!')
     });
+    fs.writeFileSync(cacheFilePath, JSON.stringify(data));
   });
   
   socket.on('save', function (spec) {
@@ -65,6 +66,7 @@ io.on('connection', function(socket) {
   socket.on('generate', function (payload) {
     var renerator = require(payload.generator);
     renerator(payload.spec);
+    socket.emit('message', 'Your generated project is available in ' + path.join(process.cwd(), 'build'))
   });
 
   socket.on('installGenerator', function(name){
