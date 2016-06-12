@@ -17,9 +17,21 @@ export default class Beamer {
   saveChanges = (spec) => {
     this.connection.emit('save', spec);
   }
+
+  generateProject = (spec) => {
+    this.connection.emit('generate', spec);
+  }
+
+  installGenerator= (name) => {
+    this.connection.emit('installGenerator', name);
+  }
   
   
   onDeploymentCompletion(callback) {
      this.connection.on('deploymentComplete', callback);
+  }
+
+  onNewGeneratorInstallation(callback) {
+    this.connection.on('generatorInstalled', callback);
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import AddEndpoint from './AddEndpoint';
+import Generator from './Generator';
 import FileSaver from 'file-saver';
 
 class Header extends Component {
@@ -25,21 +26,19 @@ class Header extends Component {
   render() {
     return (
       <div className="ui fluid small menu hermesHeader">
-        <div className="ui container"  style={{width: '90% !important'}}>
-        {<div className="item">
-          <img src={require("../asset/Logo.png")} style={{width: '135px', height: '45px'}}/> 
-        </div>}        
+        <div className="ui container"  style={{ width: '90% !important' }}>
+          {<div className="item">
+            <img src={require("../asset/Logo.png") } style={{ width: '135px', height: '45px' }}/>
+          </div>}
           <div className="item">
             <AddEndpoint onClick={this.props.createEndPoint} onCreateSocketEndpoint={this.props.createSocketEndpoint} createGraphqlEndpoint={this.props.createGraphqlEndpoint}/>
           </div>
-           <div className="item">
+          <div className="item">
             <div className="ui small icon" >
               <a className="ui upload blue inverted icon button" onClick={this.props.save}>
                 <i className="icon save"></i> Save
               </a>
             </div>
-          </div>
-          <div className="item">
             <div className="ui small icon" >
               <a className="ui upload blue inverted icon button" onClick={this.props.initialize}>
                 <i className="icon erase"></i> Reset
@@ -50,20 +49,19 @@ class Header extends Component {
             <div>
               <label htmlFor="file" className="ui icon blue inverted button"  >
                 <i className="file icon"></i> Import
-               </label>
+              </label>
               <input ref="importInput" id="file" type='file' accept='json/*' style={{ display: 'none' }}/>
             </div>
-          </div>
-          <div className="item">
             <div className="ui small icon" >
               <a className="ui upload blue inverted icon button" ref="export" href="" onClick={this.onDownload} download="spec.json">
                 <i className="icon upload"></i> Export
               </a>
             </div>
-          </div>         
+            <Generator generators={this.props.generators} onGenerate={this.props.generateProject} installGenerator={this.props.installGenerator}/>
+          </div>
           <a href="#" className="right item deployButton" onClick={this.props.onDeploy} >
-              <i className="icon send outline"></i>
-              Deploy
+            <i className="icon send outline"></i>
+            Deploy
           </a>
           <div className="item">
             <div className="ui inverted transparent left icon input">
@@ -78,7 +76,9 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  spec: PropTypes.obj
+  spec: PropTypes.obj,
+  generators: PropTypes.obj,
+  generateProject: PropTypes.func
 }
 
 export default Header;

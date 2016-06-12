@@ -8,12 +8,12 @@ import GraphqlPanel from './graphql/GraphqlPanel';
 import LogPanel from './LogPanel';
 import {observer} from 'mobx-react';
 import Status from './Status';
+import Notification from './Notification';
 import '../semantic/semantic';
 
 
 @observer
 class App extends Component {
-  
   render () {
     return (
       <Container>
@@ -29,6 +29,9 @@ class App extends Component {
               createEndPoint={this.props.state.createEndPoint}
               createSocketEndpoint={this.props.state.createSocketEndpoint}
               createGraphqlEndpoint={this.props.state.createGraphqlEndpoint}
+              generateProject={this.props.state.generateProject}
+              generators={this.props.state.generators}
+              installGenerator={this.props.state.installGenerator}
             />
           </div>
           <div className="row hermesDashboard" style={{width: '90% !important'}}>
@@ -50,6 +53,7 @@ class App extends Component {
                <Status status={this.props.state.status}/>
              </div>
            </div>
+           <Notification msg={this.props.state.msg}/>
         </div>
       </Container>
     );

@@ -16,6 +16,8 @@ class AppState {
   @observable currentRequest;
   @observable port = 0;
   @observable status = null;
+  @observable generators = [];
+  @observable msg = null;
 
   constructor() {
     this.responseTypes = contentTypes;
@@ -26,14 +28,19 @@ class AppState {
     this.beamer.onStart((data) => {
       this.port = data.port;
       this.loadSpec(data.spec);
+      this.generators = data.generators;
     });
     
     this.beamer.onDeploymentCompletion(() => {
       setTimeout(() => {
         this.status = deployed;  
-      }, 800);
-      
-    })
+      }, 800);      
+    });
+
+    this.beamer.onNewGeneratorInstallation((response) => {
+      this.msg = `${response.generatorName} is installed`;
+      this.generators = response.generators;
+    });
   }
 
   setCurrentEndpoint = (index) => {
@@ -144,6 +151,18 @@ class AppState {
   
   @computed get totalEndpoints() {
     return this.endpoints.length;
+  }
+
+  generateProject = (generator) => {
+    this.beamer.generateProject({
+      spec: this.getPayload(),
+      generator: generator
+    });
+  }
+
+  installGenerator = (name) => {
+    this.msg = `Started installing ${name}`;
+    this.beamer.installGenerator(name);
   }
 };
 

@@ -31,3 +31,8 @@ body {
 .exportImportLabel {
   color: #91D0FF !important;
 }
+
+.exportProjectButton {
+  height: 36px;
+  padding-top: 12px !important;
+}
