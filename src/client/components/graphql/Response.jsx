@@ -22,6 +22,7 @@ class Response extends React.Component {
             width="100%"
             onChange={this.handleChange}
             value={this.props.endpoint.schema}
+            fontSize={14}
           />
         </div>
       )

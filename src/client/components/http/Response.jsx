@@ -40,6 +40,7 @@ class Response extends React.Component {
             onChange={this.handleChange}
             value={this.props.endpoint.response.content}
             enableBasicAutocompletion={true}
+            fontSize={14}
           />
         </div>
       )
