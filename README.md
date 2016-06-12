@@ -32,7 +32,12 @@ $ npm install atmo -g
 - Mock GraphQL endpoints (Experimental)
 - Static content serving 
 - Export/Import project
+- Code generation
 - Sleek UI
+
+### Generators
+Generators are responsible for the code generation.
+- [ExpressJS/ES5 Generator](https://github.com/Raathigesh/AtmoExpressES5Generator) - `atmo-gen-expressjs-es5`
 
 ## Usage
 Execute the following command
@@ -46,10 +51,6 @@ $ atmo
 
 ## Sleek UI huh?
 <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoUi.PNG" alt="Atmo" >
-
-## The Future
-- [Ability to generate a Node JS project](https://github.com/Raathigesh/Atmo/issues/10)
-- [Easy deployment with Zeit's Now](https://github.com/Raathigesh/Atmo/issues/14)
 
 ## License
 MIT © [Raathigeshan](https://twitter.com/Raathigeshan)
