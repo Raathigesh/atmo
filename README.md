@@ -54,6 +54,8 @@ $ atmo
 ## Sleek UI huh?
 <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoUi.PNG" alt="Atmo" >
 
+Thanks [Kreativa Studio](http://www.kreativa-studio.com/) for the free logo
+
 ## License
 MIT © [Raathigeshan](https://twitter.com/Raathigeshan)
 
