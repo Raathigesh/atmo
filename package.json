@@ -27,9 +27,11 @@
     "file-exists": "^1.0.0",
     "freeport": "^1.0.5",
     "graphql": "^0.5.0",
+    "json-server": "^0.8.14",
     "jsonfile": "^2.3.1",
     "mustache": "^2.2.1",
     "npmi": "^2.0.1",
+    "server-destroy": "^1.0.1",
     "socket.io": "^1.4.5",
     "yargs": "^4.7.1"
   },

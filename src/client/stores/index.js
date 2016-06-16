@@ -9,6 +9,7 @@ import contentTypes from '../models/ContentTypes';
 import ContentType from '../models/ContentType';
 import SocketEndpoint from '../models/socket/SocketEndpoint';
 import GraphqlEndpoint from '../models/graphql/GraphqlEndpoint';
+import JsonServerEndpoint from '../models/jsonServer/JsonServerEndpoint';
 import { initial, deploying, deployed, failed } from '../models/Statuses';
 
 class AppState {
@@ -67,6 +68,25 @@ class AppState {
     this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
 
+  createJsonServerEndpoint = () => {
+    if (!this.isAnyJsonServerEndpointAvailable()) {
+      this.endpoints.push(new JsonServerEndpoint('/api', '{}'));
+      this.currentRequest = this.endpoints[this.endpoints.length - 1];
+    } else {
+      this.msg = 'Only one json-server endpoint is supported at a time.'
+    }
+  }
+
+  isAnyJsonServerEndpointAvailable = () => {
+    for(let endpoint of this.endpoints) {
+      if (endpoint.type === 'jsonServer') {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   updateUrl = (url, index) => {
     this.endpoints[index].url = url;
   }
@@ -75,6 +95,7 @@ class AppState {
     let httpEndpoints = [];
     let socketEndpoints = [];
     let graphqlEndpoints = [];
+    let jsonServerEndpoint = null;
 
     for (let endpoint of this.endpoints) {
       if (endpoint.type === 'http') {
@@ -83,6 +104,8 @@ class AppState {
         socketEndpoints.push(endpoint);
       } else if (endpoint.type === 'gql') {
         graphqlEndpoints.push(endpoint);
+      } else if (endpoint.type === 'jsonServer') {
+        jsonServerEndpoint = endpoint;
       }
     }
 
@@ -90,7 +113,7 @@ class AppState {
       endpoints: mobx.toJSON(httpEndpoints),
       socketEndpoints: mobx.toJSON(socketEndpoints),
       graphqlEndpoints: mobx.toJSON(graphqlEndpoints),
-      port: this.port
+      jsonServerEndpoint: jsonServerEndpoint
     };
 
     return payload;
@@ -112,7 +135,7 @@ class AppState {
   loadSpec = (spec) => {
     this.endpoints = [];
 
-    if (!spec.endpoints && !spec.socketEndpoints && !spec.graphqlEndpoints) {
+    if (!spec.endpoints && !spec.socketEndpoints && !spec.graphqlEndpoints && !spec.jsonServerEndpoint) {
       this.createEndPoint();
     } else {
       for (let endpoint of spec.endpoints) {
@@ -127,6 +150,9 @@ class AppState {
       for (let endpoint of spec.graphqlEndpoints) {
         this.endpoints.push(new GraphqlEndpoint(endpoint.url, endpoint.schema));
       }
+
+      this.endpoints.push(new JsonServerEndpoint(spec.jsonServerEndpoint.url, spec.jsonServerEndpoint.model));
+
     }
     this.currentRequest = this.endpoints[0];
   }

@@ -16,6 +16,7 @@ class AddEndpoint extends Component {
                 <div className="menu">
                     <div className="item" data-value="drop" onClick={this.props.onCreateSocketEndpoint}>New Socket Event</div>
                     <div className="item" data-value="horizontal flip" onClick={this.props.createGraphqlEndpoint}>New GraphQL Endpoint</div>
+                    <div className="item" data-value="horizontal flip" onClick={this.props.createJsonServerEndpoint}>New Json Server Endpoint</div>
                 </div>
             </div>
         </div>

@@ -31,7 +31,7 @@ class Header extends Component {
             <img src={require("../asset/Logo.png") } style={{ width: '135px', height: '45px' }}/>
           </div>}
           <div className="item">
-            <AddEndpoint onClick={this.props.createEndPoint} onCreateSocketEndpoint={this.props.createSocketEndpoint} createGraphqlEndpoint={this.props.createGraphqlEndpoint}/>
+            <AddEndpoint onClick={this.props.createEndPoint} onCreateSocketEndpoint={this.props.createSocketEndpoint} createGraphqlEndpoint={this.props.createGraphqlEndpoint} createJsonServerEndpoint={this.props.createJsonServerEndpoint}/>
           </div>
           <div className="item">
             <div className="ui small icon" >

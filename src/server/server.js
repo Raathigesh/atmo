@@ -51,7 +51,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('deploy', function (data) {
-    apiServer.deploy(data, function() {
+    apiServer.deploy(apiServerPort, argv.static, data, function() {
         socket.emit('deploymentComplete');
         socket.emit('message', 'Your changes are deployed!')
     });
