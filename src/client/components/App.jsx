@@ -9,6 +9,7 @@ import JsonServerPanel from './jsonServer/jsonServerPanel';
 import LogPanel from './LogPanel';
 import {observer} from 'mobx-react';
 import Status from './Status';
+import ProxyPanel from './proxy/ProxyPanel';
 import Notification from './Notification';
 import '../semantic/semantic';
 
@@ -34,6 +35,7 @@ class App extends Component {
               generateProject={this.props.state.generateProject}
               generators={this.props.state.generators}
               installGenerator={this.props.state.installGenerator}
+              createProxyEndpoint={this.props.state.createProxyEndpoint}
             />
           </div>
           <div className="row hermesDashboard" style={{width: '90% !important'}}>
@@ -53,6 +55,7 @@ class App extends Component {
                {this.props.state.currentRequest.type === 'socket' && <SocketPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
                {this.props.state.currentRequest.type === 'gql' && <GraphqlPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
                {this.props.state.currentRequest.type === 'jsonServer' && <JsonServerPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
+               {this.props.state.currentRequest.type === 'proxy' && <ProxyPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
                <Status status={this.props.state.status}/>
              </div>
            </div>

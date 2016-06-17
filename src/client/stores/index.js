@@ -10,6 +10,7 @@ import ContentType from '../models/ContentType';
 import SocketEndpoint from '../models/socket/SocketEndpoint';
 import GraphqlEndpoint from '../models/graphql/GraphqlEndpoint';
 import JsonServerEndpoint from '../models/jsonServer/JsonServerEndpoint';
+import ProxyEndpoint from '../models/proxy/ProxyEndpoint';
 import { initial, deploying, deployed, failed } from '../models/Statuses';
 
 class AppState {
@@ -87,6 +88,11 @@ class AppState {
     return false;
   }
 
+  createProxyEndpoint = () => {
+     this.endpoints.push(new ProxyEndpoint('/proxy', ''));
+     this.currentRequest = this.endpoints[this.endpoints.length - 1];
+  }
+
   updateUrl = (url, index) => {
     this.endpoints[index].url = url;
   }
@@ -95,6 +101,7 @@ class AppState {
     let httpEndpoints = [];
     let socketEndpoints = [];
     let graphqlEndpoints = [];
+    let proxyEndpoints = [];
     let jsonServerEndpoint = null;
 
     for (let endpoint of this.endpoints) {
@@ -106,6 +113,8 @@ class AppState {
         graphqlEndpoints.push(endpoint);
       } else if (endpoint.type === 'jsonServer') {
         jsonServerEndpoint = endpoint;
+      } else if (endpoint.type === 'proxy') {
+        proxyEndpoints.push(endpoint);
       }
     }
 
@@ -113,7 +122,8 @@ class AppState {
       endpoints: mobx.toJSON(httpEndpoints),
       socketEndpoints: mobx.toJSON(socketEndpoints),
       graphqlEndpoints: mobx.toJSON(graphqlEndpoints),
-      jsonServerEndpoint: jsonServerEndpoint
+      jsonServerEndpoint: jsonServerEndpoint,
+      proxyEndpoints: mobx.toJSON(proxyEndpoints)
     };
 
     return payload;
@@ -149,6 +159,10 @@ class AppState {
 
       for (let endpoint of spec.graphqlEndpoints) {
         this.endpoints.push(new GraphqlEndpoint(endpoint.url, endpoint.schema));
+      }
+debugger
+      for (let endpoint of spec.proxyEndpoints) {
+        this.endpoints.push(new ProxyEndpoint(endpoint.url, endpoint.urlToProxy));
       }
 
       this.endpoints.push(new JsonServerEndpoint(spec.jsonServerEndpoint.url, spec.jsonServerEndpoint.model));

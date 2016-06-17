@@ -3,7 +3,6 @@ var http = require('http');
 var path = require('path');
 var chalk = require('chalk');
 var enableDestroy = require('server-destroy');
-
 var app = null;
 var server = null;
 var io = null;
@@ -12,6 +11,7 @@ var httpModule = require('../endpoints/http');
 var socketModule = require('../endpoints/socket');
 var graphqlModule = require('../endpoints/graphql');
 var jsonServerModule = require('../endpoints/jsonServer');
+var proxyModule = require('../endpoints/proxy');
 
 /**
  * Creates the API server with the specified port.
@@ -32,7 +32,7 @@ function createApiServer(port, static) {
 
   server.listen(port, function () {
       console.log(chalk.green('API is available at: http://localhost:' + port));
-  });
+  }); 
 
   enableDestroy(server);
   
@@ -48,6 +48,7 @@ function deploy(port, static, spec, done) {
   socketModule(io, spec);
   graphqlModule(app, spec);
   jsonServerModule(app, spec);
+  proxyModule(app, spec);
   done();
 }
 
