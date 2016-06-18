@@ -7,6 +7,10 @@ function proxyModule(app, spec) {
     app.use(endpoint.url, proxy(endpoint.urlToProxy, {
       forwardPath: function (req, res) {
         return require('url').parse(req.url).path;
+      },
+      intercept: function(rsp, data, req, responseOut, callback) {
+        responseOut.set('Access-Control-Allow-Origin', '*');
+        callback(null, data);
       }
     }));
   }
