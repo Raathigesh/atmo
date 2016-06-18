@@ -57,8 +57,6 @@ $ atmo
 ## Sleek UI huh?
 <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoUi.PNG" alt="Atmo" >
 
-Thanks [Kreativa Studio](http://www.kreativa-studio.com/) for the free logo
-
 ## Contribute
 For any problem/question or if you think a feature that could make Atmo more useful, do not hesitate to open an issue.
 
@@ -69,6 +67,9 @@ Run `npm run dev` to launch the webpack dev server.
 
 #### Running the api server
 Run `npm run server` to launch the api server.
+
+## Thanks
+Thanks [Kreativa Studio](http://www.kreativa-studio.com/) for the free logo.
 
 ## License
 MIT © [Raathigeshan](https://twitter.com/Raathigeshan)
