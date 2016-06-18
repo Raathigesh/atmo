@@ -10,7 +10,7 @@ class Url extends Component {
 
   render() {
     return (
-      <div className="ui right action left icon fluid input">
+      <div className="ui right left icon fluid input panelField">
         <i className="star outline icon"></i>
         <input type="text" placeholder="Event To Emit Back" value={this.props.endpoint.eventToEmit} onChange={this.handleEventToEmitChange} />
       </div>

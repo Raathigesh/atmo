@@ -27,7 +27,7 @@ class ResponseType extends Component {
     });
 
     return (
-      <div  className="ui fluid right action left icon input">
+      <div  className="ui fluid right action left icon input panelField">
         <i className="reply icon"></i>
         <input type="text" placeholder="Content type" value={this.props.contentType.contentType} disabled/>
         <div ref="responseTypeDowndrop" className="ui basic floating dropdown button">

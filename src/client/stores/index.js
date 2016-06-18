@@ -165,8 +165,9 @@ class AppState {
         this.endpoints.push(new ProxyEndpoint(endpoint.url, endpoint.urlToProxy));
       }
 
-      this.endpoints.push(new JsonServerEndpoint(spec.jsonServerEndpoint.url, spec.jsonServerEndpoint.model));
-
+      if (spec.jsonServerEndpoint) {
+        this.endpoints.push(new JsonServerEndpoint(spec.jsonServerEndpoint.url, spec.jsonServerEndpoint.model));
+      }
     }
     this.currentRequest = this.endpoints[0];
   }

@@ -10,7 +10,7 @@ class EventName extends Component {
 
   render() {
     return (
-      <div className="ui right action left icon fluid input">
+      <div className="ui right action left icon fluid input panelField">
         <i className="fire outline icon"></i>
         <input type="text" placeholder="Event Name" value={this.props.endpoint.eventName}  onChange={this.handleEventNameChange} />
         <div type="button" className={classnames('ui red button ', { 'disabled': this.props.totalEndpoints === 1 }) } onClick={this.props.deleteEndpoint}>Delete</div>
