@@ -35,7 +35,7 @@ var apiServerPort;
 freeport(function (err, port) {
   if (err) throw err;
   apiServerPort = argv.port || 3334;
-  api = apiServer.createApiServer(apiServerPort, argv.static);
+  api = apiServer.createApiServer(apiServerPort, argv.static, argv.logs);
 });
 
 io.on('connection', function (socket) {
@@ -51,7 +51,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('deploy', function (data) {
-    apiServer.deploy(apiServerPort, argv.static, data, function () {
+    apiServer.deploy(apiServerPort, argv.static, data, argv.logs, function () {
       socket.emit('deploymentComplete');
       socket.emit('message', 'Your changes are deployed!')
     });

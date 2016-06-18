@@ -3,6 +3,8 @@ var http = require('http');
 var path = require('path');
 var chalk = require('chalk');
 var enableDestroy = require('server-destroy');
+var morgan = require('morgan');
+
 var app = null;
 var server = null;
 var io = null;
@@ -16,7 +18,7 @@ var proxyModule = require('../endpoints/proxy');
 /**
  * Creates the API server with the specified port.
  */
-function createApiServer(port, static) {
+function createApiServer(port, static, logs) {
   server && server.destroy();
   app = express();
   server = http.createServer(app);
@@ -25,6 +27,10 @@ function createApiServer(port, static) {
   app.get('/_status', function internalStaus(req, res) {
     res.send('API server running.');
   });
+
+  if (logs) {
+    app.use(morgan('combined'))
+  }
 
   if (static) {
     app.use(express.static(path.join(process.cwd(), 'public')));
@@ -42,8 +48,8 @@ function createApiServer(port, static) {
 /**
  * Deployes the new endpoints provided by the UI
  */
-function deploy(port, static, spec, done) {
-  createApiServer(port, static);
+function deploy(port, static, spec, logs, done) {
+  createApiServer(port, static, logs);
   httpModule(app, spec);
   socketModule(io, spec);
   graphqlModule(app, spec);

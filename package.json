@@ -30,6 +30,7 @@
     "graphql": "^0.5.0",
     "json-server": "^0.8.14",
     "jsonfile": "^2.3.1",
+    "morgan": "^1.7.0",
     "mustache": "^2.2.1",
     "npmi": "^2.0.1",
     "server-destroy": "^1.0.1",
