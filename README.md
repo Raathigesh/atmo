@@ -36,7 +36,7 @@ $ npm install atmo -g
 - Export and share your project through a single json file
 - Import an atmo project from your colleague or team
 - Code generation through generators
-  - [ExpressJS/ES5 Generator](https://github.com/Raathigesh/AtmoExpressES5Generator) - `atmo-gen-expressjs-es5`
+  - `atmo-gen-expressjs-es5` - [ExpressJS/ES5 Generator](https://github.com/Raathigesh/AtmoExpressES5Generator)
 - https://zeit.co/now deployable projects
 - Sleek UI
  
