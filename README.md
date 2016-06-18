@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoLogo.png" alt="Atmo" height="300">
    <br>
-  <h4 align="center">Mock Http, Socket, Graphql Endpoints with ease</h4>
+  <h4 align="center">Server side powertool for prototyping</h4>
 </h1>
 
 <p align="center">
@@ -30,11 +30,13 @@ $ npm install atmo -g
 - Mock Http endpoints
 - Mock Socket endpoints
 - Mock GraphQL endpoints (Experimental)
+- Http proxy support
+- In-built support for Json-Server. [Refer Json-Server docs for more info.](https://github.com/typicode/json-server)
 - Static content serving 
 - Export and share your project through a single json file
 - Import an atmo project from your colleague or team
 - Code generation through generators
-- Easy deployment with https://zeit.co/now
+- https://zeit.co/now deployable projects
 - Sleek UI
 
 ### Generators
@@ -49,7 +51,8 @@ $ atmo
 
 #### Cli Options
 - `--port` will launch the API server in a specific port. Default port is 3334. (`atmo --port 3000`)
-- `--static` will expose the current working directory as static content folder (`atmo --static`)
+- `--static` will serve the content in the folder `public` in your current working directory (`atmo --static`)
+- `--logs` will print out the access logs to console (`atmo --logs`)
 
 ## Sleek UI huh?
 <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoUi.PNG" alt="Atmo" >
