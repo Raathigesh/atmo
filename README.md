@@ -54,9 +54,6 @@ $ atmo
 - `--static` will serve the content in the folder `public` in your current working directory (`atmo --static`)
 - `--logs` will print out the access logs to console (`atmo --logs`)
 
-## Sleek UI huh?
-<img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoUi.PNG" alt="Atmo" >
-
 ## Contribute
 For any problem/question or if you think a feature that could make Atmo more useful, do not hesitate to open an issue.
 
