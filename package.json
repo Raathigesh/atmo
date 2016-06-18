@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon src/server/index.js --port 8888",
     "build": "webpack --config config/webpack.prod.config.js",
-    "dev": "webpack-dev-server --config config/webpack.config.js --devtool eval --progress --colors --hot --content-base dist/"
+    "dev": "webpack-dev-server --config config/webpack.config.js --devtool eval --progress --colors --hot --content-base dist/",
+    "server": "node ./src/server/index.js --static --port 8888"
   },
   "repository": {
     "type": "git",
