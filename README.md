@@ -62,10 +62,10 @@ For any problem/question or if you think a feature that could make Atmo more use
 
 ### Building Atmo
 
-#### Running client project
+##### Running client project
 Run `npm run dev` to launch the webpack dev server.
 
-#### Running the api server
+##### Running the api server
 Run `npm run server` to launch the api server.
 
 ## Thanks
