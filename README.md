@@ -36,7 +36,7 @@ $ npm install atmo -g
 - Export and share your project through a single json file
 - Import an atmo project from your colleague or team
 - Code generation through generators
-- Easy deployment with https://zeit.co/now
+- https://zeit.co/now deployable projects
 - Sleek UI
 
 ### Generators
