@@ -7,7 +7,6 @@ var server = http.createServer(app);
 var io = require('socket.io')(server);
 var apiServer = require('./apiServer');
 var chalk = require('chalk');
-var freeport = require('freeport');
 var argv = require('yargs').argv;
 var fs = require('fs');
 var path = require('path');
@@ -20,23 +19,13 @@ var npmi = require('npmi');
 
 app.use(express.static(__dirname + '../../../dist'));
 
-freeport(function (err, port) {
-  if (err) throw err;
-  port = 3333;
-  server.listen(port, function () {
-    console.log(chalk.blue('Atmo dashboard is available at: http://localhost:' + port));
-  });
+var port = 3333;
+server.listen(port, function () {
+  console.log(chalk.blue('Atmo dashboard is available at: http://localhost:' + port));
 });
 
-
-var api;
-var apiServerPort;
-
-freeport(function (err, port) {
-  if (err) throw err;
-  apiServerPort = argv.port || 3334;
-  api = apiServer.createApiServer(apiServerPort, argv.static, argv.logs);
-});
+var apiServerPort = argv.port || 3334;
+var api = apiServer.createApiServer(apiServerPort, argv.static, argv.logs);
 
 io.on('connection', function (socket) {
   var cacheSpec = {};

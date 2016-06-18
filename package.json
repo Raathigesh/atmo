@@ -26,7 +26,6 @@
     "express-http-proxy": "^0.7.1",
     "express-remove-route": "^0.1.1",
     "file-exists": "^1.0.0",
-    "freeport": "^1.0.5",
     "graphql": "^0.5.0",
     "json-server": "^0.8.14",
     "jsonfile": "^2.3.1",
