@@ -60,7 +60,7 @@ $ atmo
 ## Contribute
 For any problem/question or if you think a feature that could make Atmo more useful, do not hesitate to open an issue.
 
-### Building Atmo
+#### Building Atmo
 
 ##### Running client project
 Run `npm run dev` to launch the webpack dev server.
