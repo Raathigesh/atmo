@@ -1,12 +1,11 @@
 import mobx, {observable, computed} from 'mobx';
 import {observer} from 'mobx-react';
-import Endpoint from '../models/Endpoint';
-import Header from '../models/Header';
-import Response from '../models/Response';
-import DevTools from 'mobx-react-devtools';
+import Endpoint from '../models/http/Endpoint';
+import Header from '../models/http/Header';
+import Response from '../models/http/Response';
 import Beamer from '../lib/Beamer';
-import contentTypes from '../models/ContentTypes';
-import ContentType from '../models/ContentType';
+import contentTypes from '../models/http/ContentTypes';
+import ContentType from '../models/http/ContentType';
 import SocketEndpoint from '../models/socket/SocketEndpoint';
 import GraphqlEndpoint from '../models/graphql/GraphqlEndpoint';
 import JsonServerEndpoint from '../models/jsonServer/JsonServerEndpoint';
@@ -60,7 +59,7 @@ class AppState {
   }
 
   createSocketEndpoint = () => {
-    this.endpoints.push(new SocketEndpoint('', '', '{}'));
+    this.endpoints.push(new SocketEndpoint('', '', '{}', 'all'));
     this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
 
@@ -154,7 +153,7 @@ class AppState {
       }
 
       for (let endpoint of spec.socketEndpoints) {
-        this.endpoints.push(new SocketEndpoint(endpoint.eventName, endpoint.eventToEmit, endpoint.payload));
+        this.endpoints.push(new SocketEndpoint(endpoint.eventName, endpoint.eventToEmit, endpoint.payload, endpoint.emitType));
       }
 
       for (let endpoint of spec.graphqlEndpoints) {

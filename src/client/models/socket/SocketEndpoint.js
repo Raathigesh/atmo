@@ -4,12 +4,14 @@ export default class SocketEndpoint {
   @observable eventName;
   @observable eventToEmit;
   @observable payload;
+  @observable emitType;
   type;
 
-  constructor(eventName, eventToEmit, payload) {
+  constructor(eventName, eventToEmit, payload, emitType) {
     this.eventName = eventName;
     this.eventToEmit = eventToEmit;
     this.payload = payload;
+    this.emitType = emitType;
     this.type = 'socket';
   }
 
@@ -23,5 +25,9 @@ export default class SocketEndpoint {
 
   setPayload(payload) {
     this.payload = payload;
+  }
+
+  setEmitType(value) {
+    this.emitType = value;
   }
 }
