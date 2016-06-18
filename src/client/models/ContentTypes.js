@@ -1,11 +1,11 @@
 import ContentType from './ContentType';
 
 const responseTypse = [
-	new ContentType('JSON', 'application/json'),
-	new ContentType('Html', 'text/html'),
-	new ContentType('Text', 'text/plain'),
-	new ContentType('XML', 'application/xml'),
-	new ContentType('none', '')
+  new ContentType('JSON', 'application/json'),
+  new ContentType('Html', 'text/html'),
+  new ContentType('Text', 'text/plain'),
+  new ContentType('XML', 'application/xml'),
+  new ContentType('none', '')
 ];
 
 export default responseTypse;

@@ -12,15 +12,15 @@ export default class Response {
     this.contentType = contentType;
     this.responseCode = '200';
   }
-  
+
   setType = (type) => {
     this.type = type;
   }
-  
+
   setContentType = (contentType) => {
     this.contentType = contentType;
   }
-  
+
   setResponseCode = (code) => {
     this.responseCode = code;
   }

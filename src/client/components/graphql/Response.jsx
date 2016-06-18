@@ -9,23 +9,23 @@ import 'brace/theme/tomorrow';
 class Response extends React.Component {
   handleChange = (response) => {
     this.props.endpoint.setSchema(response);
-  }  
+  }
 
-  render () {
-      return (
-        <div>
-          <AceEditor
-            mode='json'
-            theme="tomorrow"
-            name="UNIQUE_ID_OF_DIV"
-            editorProps={{$blockScrolling: true}}
-            width="100%"
-            onChange={this.handleChange}
-            value={this.props.endpoint.schema}
-            fontSize={14}
+  render() {
+    return (
+      <div>
+        <AceEditor
+          mode='json'
+          theme="tomorrow"
+          name="UNIQUE_ID_OF_DIV"
+          editorProps={{ $blockScrolling: true }}
+          width="100%"
+          onChange={this.handleChange}
+          value={this.props.endpoint.schema}
+          fontSize={14}
           />
-        </div>
-      )
+      </div>
+    );
   }
 }
 

@@ -16,12 +16,12 @@ import '../semantic/semantic';
 
 @observer
 class App extends Component {
-  render () {
+  render() {
     return (
       <Container>
         <div className="ui grid">
           <div className="row">
-            <Header 
+            <Header
               onDeploy={this.props.state.deployChanges}
               port={this.props.state.port}
               onPortChange={this.props.state.updatePort}
@@ -36,30 +36,30 @@ class App extends Component {
               generators={this.props.state.generators}
               installGenerator={this.props.state.installGenerator}
               createProxyEndpoint={this.props.state.createProxyEndpoint}
-            />
+              />
           </div>
-          <div className="row hermesDashboard" style={{width: '90% !important'}}>
-             <div className="four wide column">
-               <SideBar
-                 currentEndpoint={this.props.state.currentRequest}
-                 requests={this.props.state.endpoints}
-                 setCurrentEndpoint={this.props.state.setCurrentEndpoint}                
-               />
-             </div>
-             <div className="twelve wide column">
-               {this.props.state.currentRequest.type === 'http' && <HttpRequestPanel 
-                 endpoint={this.props.state.currentRequest} 
-                 responseTypes={this.props.state.responseTypes}
-                 deleteEndpoint={this.props.state.deleteEndpoint}
-                 totalEndpoints={this.props.state.totalEndpoints}/>}
-               {this.props.state.currentRequest.type === 'socket' && <SocketPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
-               {this.props.state.currentRequest.type === 'gql' && <GraphqlPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
-               {this.props.state.currentRequest.type === 'jsonServer' && <JsonServerPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
-               {this.props.state.currentRequest.type === 'proxy' && <ProxyPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
-               <Status status={this.props.state.status}/>
-             </div>
-           </div>
-           <Notification msg={this.props.state.msg}/>
+          <div className="row hermesDashboard" style={{ width: '90% !important' }}>
+            <div className="four wide column">
+              <SideBar
+                currentEndpoint={this.props.state.currentRequest}
+                requests={this.props.state.endpoints}
+                setCurrentEndpoint={this.props.state.setCurrentEndpoint}
+                />
+            </div>
+            <div className="twelve wide column">
+              {this.props.state.currentRequest.type === 'http' && <HttpRequestPanel
+                endpoint={this.props.state.currentRequest}
+                responseTypes={this.props.state.responseTypes}
+                deleteEndpoint={this.props.state.deleteEndpoint}
+                totalEndpoints={this.props.state.totalEndpoints}/>}
+              {this.props.state.currentRequest.type === 'socket' && <SocketPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
+              {this.props.state.currentRequest.type === 'gql' && <GraphqlPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
+              {this.props.state.currentRequest.type === 'jsonServer' && <JsonServerPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
+              {this.props.state.currentRequest.type === 'proxy' && <ProxyPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
+              <Status status={this.props.state.status}/>
+            </div>
+          </div>
+          <Notification msg={this.props.state.msg}/>
         </div>
       </Container>
     );

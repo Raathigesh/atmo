@@ -9,13 +9,15 @@ const Request = ({endpoint, responseTypes, deleteEndpoint, totalEndpoints}) => {
   return (
     <div className="ui grid">
       <div className="row">
-         <div className="sixteen wide column">
+        <div className="sixteen wide column">
+          <div className="ui segment">
             <Url endpoint={endpoint} deleteEndpoint={deleteEndpoint} totalEndpoints={totalEndpoints}/>
             <ResponseHeaders endpoint={endpoint}/>
             <ResponseType responseTypes={responseTypes} response={endpoint.response} contentType={endpoint.response.contentType}/>
             <Response endpoint={endpoint}/>
-         </div>
-       </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

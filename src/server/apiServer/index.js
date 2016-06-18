@@ -22,20 +22,20 @@ function createApiServer(port, static) {
   server = http.createServer(app);
   io = require('socket.io')(server);
 
-  app.get('/_status', function internalStaus(req, res){
+  app.get('/_status', function internalStaus(req, res) {
     res.send('API server running.');
   });
 
-  if(static) {
-		app.use(express.static(path.join(process.cwd(), 'public')));  
-	}
+  if (static) {
+    app.use(express.static(path.join(process.cwd(), 'public')));
+  }
 
   server.listen(port, function () {
-      console.log(chalk.green('API is available at: http://localhost:' + port));
-  }); 
+    console.log(chalk.green('API is available at: http://localhost:' + port));
+  });
 
   enableDestroy(server);
-  
+
   return server;
 }
 

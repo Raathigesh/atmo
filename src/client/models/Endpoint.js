@@ -27,11 +27,11 @@ export default class Endpoint {
   setResponse(response) {
     this.response.content = response;
   }
-  
+
   addEmptyHeader() {
     this.headers.push(new Header('', ''));
   }
-  
+
   removeHeader(index) {
     this.headers.splice(index, 1);
   }

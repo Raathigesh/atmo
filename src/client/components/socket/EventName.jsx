@@ -8,14 +8,14 @@ class EventName extends Component {
     this.props.endpoint.setEventName(e.target.value);
   }
 
-  render () {
-      return (
-        <div className="ui right action left icon fluid input">
-          <i className="fire outline icon"></i>
-          <input type="text" placeholder="Event Name" value={this.props.endpoint.eventName}  onChange={this.handleEventNameChange} />
-          <div type="button" className={classnames('ui red button ', {'disabled': this.props.totalEndpoints === 1})} onClick={this.props.deleteEndpoint}>Delete</div>
-        </div>
-      );
+  render() {
+    return (
+      <div className="ui right action left icon fluid input">
+        <i className="fire outline icon"></i>
+        <input type="text" placeholder="Event Name" value={this.props.endpoint.eventName}  onChange={this.handleEventNameChange} />
+        <div type="button" className={classnames('ui red button ', { 'disabled': this.props.totalEndpoints === 1 }) } onClick={this.props.deleteEndpoint}>Delete</div>
+      </div>
+    );
   }
 }
 

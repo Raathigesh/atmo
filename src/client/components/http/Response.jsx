@@ -12,11 +12,11 @@ class Response extends React.Component {
   handleChange = (response) => {
     this.props.endpoint.setResponse(response);
   }
-  
+
   getMode = () => {
     let mode = 'markdown';
     let contentType = this.props.endpoint.response.contentType.type;
-    
+
     if (contentType === 'JSON') {
       mode = 'json';
     } else if (contentType === 'Html') {
@@ -24,26 +24,26 @@ class Response extends React.Component {
     } else if (contentType === 'XML') {
       mode = 'xml';
     }
-    
+
     return mode;
   }
 
-  render () {
-      return (
-        <div>
-          <AceEditor
-            mode={this.getMode()}
-            theme="tomorrow"
-            name="UNIQUE_ID_OF_DIV"
-            editorProps={{$blockScrolling: true}}
-            width="100%"
-            onChange={this.handleChange}
-            value={this.props.endpoint.response.content}
-            enableBasicAutocompletion={true}
-            fontSize={14}
+  render() {
+    return (
+      <div>
+        <AceEditor
+          mode={this.getMode() }
+          theme="tomorrow"
+          name="UNIQUE_ID_OF_DIV"
+          editorProps={{ $blockScrolling: true }}
+          width="100%"
+          onChange={this.handleChange}
+          value={this.props.endpoint.response.content}
+          enableBasicAutocompletion={true}
+          fontSize={14}
           />
-        </div>
-      )
+      </div>
+    )
   }
 }
 

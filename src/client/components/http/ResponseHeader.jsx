@@ -4,24 +4,24 @@ import {observer} from 'mobx-react';
 @observer
 class Header extends Component {
   handleKeyChange = (e) => {
-      this.props.header.setKey(e.target.value);
+    this.props.header.setKey(e.target.value);
   }
 
   handleValueChange = (e) => {
     this.props.header.setValue(e.target.value);
   }
-  
+
   handleTextBoxClick = () => {
     if (this.props.isLastHeader) {
       this.props.onLastHeaderHighlight();
     }
   }
-  
+
   handleRemoveHeaderClick = () => {
     this.props.onRemoveEndpoint(this.props.index);
   }
 
-  render () {
+  render() {
     return (
       <tr>
         <td className="six wide">

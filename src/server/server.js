@@ -20,8 +20,8 @@ var npmi = require('npmi');
 
 app.use(express.static(__dirname + '../../../dist'));
 
-freeport(function(err, port) {
-  if (err) throw err; 
+freeport(function (err, port) {
+  if (err) throw err;
   port = 3333;
   server.listen(port, function () {
     console.log(chalk.blue('Atmo dashboard is available at: http://localhost:' + port));
@@ -32,18 +32,18 @@ freeport(function(err, port) {
 var api;
 var apiServerPort;
 
-freeport(function(err, port) {
+freeport(function (err, port) {
   if (err) throw err;
   apiServerPort = argv.port || 3334;
   api = apiServer.createApiServer(apiServerPort, argv.static);
 });
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
   var cacheSpec = {};
   if (fileExists(cacheFilePath)) {
     cacheSpec = JSON.parse(fs.readFileSync(cacheFilePath));
   }
-  
+
   socket.emit('onStart', {
     port: apiServerPort,
     spec: cacheSpec,
@@ -51,13 +51,13 @@ io.on('connection', function(socket) {
   });
 
   socket.on('deploy', function (data) {
-    apiServer.deploy(apiServerPort, argv.static, data, function() {
-        socket.emit('deploymentComplete');
-        socket.emit('message', 'Your changes are deployed!')
+    apiServer.deploy(apiServerPort, argv.static, data, function () {
+      socket.emit('deploymentComplete');
+      socket.emit('message', 'Your changes are deployed!')
     });
     fs.writeFileSync(cacheFilePath, JSON.stringify(data));
   });
-  
+
   socket.on('save', function (spec) {
     fs.writeFileSync(cacheFilePath, JSON.stringify(spec));
     socket.emit('message', 'Your changes are saved locally.')
@@ -69,7 +69,7 @@ io.on('connection', function(socket) {
     socket.emit('message', 'Your generated project is available in ' + path.join(process.cwd(), 'build'))
   });
 
-  socket.on('installGenerator', function(name){
+  socket.on('installGenerator', function (name) {
     installGenerator(name, socket);
   });
 });
@@ -83,22 +83,22 @@ function addGenarator(name) {
 
 function installGenerator(name, socket) {
   var options = {
-      name: name,    // your module name
-      path: '.',              // installation path [default: '.']
-      forceInstall: true,    // force install if set to true (even if already installed, it will do a reinstall) [default: false]
-      npmLoad: {              // npm.load(options, callback): this is the "options" given to npm.load()
-          loglevel: 'silent'  // [default: {loglevel: 'silent'}]
-      }
+    name: name,    // your module name
+    path: '.',              // installation path [default: '.']
+    forceInstall: true,    // force install if set to true (even if already installed, it will do a reinstall) [default: false]
+    npmLoad: {              // npm.load(options, callback): this is the "options" given to npm.load()
+      loglevel: 'silent'  // [default: {loglevel: 'silent'}]
+    }
   };
   npmi(options, function (err, result) {
-      if (err) {
-          socket.emit('message', err.message)
-      } else {
-        var generators = addGenarator(name);
-        socket.emit('generatorInstalled', {
-          generatorName: options.name,
-          generators: generators.generators
-        });
-      }
+    if (err) {
+      socket.emit('message', err.message)
+    } else {
+      var generators = addGenarator(name);
+      socket.emit('generatorInstalled', {
+        generatorName: options.name,
+        generators: generators.generators
+      });
+    }
   });
 }

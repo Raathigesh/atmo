@@ -8,13 +8,13 @@ class Url extends Component {
     this.props.endpoint.setProxyUrl(e.target.value);
   }
 
-  render () {
-      return (
-        <div className="ui right action left icon fluid input">
-          <i className="star outline icon"></i>
-          <input type="text" placeholder="Proxy Url" value={this.props.endpoint.urlToProxy} onChange={this.handleEventToEmitChange} />
-        </div>
-      );
+  render() {
+    return (
+      <div className="ui right action left icon fluid input">
+        <i className="star outline icon"></i>
+        <input type="text" placeholder="Proxy Url" value={this.props.endpoint.urlToProxy} onChange={this.handleEventToEmitChange} />
+      </div>
+    );
   }
 }
 

@@ -8,7 +8,7 @@ export default class ProxyEndpoint {
   constructor(url, urlToProxy) {
     this.url = url;
     this.urlToProxy = urlToProxy;
-	this.type = 'proxy';
+    this.type = 'proxy';
   }
 
   setUrl(url) {

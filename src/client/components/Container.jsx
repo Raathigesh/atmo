@@ -7,7 +7,7 @@ const Container = (props) => {
     <div className="ui fluid container">
       {props.children}
     </div>
-  )
+  );
 }
 
 export default Container;

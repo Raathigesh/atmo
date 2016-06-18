@@ -79,7 +79,7 @@ class AppState {
   }
 
   isAnyJsonServerEndpointAvailable = () => {
-    for(let endpoint of this.endpoints) {
+    for (let endpoint of this.endpoints) {
       if (endpoint.type === 'jsonServer') {
         return true;
       }
@@ -89,8 +89,8 @@ class AppState {
   }
 
   createProxyEndpoint = () => {
-     this.endpoints.push(new ProxyEndpoint('/proxy', ''));
-     this.currentRequest = this.endpoints[this.endpoints.length - 1];
+    this.endpoints.push(new ProxyEndpoint('/proxy', ''));
+    this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
 
   updateUrl = (url, index) => {
@@ -160,7 +160,7 @@ class AppState {
       for (let endpoint of spec.graphqlEndpoints) {
         this.endpoints.push(new GraphqlEndpoint(endpoint.url, endpoint.schema));
       }
-debugger
+
       for (let endpoint of spec.proxyEndpoints) {
         this.endpoints.push(new ProxyEndpoint(endpoint.url, endpoint.urlToProxy));
       }

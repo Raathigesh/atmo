@@ -10,7 +10,7 @@ export default class SocketEndpoint {
     this.eventName = eventName;
     this.eventToEmit = eventToEmit;
     this.payload = payload;
-	  this.type = 'socket';
+    this.type = 'socket';
   }
 
   setEventName(name) {

@@ -8,13 +8,13 @@ class Url extends Component {
     this.props.endpoint.setEventToEmit(e.target.value);
   }
 
-  render () {
-      return (
-        <div className="ui right action left icon fluid input">
-          <i className="star outline icon"></i>
-          <input type="text" placeholder="Event To Emit Back" value={this.props.endpoint.eventToEmit} onChange={this.handleEventToEmitChange} />
-        </div>
-      );
+  render() {
+    return (
+      <div className="ui right action left icon fluid input">
+        <i className="star outline icon"></i>
+        <input type="text" placeholder="Event To Emit Back" value={this.props.endpoint.eventToEmit} onChange={this.handleEventToEmitChange} />
+      </div>
+    );
   }
 }
 
