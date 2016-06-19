@@ -35,7 +35,7 @@ $ npm install atmo -g
 - Static content serving 
 - Export and share your project through a single json file
 - Import an atmo project from your colleague or team
-- Code generation through generators
+- Code generation through generators.
   - `atmo-gen-expressjs-es5` - [ExpressJS/ES5 Generator](https://github.com/Raathigesh/AtmoExpressES5Generator)
 - https://zeit.co/now deployable projects
 - Sleek UI
@@ -62,6 +62,9 @@ Run `npm run dev` to launch the webpack dev server.
 
 ###### Running the api server
 Run `npm run server` to launch the api server.
+
+##### Write a generator
+Atmo uses generators to automatically generate code for the endpoints that are created via the UI. You could write a generator which generates code in your favourite node js framework (e.g: HapiJS). [Learn more here on how to write a generator.](https://github.com/Raathigesh/Atmo/blob/master/docs/HowToWriteAGenerator.md)
 
 ## Thanks
 Thanks [Kreativa Studio](http://www.kreativa-studio.com/) for the free logo.
