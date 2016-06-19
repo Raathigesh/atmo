@@ -11,6 +11,7 @@ import GraphqlEndpoint from '../models/graphql/GraphqlEndpoint';
 import JsonServerEndpoint from '../models/jsonServer/JsonServerEndpoint';
 import ProxyEndpoint from '../models/proxy/ProxyEndpoint';
 import { initial, deploying, deployed, failed } from '../models/Statuses';
+import jsonStringfy from 'json-stringify-pretty-compact';
 
 class AppState {
   @observable endpoints = [];
@@ -46,6 +47,10 @@ class AppState {
     this.beamer.onMessage((message) => {
       this.msg = message;
       this.msg = '';
+    });
+
+    this.beamer.onJsonServerDbUpdate((db) => {
+      this.updateJsonDb(db);
     });
   }
 
@@ -148,7 +153,7 @@ class AppState {
       this.createEndPoint();
     } else {
       for (let endpoint of spec.endpoints) {
-        let response = new Response(new ContentType(endpoint.response.contentType.type, endpoint.response.contentType.contentType), endpoint.response.content);
+        let response = new Response(new ContentType(endpoint.response.contentType.type, endpoint.response.contentType.contentType), endpoint.response.content, endpoint.response.responseCode);
         this.endpoints.push(new Endpoint(endpoint.url, endpoint.method, this.getHeadersFromJson(endpoint), response));
       }
 
@@ -192,6 +197,20 @@ class AppState {
     });
   }
 
+  updateJsonDb = (db) => {
+    if (db) {
+      for (let endpoint of this.endpoints) {
+        if (endpoint.type === 'jsonServer') {
+          endpoint.setModel(jsonStringfy(db));
+          this.showNotification('Synced json-server db.');
+          break;
+        }
+      }
+    } else {
+      this.showNotification('It seems like nothing much to sync.');
+    }
+  }
+
   initialize = () => {
     this.endpoints = [];
     this.endpoints.push(new Endpoint('/', 'GET', [new Header('Access-Control-Allow-Origin', '*')], new Response(contentTypes[0], '{}')));
@@ -212,6 +231,15 @@ class AppState {
   installGenerator = (name) => {
     this.msg = `Started installing ${name}`;
     this.beamer.installGenerator(name);
+  }
+
+  syncJsonServer = () => {
+    this.beamer.syncJsonServer();
+  }
+
+  showNotification = (msg) => {
+    this.msg = msg;
+    this.msg = '';
   }
 };
 

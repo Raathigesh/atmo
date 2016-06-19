@@ -56,7 +56,7 @@ class App extends Component {
                 totalEndpoints={this.props.state.totalEndpoints}/>}
               {this.props.state.currentRequest.type === 'socket' && <SocketPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
               {this.props.state.currentRequest.type === 'gql' && <GraphqlPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
-              {this.props.state.currentRequest.type === 'jsonServer' && <JsonServerPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
+              {this.props.state.currentRequest.type === 'jsonServer' && <JsonServerPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint} syncJsonServer={this.props.state.syncJsonServer}/>}
               {this.props.state.currentRequest.type === 'proxy' && <ProxyPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
             </div>
           </div>

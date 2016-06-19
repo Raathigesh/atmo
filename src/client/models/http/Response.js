@@ -7,10 +7,10 @@ export default class Response {
   @observable contentType;
   @observable responseCode;
 
-  constructor(contentType, content) {
+  constructor(contentType, content, responseCode = '200') {
     this.content = content;
     this.contentType = contentType;
-    this.responseCode = '200';
+    this.responseCode = responseCode;
   }
 
   setType = (type) => {

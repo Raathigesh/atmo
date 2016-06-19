@@ -13,6 +13,7 @@ class EventName extends Component {
       <div className="ui right action left icon fluid input panelField">
         <i className="rocket outline icon"></i>
         <input type="text" placeholder="Url" value={this.props.endpoint.url}  onChange={this.handleEventNameChange} />
+        <div type="button" className="ui blue button" onClick={this.props.syncJsonServer}><i className="refresh icon"></i>Sync Db</div>
         <div type="button" className={classnames('ui red button ', { 'disabled': this.props.totalEndpoints === 1 }) } onClick={this.props.deleteEndpoint}>Delete</div>
       </div>
     );

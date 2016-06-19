@@ -69,7 +69,9 @@ function responseCallback(req, res, endpoint) {
 
 function setHeaders(res, headers) {
   headers.forEach(function (header) {
-    res.set(header.key, header.value);
+    if (header.key !== "") {
+      res.set(header.key, header.value);
+    }
   });
 }
 

@@ -50,6 +50,7 @@
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
     "jquery": "^2.2.3",
+    "json-stringify-pretty-compact": "^1.0.1",
     "mobx": "^2.1.5",
     "mobx-react": "^3.0.5",
     "mobx-react-devtools": "^4.0.5",

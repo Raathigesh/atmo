@@ -59,8 +59,8 @@ class ResponseCode extends Component {
       return (<div className="item" onClick={() => { this.handleOnChange(responseCode.value) } }>
         {responseCode.label}
       </div>);
-    });
-
+    }); 
+ 
     return (
       <div ref="responseCodeDropdown" className="ui floating blue labeled icon dropdown button">
         <i className="wizard icon"></i>

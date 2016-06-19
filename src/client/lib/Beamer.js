@@ -25,6 +25,10 @@ export default class Beamer {
   installGenerator= (name) => {
     this.connection.emit('installGenerator', name);
   }
+
+  syncJsonServer = () => {
+    this.connection.emit('syncJsonServerDb');
+  }
   
   
   onDeploymentCompletion(callback) {
@@ -37,5 +41,9 @@ export default class Beamer {
 
   onMessage(callback) {
     this.connection.on('message', callback);
+  }
+
+  onJsonServerDbUpdate(callback) {
+    this.connection.on('jsonDb', callback);
   }
 }

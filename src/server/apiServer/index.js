@@ -15,6 +15,8 @@ var graphqlModule = require('../endpoints/graphql');
 var jsonServerModule = require('../endpoints/jsonServer');
 var proxyModule = require('../endpoints/proxy');
 
+var jsonServerRouter = null;
+
 /**
  * Creates the API server with the specified port.
  */
@@ -53,12 +55,17 @@ function deploy(port, static, spec, logs, done) {
   httpModule(app, spec);
   socketModule(io, spec);
   graphqlModule(app, spec);
-  jsonServerModule(app, spec);
+  jsonServerRouter = jsonServerModule(app, spec);
   proxyModule(app, spec);
   done();
 }
 
+function getJsonServerDb() {
+  return jsonServerRouter && jsonServerRouter.db.getState();
+}
+
 module.exports = {
   createApiServer: createApiServer,
-  deploy: deploy
+  deploy: deploy,
+  getJsonServerDb: getJsonServerDb
 }

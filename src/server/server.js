@@ -61,6 +61,10 @@ io.on('connection', function (socket) {
   socket.on('installGenerator', function (name) {
     installGenerator(name, socket);
   });
+
+  socket.on('syncJsonServerDb', function (name) {
+    socket.emit('jsonDb', apiServer.getJsonServerDb());
+  });
 });
 
 function addGenarator(name) {
