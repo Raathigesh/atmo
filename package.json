@@ -1,6 +1,6 @@
 {
   "name": "atmo",
-  "version": "0.7.1",
+  "version": "0.8.1",
   "description": "Mocking Http, Socket, Graphql Endpoints made with ease through UI",
   "main": "src/server/index.js",
   "scripts": {
