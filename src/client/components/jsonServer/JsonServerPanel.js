@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Url from './Url';
 import Json from './Json';
+import DocsFooter from '../DocsFooter';
 
 class JsonServerPanel extends Component {
   render() {
@@ -8,10 +9,13 @@ class JsonServerPanel extends Component {
       <div className="ui grid">
         <div className="row">
           <div className="sixteen wide column">
-            <div className="ui segment">
+            <div className="ui  top attached segment">
               <Url endpoint={this.props.endpoint} deleteEndpoint={this.props.deleteEndpoint}/>
               <Json endpoint={this.props.endpoint} />
             </div>
+            <DocsFooter>
+              Refer the <a href='https://github.com/Raathigesh/Atmo/blob/master/docs/JsonServerEndpoint.md'>docs on how to create a Json-server endpoint.</a>
+            </DocsFooter>
           </div>
         </div>
       </div>

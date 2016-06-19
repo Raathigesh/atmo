@@ -70,10 +70,6 @@ class Header extends Component {
             Deploy
           </a>
           <div className="item">
-            <div className="ui inverted transparent left icon input">
-              <input type="text" value={`http://localhost:${this.props.port}`} readonly/>
-              <i className="lightning icon"></i>
-            </div>
           </div>
         </div>
       </div>

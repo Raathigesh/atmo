@@ -44,6 +44,7 @@ class App extends Component {
                 currentEndpoint={this.props.state.currentRequest}
                 requests={this.props.state.endpoints}
                 setCurrentEndpoint={this.props.state.setCurrentEndpoint}
+                status={this.props.state.status}
                 />
             </div>
             <div className="twelve wide column">
@@ -56,7 +57,6 @@ class App extends Component {
               {this.props.state.currentRequest.type === 'gql' && <GraphqlPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
               {this.props.state.currentRequest.type === 'jsonServer' && <JsonServerPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
               {this.props.state.currentRequest.type === 'proxy' && <ProxyPanel endpoint={this.props.state.currentRequest} deleteEndpoint={this.props.state.deleteEndpoint}/>}
-              <Status status={this.props.state.status}/>
             </div>
           </div>
           <Notification msg={this.props.state.msg}/>
