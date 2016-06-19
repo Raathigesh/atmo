@@ -1,7 +1,7 @@
 {
   "name": "atmo",
   "version": "0.8.1",
-  "description": "Mocking Http, Socket, Graphql Endpoints made with ease through UI",
+  "description": "Server side powertool for prototyping",
   "main": "src/server/index.js",
   "scripts": {
     "start": "nodemon src/server/index.js --port 8888",
@@ -15,6 +15,20 @@
   },
   "author": "Raathigeshan Kugarajan",
   "license": "MIT",
+   "keywords": [
+    "mock",
+    "https",
+    "socket",
+    "socket.io",
+    "graphql",
+    "proxy",
+    "httpProxy",
+    "json-server",
+    "prototype",
+    "http-mock",
+    "graphql-mock",
+    "atmo"
+  ],
   "bugs": {
     "url": "https://github.com/Raathigesh/Atmo/issues"
   },
