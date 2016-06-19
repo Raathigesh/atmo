@@ -63,7 +63,7 @@ Run `npm run dev` to launch the webpack dev server.
 ###### Running the api server
 Run `npm run server` to launch the api server.
 
-##### Write a generator
+#### Write a generator
 Atmo uses generators to automatically generate code for the endpoints that are created via the UI. You could write a generator which generates code in your favourite node js framework (e.g: HapiJS). [Learn more here on how to write a generator.](https://github.com/Raathigesh/Atmo/blob/master/docs/HowToWriteAGenerator.md)
 
 ## Thanks
