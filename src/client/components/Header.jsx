@@ -23,6 +23,10 @@ class Header extends Component {
     }, false);
   }
 
+  openAtmoUrl = () => {
+    window.open('https://github.com/Raathigesh/Atmo', '_blank');
+  }
+
   render() {
     return (
       <div className="ui fluid small menu hermesHeader">
@@ -64,6 +68,16 @@ class Header extends Component {
               </a>
             </div>
             <Generator generators={this.props.generators} onGenerate={this.props.generateProject} installGenerator={this.props.installGenerator}/>
+          </div>
+          <div className="item">
+            <div className="ui labeled button" onClick={this.openAtmoUrl}>
+              <div className="ui blue button">
+                <i className="star icon"></i> Star
+              </div>
+              {this.props.stars > 0 && <a className="ui basic blue left pointing label">
+                {this.props.stars}
+              </a>}
+            </div>
           </div>
           <a href="#" className="right item deployButton" onClick={this.props.onDeploy} >
             <i className="icon send outline"></i>

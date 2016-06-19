@@ -36,6 +36,7 @@ class App extends Component {
               generators={this.props.state.generators}
               installGenerator={this.props.state.installGenerator}
               createProxyEndpoint={this.props.state.createProxyEndpoint}
+              stars={this.props.state.stars}
               />
           </div>
           <div className="row hermesDashboard" style={{ width: '90% !important' }}>

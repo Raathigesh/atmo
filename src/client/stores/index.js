@@ -20,6 +20,7 @@ class AppState {
   @observable status = null;
   @observable generators = [];
   @observable msg = null;
+  @observable stars = 0;
 
   constructor() {
     this.responseTypes = contentTypes;
@@ -51,6 +52,10 @@ class AppState {
 
     this.beamer.onJsonServerDbUpdate((db) => {
       this.updateJsonDb(db);
+    });
+
+    $.get("https://api.github.com/repos/raathigesh/atmo/stargazers", (data) => {
+        this.stars = data.length;
     });
   }
 
