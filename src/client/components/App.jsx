@@ -45,6 +45,7 @@ class App extends Component {
                 requests={this.props.state.endpoints}
                 setCurrentEndpoint={this.props.state.setCurrentEndpoint}
                 status={this.props.state.status}
+                port={this.props.state.port}
                 />
             </div>
             <div className="twelve wide column">

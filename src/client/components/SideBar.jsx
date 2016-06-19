@@ -17,13 +17,14 @@ const SideBar = (props) => {
     )
   });
 
+  let url = `http://localhost:${props.port}`;
   return (
     <div className="ui vertical fluid menu">
       <div className="item">
         <h4 className="ui header">
           <i className={`lightning ${props.status.color} icon`}></i>
           <div className="content">
-            <a href='http://localhost:3000'>http://localhost:3000</a>
+            <a href={url}>{url}</a>
             <div className="sub header">{props.status.message}</div>
           </div>
         </h4>
