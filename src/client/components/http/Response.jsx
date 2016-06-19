@@ -42,6 +42,7 @@ class Response extends React.Component {
           value={this.props.endpoint.response.content}
           enableBasicAutocompletion={true}
           fontSize={14}
+          highlightActiveLine={true}
           />
       </div>
     )
