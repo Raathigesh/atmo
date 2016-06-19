@@ -21,7 +21,7 @@ app.use(express.static(__dirname + '../../../dist'));
 
 var port = 3333;
 server.listen(port, function () {
-  console.log(chalk.blue('Atmo dashboard is available at: http://localhost:' + port));
+  console.log(chalk.blue('Atmo dashboard v' + pack.version + ' is available at: http://localhost:' + port));
 });
 
 var apiServerPort = argv.port || 3334;
@@ -72,11 +72,11 @@ function addGenarator(name) {
 
 function installGenerator(name, socket) {
   var options = {
-    name: name,    // your module name
-    path: '.',              // installation path [default: '.']
-    forceInstall: true,    // force install if set to true (even if already installed, it will do a reinstall) [default: false]
-    npmLoad: {              // npm.load(options, callback): this is the "options" given to npm.load()
-      loglevel: 'silent'  // [default: {loglevel: 'silent'}]
+    name: name,
+    path: '.', 
+    forceInstall: true,
+    npmLoad: {
+      loglevel: 'silent'
     }
   };
   npmi(options, function (err, result) {

@@ -5,6 +5,7 @@ class Notification extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.msg !== nextProps.msg && nextProps.msg !== '') {
       this.refs.notifications.addNotification({
+        title: 'Atmo',
         message: nextProps.msg,
         level: 'success'
       });
