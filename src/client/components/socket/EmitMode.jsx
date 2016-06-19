@@ -8,9 +8,12 @@ class ResponseCode extends Component {
         label: 'Emit to all connections',
         value: 'all'
       }, {
-          label: 'Emit only to current connection',
-          value: 'self'
-        }]
+        label: 'Emit only to current connection',
+        value: 'self'
+      }, {
+        label: 'Emit to all but not to the current',
+        value: 'broadcast'
+      }]
     }
   }
   componentDidMount() {

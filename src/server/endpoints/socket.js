@@ -14,8 +14,11 @@ function initializeSocketEndpoints(io, endpoints) {
 function registerEvent(endpoint, socket, io) {
   socket.on(endpoint.eventName, function (data) {
     if (endpoint.emitType === 'all') {
-      socket.emit(endpoint.eventToEmit, endpoint.payload);
-    } else {
+      io.sockets.emit(endpoint.eventToEmit, endpoint.payload);
+    } else if (endpoint.emitType === 'broadcast') {
+      socket.broadcast.emit(endpoint.eventToEmit, endpoint.payload);
+    }
+    else {
       io.to(socket.id).emit(endpoint.eventToEmit, endpoint.payload);
     }
   });

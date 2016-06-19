@@ -14,10 +14,10 @@ class AddEndpoint extends Component {
         <div  ref="createEndpointDropdown" className="ui floating dropdown icon button">
           <i className="dropdown icon"></i>
           <div className="menu">
-            <div className="item" data-value="drop" onClick={this.props.onCreateSocketEndpoint}>New Socket Event</div>
-            <div className="item" data-value="horizontal flip" onClick={this.props.createGraphqlEndpoint}>New GraphQL Endpoint</div>
+            <div className="item" data-value="drop" onClick={this.props.onCreateSocketEndpoint}>New Socket Event</div>            
             <div className="item" data-value="horizontal flip" onClick={this.props.createJsonServerEndpoint}>New Json Server Endpoint</div>
             <div className="item" data-value="horizontal flip" onClick={this.props.createProxyEndpoint}>New Proxy Endpoint</div>
+            <div className="item" data-value="horizontal flip" onClick={this.props.createGraphqlEndpoint}>New GraphQL Endpoint</div>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@
 </head>
 <body>
 <div id="root"></div>
+<button onclick="tweet()">Emit Tweet</button>
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script>  
     var socket = io.connect("http://localhost:8888");
@@ -17,6 +18,11 @@
 	socket.on("tweet", function (data) {  
 	    console.log('Tweet from server ' + data);
 	});
+
+	function tweet() {
+		console.log('Emitting...');
+		 socket.emit("tweet", "Whats up?");  
+	}
 </script
 
 </body>
