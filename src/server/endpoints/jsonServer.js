@@ -1,5 +1,4 @@
 
-var util = require('../apiServer/util');
 var jsonServer = require('json-server');
 
 function jsonServerModule(app, spec) {
@@ -8,7 +7,6 @@ function jsonServerModule(app, spec) {
     router = jsonServer.router(JSON.parse(spec.jsonServerEndpoint.model));
     app.use(spec.jsonServerEndpoint.url, router);
   }
-
   return router;
 }
 

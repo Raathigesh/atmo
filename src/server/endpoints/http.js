@@ -1,5 +1,3 @@
-var util = require('../apiServer/util');
-
 function httpModule(app, spec) {
   for (var i = 0; i < spec.endpoints.length; i++) {
     addRoute(app, spec.endpoints[i]);
@@ -10,8 +8,6 @@ function httpModule(app, spec) {
  * Adds new routes
  */
 function addRoute(app, endpoint) {
-  util.removeRouteIfAvailable(app, endpoint);
-
   if (endpoint.method === 'GET') {
     app.get(endpoint.url, function (req, res) {
       responseCallback(req, res, endpoint);
@@ -65,7 +61,6 @@ function responseCallback(req, res, endpoint) {
   res.status(endpoint.response.responseCode);
   res.send(endpoint.response.content);
 }
-
 
 function setHeaders(res, headers) {
   headers.forEach(function (header) {

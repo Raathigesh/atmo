@@ -3,7 +3,7 @@ var http = require('http');
 var path = require('path');
 var chalk = require('chalk');
 var enableDestroy = require('server-destroy');
-var morgan = require('morgan');
+var morgan = require('morgan')
 
 var app = null;
 var server = null;
@@ -31,7 +31,7 @@ function createApiServer(port, static, logs) {
   });
 
   if (logs) {
-    app.use(morgan('combined'))
+    app.use(morgan('common'));
   }
 
   if (static) {
