@@ -31,7 +31,7 @@ function createApiServer(port, static, logs) {
   });
 
   if (logs) {
-    app.use(morgan('common'));
+    app.use(morgan('dev'));
   }
 
   if (static) {
