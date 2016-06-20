@@ -1,1 +1,1 @@
-{"endpoints":[{"url":"/asdasdasdasd","method":"GET","headers":[{"key":"cross-origin","value":"*"}],"response":{"type":"json","content":"{}","contentType":{"type":"json","contentType":"application/json"},"responseCode":"200"},"type":"http"}],"socketEndpoints":[],"graphqlEndpoints":[],"port":8888}
+{}
