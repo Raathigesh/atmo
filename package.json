@@ -1,6 +1,6 @@
 {
   "name": "atmo",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Server side powertool for prototyping",
   "main": "src/server/index.js",
   "scripts": {
@@ -81,7 +81,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "bin": {
-    "atmo": "src/server/index.js"
+    "atmo": "bin/atmo"
   },
   "babel": {
     "presets": [
