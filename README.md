@@ -18,9 +18,6 @@
          alt="NPM Version">
   </a>
 </p>
-<br>
-
-
 ## Installation
 ```
 $ npm install atmo -g
