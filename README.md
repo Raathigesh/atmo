@@ -17,11 +17,7 @@
     <img src="https://img.shields.io/npm/v/atmo.svg?style=flat-square"
          alt="NPM Version">
   </a>
-   <h4 align="center">Still under active development</h4>
 </p>
-<br>
-
-
 ## Installation
 ```
 $ npm install atmo -g
