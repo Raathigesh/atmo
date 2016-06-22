@@ -8,7 +8,9 @@ import contentTypes from '../models/http/ContentTypes';
 import ContentType from '../models/http/ContentType';
 import SocketEndpoint from '../models/socket/SocketEndpoint';
 import GraphqlEndpoint from '../models/graphql/GraphqlEndpoint';
+import initialGraphqlSchema from '../models/graphql/InitialSchema';
 import JsonServerEndpoint from '../models/jsonServer/JsonServerEndpoint';
+import initialJsonServerDb from '../models/jsonServer/initialJsonServerDb';
 import ProxyEndpoint from '../models/proxy/ProxyEndpoint';
 import { initial, deploying, deployed, failed } from '../models/Statuses';
 import jsonStringfy from 'json-stringify-pretty-compact';
@@ -74,13 +76,13 @@ class AppState {
   }
 
   createGraphqlEndpoint = () => {
-    this.endpoints.push(new GraphqlEndpoint('', ''));
+    this.endpoints.push(new GraphqlEndpoint('', initialGraphqlSchema));
     this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
 
   createJsonServerEndpoint = () => {
     if (!this.isAnyJsonServerEndpointAvailable()) {
-      this.endpoints.push(new JsonServerEndpoint('/api', '{}'));
+      this.endpoints.push(new JsonServerEndpoint('/api', initialJsonServerDb));
       this.currentRequest = this.endpoints[this.endpoints.length - 1];
     } else {
       this.msg = 'Only one json-server endpoint is supported at a time.'
@@ -93,7 +95,6 @@ class AppState {
         return true;
       }
     }
-
     return false;
   }
 
