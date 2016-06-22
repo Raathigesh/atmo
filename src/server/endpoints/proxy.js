@@ -11,7 +11,8 @@ function proxyModule(app, spec) {
       intercept: function(rsp, data, req, responseOut, callback) {
         responseOut.set('Access-Control-Allow-Origin', '*');
         callback(null, data);
-      }
+      },
+      preserveHostHdr: true
     }));
   }
 
