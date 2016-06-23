@@ -65,7 +65,7 @@
         "type": "jsonServer"
     },
 	// Proxy endpoint
-    "proxyEndpoints": [{]
+    "proxyEndpoints": [{
 		// Url of the proxy endpoint
         "url": "/proxy",
 		// Url that should be proxied
