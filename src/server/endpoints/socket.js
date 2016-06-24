@@ -17,8 +17,7 @@ function registerEvent(endpoint, socket, io) {
       io.sockets.emit(endpoint.eventToEmit, endpoint.payload);
     } else if (endpoint.emitType === 'broadcast') {
       socket.broadcast.emit(endpoint.eventToEmit, endpoint.payload);
-    }
-    else {
+    } else {
       io.to(socket.id).emit(endpoint.eventToEmit, endpoint.payload);
     }
   });
