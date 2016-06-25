@@ -72,7 +72,7 @@ class Header extends Component {
           <div className="item">
             <div className="ui labeled button" onClick={this.openAtmoUrl}>
               <div className="ui blue button">
-                <i className="star icon"></i> Star
+                <i className="github icon"></i> Star
               </div>
               {this.props.stars > 0 && <a className="ui basic blue left pointing label">
                 {this.props.stars}
