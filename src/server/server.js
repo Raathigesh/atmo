@@ -16,6 +16,13 @@ var pack = require('../../package.json');
 var jsonfile = require('jsonfile');
 var generatorsDataFile = path.join(__dirname, '../../cache/generators.json');
 var npmi = require('npmi');
+var figlet = require('figlet');
+
+console.log(chalk.blue(figlet.textSync(' Atmo')));
+console.log(chalk.gray('Server side tool for prototyping'));
+console.log(chalk.gray('---------------------------------'));
+console.log(chalk.gray('          Version '+ pack.version));
+console.log(chalk.gray(''));
 
 app.use(express.static(__dirname + '../../../dist'));
 
@@ -28,7 +35,7 @@ var port = 3333;
  * Start the dashboard server
  */
 server.listen(port, function () {
-  console.log(chalk.blue('Atmo dashboard v' + pack.version + ' is available at: http://localhost:' + port));
+  console.log(chalk.yellow('Atmo dashboard is available at: http://localhost:' + port));
 });
 
 /**
