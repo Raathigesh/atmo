@@ -43,7 +43,7 @@ Execute the following command
 $ atmo
 ```
 
-#### Cli Options
+#### Options
 - `--port` will launch the API server in a specific port. Default port is 3334. (`atmo --port 3000`)
 - `--static` will serve the content in the folder `public` in your current working directory (`atmo --static`)
 - `--logs` will print out the access logs to console (`atmo --logs`)
