@@ -27,7 +27,7 @@ $ npm install atmo -g
 - Socket server
 - GraphQL endpoints (Experimental)
 - Http proxy
-- In-built support for Json-Server. [Refer Json-Server docs for more info.](https://github.com/typicode/json-server)
+- In-built support for Json-Server. [More on creating Json-Server endpoint.](https://github.com/Raathigesh/Atmo/blob/master/docs/JsonServerEndpoint.md)
 - Static content folder 
 - Export project as Json file
 - Import project
