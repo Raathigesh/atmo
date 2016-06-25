@@ -48,6 +48,13 @@ $ atmo
 - `--static` will serve the content in the folder `public` in your current working directory (`atmo --static`)
 - `--logs` will print out the access logs to console (`atmo --logs`)
 
+## Docs
+- [Creating a socket endpoint and connecting to it](https://github.com/Raathigesh/Atmo/blob/master/docs/SocketEndpoint.md)
+- [Creating a proxy endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/ProxyEndpoint.md)
+- [Creating a json-server endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/JsonServerEndpoint.md)
+- [Creating a graphql endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/GraphqlEndpoint.md)
+
+
 ## Contribute
 For any problem/question or if you think a feature that could make Atmo more useful, do not hesitate to open an issue.
 
