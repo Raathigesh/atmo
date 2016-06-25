@@ -14,6 +14,7 @@ import initialJsonServerDb from '../models/jsonServer/initialJsonServerDb';
 import ProxyEndpoint from '../models/proxy/ProxyEndpoint';
 import { initial, deploying, deployed, failed } from '../models/Statuses';
 import jsonStringfy from 'json-stringify-pretty-compact';
+import { parseSpec, getPayload, isAnyJsonServerEndpointAvailable } from '../lib/Util';
 
 class AppState {
   @observable endpoints = [];
@@ -61,27 +62,51 @@ class AppState {
     });
   }
 
+  /**
+   * Reinitializes the endpoint array.
+   */
+  initialize = () => {
+    this.endpoints = [];
+    this.endpoints.push(new Endpoint('/', 'GET', [new Header('Access-Control-Allow-Origin', '*')], new Response(contentTypes[0], '{}')));
+    this.currentRequest = this.endpoints[0];
+  }
+
+  /**
+   * Sets the current active endpoint
+   */
   setCurrentEndpoint = (index) => {
     this.currentRequest = this.endpoints[index];
   }
 
+  /**
+   * Creates a new http endpoint
+   */
   createEndPoint = () => {
     this.endpoints.push(new Endpoint('/', 'GET', [new Header('Access-Control-Allow-Origin', '*')], new Response(contentTypes[0], '{}')));
     this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
 
+  /**
+   * Creates a new socket endpoint
+   */
   createSocketEndpoint = () => {
     this.endpoints.push(new SocketEndpoint('', '', '{}', 'all'));
     this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
 
+  /**
+   * Creates a new graphql endpoint
+   */
   createGraphqlEndpoint = () => {
     this.endpoints.push(new GraphqlEndpoint('', initialGraphqlSchema));
     this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
 
+  /**
+   * Creates a new json server endpoint if one already doesn't exists
+   */
   createJsonServerEndpoint = () => {
-    if (!this.isAnyJsonServerEndpointAvailable()) {
+    if (!isAnyJsonServerEndpointAvailable(this.endpoints)) {
       this.endpoints.push(new JsonServerEndpoint('/api', initialJsonServerDb));
       this.currentRequest = this.endpoints[this.endpoints.length - 1];
     } else {
@@ -89,107 +114,47 @@ class AppState {
     }
   }
 
-  isAnyJsonServerEndpointAvailable = () => {
-    for (let endpoint of this.endpoints) {
-      if (endpoint.type === 'jsonServer') {
-        return true;
-      }
-    }
-    return false;
-  }
-
+  /**
+   * Creates a new prodxy endpoint
+   */
   createProxyEndpoint = () => {
     this.endpoints.push(new ProxyEndpoint('/proxy', ''));
     this.currentRequest = this.endpoints[this.endpoints.length - 1];
   }
 
-  updateUrl = (url, index) => {
-    this.endpoints[index].url = url;
-  }
-
+  /**
+   * Returns the state of the endpoints
+   */
   getPayload = () => {
-    let httpEndpoints = [];
-    let socketEndpoints = [];
-    let graphqlEndpoints = [];
-    let proxyEndpoints = [];
-    let jsonServerEndpoint = null;
-
-    for (let endpoint of this.endpoints) {
-      if (endpoint.type === 'http') {
-        httpEndpoints.push(endpoint);
-      } else if (endpoint.type === 'socket') {
-        socketEndpoints.push(endpoint);
-      } else if (endpoint.type === 'gql') {
-        graphqlEndpoints.push(endpoint);
-      } else if (endpoint.type === 'jsonServer') {
-        jsonServerEndpoint = endpoint;
-      } else if (endpoint.type === 'proxy') {
-        proxyEndpoints.push(endpoint);
-      }
-    }
-
-    let payload = {
-      endpoints: mobx.toJSON(httpEndpoints),
-      socketEndpoints: mobx.toJSON(socketEndpoints),
-      graphqlEndpoints: mobx.toJSON(graphqlEndpoints),
-      jsonServerEndpoint: jsonServerEndpoint,
-      proxyEndpoints: mobx.toJSON(proxyEndpoints)
-    };
-
-    return payload;
+    return getPayload(this.endpoints);
   }
 
+  /**
+   * Sents socket event to deploy the new changes
+   */
   deployChanges = () => {
     this.status = deploying;
     this.beamer.deployChanges(this.getPayload());
   }
 
+  /**
+   * Sents socket event to save the application state
+   */
   saveChanges = () => {
     this.beamer.saveChanges(this.getPayload());
   }
 
-  updatePort = (port) => {
-    this.port = port;
-  }
-
+  /**
+   * Parses a spec to endpoints
+   */
   loadSpec = (spec) => {
-    this.endpoints = [];
-
-    if (!spec.endpoints && !spec.socketEndpoints && !spec.graphqlEndpoints && !spec.jsonServerEndpoint) {
-      this.createEndPoint();
-    } else {
-      for (let endpoint of spec.endpoints) {
-        let response = new Response(new ContentType(endpoint.response.contentType.type, endpoint.response.contentType.contentType), endpoint.response.content, endpoint.response.responseCode);
-        this.endpoints.push(new Endpoint(endpoint.url, endpoint.method, this.getHeadersFromJson(endpoint), response));
-      }
-
-      for (let endpoint of spec.socketEndpoints) {
-        this.endpoints.push(new SocketEndpoint(endpoint.eventName, endpoint.eventToEmit, endpoint.payload, endpoint.emitType));
-      }
-
-      for (let endpoint of spec.graphqlEndpoints) {
-        this.endpoints.push(new GraphqlEndpoint(endpoint.url, endpoint.schema));
-      }
-
-      for (let endpoint of spec.proxyEndpoints) {
-        this.endpoints.push(new ProxyEndpoint(endpoint.url, endpoint.urlToProxy));
-      }
-
-      if (spec.jsonServerEndpoint) {
-        this.endpoints.push(new JsonServerEndpoint(spec.jsonServerEndpoint.url, spec.jsonServerEndpoint.model));
-      }
-    }
+    this.endpoints = parseSpec(spec);
     this.currentRequest = this.endpoints[0];
   }
 
-  getHeadersFromJson = (endpoint) => {
-    let headers = [];
-    for (let header of endpoint.headers) {
-      headers.push(new Header(header.key, header.value));
-    }
-    return headers;
-  }
-
+  /**
+   * Deletes the current endpoint
+   */
   deleteEndpoint = () => {
     this.endpoints.forEach((endpoint, index) => {
       if (endpoint === this.currentRequest) {
@@ -203,6 +168,10 @@ class AppState {
     });
   }
 
+  /**
+   * Updates the json server DB of the exising json-server endpoint.
+   * Maximum of one json-server endpoint is supported.
+   */
   updateJsonDb = (db) => {
     if (db) {
       for (let endpoint of this.endpoints) {
@@ -217,16 +186,18 @@ class AppState {
     }
   }
 
-  initialize = () => {
-    this.endpoints = [];
-    this.endpoints.push(new Endpoint('/', 'GET', [new Header('Access-Control-Allow-Origin', '*')], new Response(contentTypes[0], '{}')));
-    this.currentRequest = this.endpoints[0];
-  }
-
+  /**
+   * Rerturns total endpoint length
+   */
   @computed get totalEndpoints() {
     return this.endpoints.length;
   }
 
+  /**
+   * Emits a socket event to the server to start generating the project
+   * through code generation. Spec and name of the geenrator is sent as 
+   * payload.
+   */
   generateProject = (generator) => {
     this.beamer.generateProject({
       spec: this.getPayload(),
@@ -234,15 +205,28 @@ class AppState {
     });
   }
 
+  /**
+   * Emits an socket event informing the server to start installing a generator.
+   * Name of the geenrator that should be installed is sent as payload.
+   */
   installGenerator = (name) => {
     this.msg = `Started installing ${name}`;
     this.beamer.installGenerator(name);
   }
 
+  /**
+   * Emits a socket event asking for the updates json-server db. This is beacause,
+   * in memory json-server DB can be in a differnt state from the initial since users
+   * can create resources or delete existing resouces through the generated REST endpoints 
+   */
   syncJsonServer = () => {
     this.beamer.syncJsonServer();
   }
 
+  /**
+   * Updates notification. The notification component will show this in the UI
+   * when this method is called.
+   */
   showNotification = (msg) => {
     this.msg = msg;
     this.msg = '';

@@ -24,7 +24,6 @@ class App extends Component {
             <Header
               onDeploy={this.props.state.deployChanges}
               port={this.props.state.port}
-              onPortChange={this.props.state.updatePort}
               state={this.props.state}
               initialize={this.props.state.initialize}
               save={this.props.state.saveChanges}
