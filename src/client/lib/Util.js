@@ -14,7 +14,8 @@ import ProxyEndpoint from '../models/proxy/ProxyEndpoint';
 export function parseSpec(spec) {
   var endpoints = [];
   if (!spec.endpoints && !spec.socketEndpoints && !spec.graphqlEndpoints && !spec.jsonServerEndpoint) {
-     endpoints.push(new Endpoint('/', 'GET', [new Header('Access-Control-Allow-Origin', '*')], new Response(contentTypes[0], '{}')));
+    // if the spec doesn't have endpoint, initialize with a default http endpoint
+    endpoints.push(new Endpoint('/', 'GET', [new Header('Access-Control-Allow-Origin', '*')], new Response(contentTypes[0], '{}')));
   } else {
     for (let endpoint of spec.endpoints) {
       let response = new Response(new ContentType(endpoint.response.contentType.type, endpoint.response.contentType.contentType), endpoint.response.content, endpoint.response.responseCode);
@@ -71,6 +72,8 @@ export function getPayload(endpoints) {
     jsonServerEndpoint: jsonServerEndpoint,
     proxyEndpoints: mobx.toJSON(proxyEndpoints)
   };
+
+  return payload;
 }
 
 /**
