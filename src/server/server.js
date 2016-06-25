@@ -19,11 +19,21 @@ var npmi = require('npmi');
 
 app.use(express.static(__dirname + '../../../dist'));
 
+/**
+ * Port of the dashboard server
+ */
 var port = 3333;
+
+/**
+ * Start the dashboard server
+ */
 server.listen(port, function () {
   console.log(chalk.blue('Atmo dashboard v' + pack.version + ' is available at: http://localhost:' + port));
 });
 
+/**
+ * API server
+ */
 var apiServerPort = argv.port || 3334;
 var api = apiServer.createApiServer(apiServerPort, argv.static, argv.logs);
 
@@ -55,7 +65,7 @@ io.on('connection', function (socket) {
   socket.on('generate', function (payload) {
     var renerator = require(payload.generator);
     renerator(payload.spec);
-    socket.emit('message', 'Your generated project is available in ' + path.join(process.cwd(), 'build'))
+    socket.emit('message', 'Your generated project is available in ' + path.join(process.cwd(), 'project'))
   });
 
   socket.on('installGenerator', function (name) {
@@ -67,6 +77,9 @@ io.on('connection', function (socket) {
   });
 });
 
+/**
+ * Add a generator name to the generator meta data file
+ */
 function addGenarator(name) {
   var generatorsData = jsonfile.readFileSync(generatorsDataFile);
   generatorsData.generators.push(name);
@@ -74,6 +87,9 @@ function addGenarator(name) {
   return generatorsData;
 }
 
+/**
+ * Install the generator npm package programmatically
+ */
 function installGenerator(name, socket) {
   var options = {
     name: name,
