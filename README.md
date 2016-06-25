@@ -23,14 +23,14 @@
 $ npm install atmo -g
 ```
 ## Features
-- Mock Http endpoints
-- Mock Socket endpoints
-- Mock GraphQL endpoints (Experimental)
-- Http proxy support
+- Http endpoints
+- Socket server
+- GraphQL endpoints (Experimental)
+- Http proxy
 - In-built support for Json-Server. [Refer Json-Server docs for more info.](https://github.com/typicode/json-server)
-- Static content serving 
-- Export and share your project through a single json file
-- Import an atmo project from your colleague or team
+- Static content folder 
+- Export project as Json file
+- Import project
 - Code generation through generators.
   - `atmo-gen-expressjs-es5` - [ExpressJS/ES5 Generator](https://github.com/Raathigesh/AtmoExpressES5Generator)
 - https://zeit.co/now deployable projects
