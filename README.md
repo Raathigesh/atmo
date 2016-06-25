@@ -48,6 +48,13 @@ $ atmo
 - `--static` will serve the content in the folder `public` in your current working directory (`atmo --static`)
 - `--logs` will print out the access logs to console (`atmo --logs`)
 
+## Docs
+- [Creating a socket endpoint and connecting to it](https://github.com/Raathigesh/Atmo/blob/master/docs/SocketEndpoint.md)
+- [Creating a proxy endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/ProxyEndpoint.md)
+- [Creating a json-server endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/JsonServerEndpoint.md)
+- [Creating a graphql endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/GraphqlEndpoint.md)
+
+
 ## Contribute
 For any problem/question or if you think a feature that could make Atmo more useful, do not hesitate to open an issue.
 
@@ -60,7 +67,9 @@ Run `npm run dev` to launch the webpack dev server.
 Run `npm run server` to launch the api server.
 
 #### Write a generator
-Atmo uses generators to automatically generate code for the endpoints that are created via the UI. You could write a generator which generates code in your favourite node js framework (e.g: HapiJS). [Learn more here on how to write a generator.](https://github.com/Raathigesh/Atmo/blob/master/docs/HowToWriteAGenerator.md)
+Atmo uses generators to automatically generate code for the endpoints that are created via the UI. You could write a generator which generates code in your favourite node js framework (e.g: HapiJS). 
+
+[Learn more here on how to write a generator.](https://github.com/Raathigesh/Atmo/blob/master/docs/HowToWriteAGenerator.md)
 
 ## Thanks
 Thanks [Kreativa Studio](http://www.kreativa-studio.com/) for the free logo.
