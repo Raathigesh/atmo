@@ -26,6 +26,13 @@ class Headers extends Component {
 
     return (
       <table className="ui celled striped table">
+       <thead>
+          <tr>
+            <th colSpan="3">
+              Response Headers
+            </th>
+          </tr>
+        </thead>
         <tbody>
           {headerItems}
         </tbody>
