@@ -1,4 +1,4 @@
-import {observable} from 'mobx';
+import { observable, computed } from 'mobx';
 
 export default class GraphqlEndpoint {
   @observable url;
@@ -17,5 +17,9 @@ export default class GraphqlEndpoint {
 
   setSchema(schema) {
     this.schema = schema;
+  }
+
+  @computed get displayEndpoint() {
+    return this.url;
   }
 }

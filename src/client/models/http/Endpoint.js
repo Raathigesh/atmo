@@ -1,4 +1,4 @@
-import {observable} from 'mobx';
+import {observable, computed} from 'mobx';
 import Header from './Header';
 
 export default class Endpoint {
@@ -34,5 +34,9 @@ export default class Endpoint {
 
   removeHeader(index) {
     this.headers.splice(index, 1);
+  }
+
+  @computed get displayEndpoint() {
+    return this.url;
   }
 }

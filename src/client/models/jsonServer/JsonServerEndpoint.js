@@ -1,4 +1,4 @@
-import {observable} from 'mobx';
+import { observable, computed } from 'mobx';
 
 export default class JsonServerEndpoint {
   @observable url;
@@ -13,5 +13,9 @@ export default class JsonServerEndpoint {
 
   setModel(model) {
     this.model = model;
+  }
+
+  @computed get displayEndpoint() {
+    return this.url;
   }
 }

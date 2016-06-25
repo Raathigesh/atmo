@@ -1,4 +1,4 @@
-import {observable} from 'mobx';
+import { observable, computed } from 'mobx';
 
 export default class ProxyEndpoint {
   @observable url;
@@ -17,5 +17,9 @@ export default class ProxyEndpoint {
 
   setProxyUrl(url) {
     this.urlToProxy = url;
+  }
+
+  @computed get displayEndpoint() {
+    return this.url;
   }
 }

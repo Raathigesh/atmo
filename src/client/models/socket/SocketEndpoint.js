@@ -1,4 +1,4 @@
-import {observable} from 'mobx';
+import { observable, computed } from 'mobx';
 
 export default class SocketEndpoint {
   @observable eventName;
@@ -29,5 +29,9 @@ export default class SocketEndpoint {
 
   setEmitType(value) {
     this.emitType = value;
+  }
+
+  @computed get displayEndpoint() {
+    return '';
   }
 }
