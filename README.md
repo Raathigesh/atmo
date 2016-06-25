@@ -59,17 +59,11 @@ $ atmo
 For any problem/question or if you think a feature that could make Atmo more useful, do not hesitate to open an issue.
 
 #### Building Atmo
-
-###### Running client project
 Launch the webpack dev server.
-
 ````bash
 npm run dev
 `````
-
-###### Running the api server
 Launch the api server.
-
 ````bash
 npm run serve
 ````
