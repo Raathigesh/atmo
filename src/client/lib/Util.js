@@ -3,6 +3,7 @@ import Endpoint from '../models/http/Endpoint';
 import Response from '../models/http/Response';
 import Header from '../models/http/Header';
 import ContentType from '../models/http/ContentType';
+import contentTypes from '../models/http/ContentTypes';
 import SocketEndpoint from '../models/socket/SocketEndpoint';
 import GraphqlEndpoint from '../models/graphql/GraphqlEndpoint';
 import JsonServerEndpoint from '../models/jsonServer/JsonServerEndpoint';
