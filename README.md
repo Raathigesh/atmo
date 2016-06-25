@@ -23,14 +23,14 @@
 $ npm install atmo -g
 ```
 ## Features
-- Mock Http endpoints
-- Mock Socket endpoints
-- Mock GraphQL endpoints (Experimental)
-- Http proxy support
+- Http endpoints
+- Socket server
+- GraphQL endpoints (Experimental)
+- Http proxy
 - In-built support for Json-Server. [Refer Json-Server docs for more info.](https://github.com/typicode/json-server)
-- Static content serving 
-- Export and share your project through a single json file
-- Import an atmo project from your colleague or team
+- Static content folder 
+- Export project as Json file
+- Import project
 - Code generation through generators.
   - `atmo-gen-expressjs-es5` - [ExpressJS/ES5 Generator](https://github.com/Raathigesh/AtmoExpressES5Generator)
 - https://zeit.co/now deployable projects
@@ -43,7 +43,7 @@ Execute the following command
 $ atmo
 ```
 
-#### Cli Options
+#### Options
 - `--port` will launch the API server in a specific port. Default port is 3334. (`atmo --port 3000`)
 - `--static` will serve the content in the folder `public` in your current working directory (`atmo --static`)
 - `--logs` will print out the access logs to console (`atmo --logs`)
@@ -59,12 +59,14 @@ $ atmo
 For any problem/question or if you think a feature that could make Atmo more useful, do not hesitate to open an issue.
 
 #### Building Atmo
-
-###### Running client project
-Run `npm run dev` to launch the webpack dev server.
-
-###### Running the api server
-Run `npm run server` to launch the api server.
+Launch the webpack dev server.
+````bash
+npm run dev
+`````
+Launch the api server.
+````bash
+npm run serve
+````
 
 #### Write a generator
 Atmo uses generators to automatically generate code for the endpoints that are created via the UI. You could write a generator which generates code in your favourite node js framework (e.g: HapiJS). 
