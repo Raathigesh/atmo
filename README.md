@@ -51,9 +51,7 @@ $ atmo
 ## UI Demo
 Take a look at the UI of Atmo.
 
-http://atmo.surge.sh/
-
-**This demo is just to showcase the UI. Deploying will not work.**
+http://atmo.surge.sh/ (**This demo is just to showcase the UI.**)
 
 ## Docs
 - [Creating a socket endpoint and connecting to it](https://github.com/Raathigesh/Atmo/blob/master/docs/SocketEndpoint.md)
