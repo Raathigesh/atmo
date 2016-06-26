@@ -18,10 +18,12 @@
          alt="NPM Version">
   </a>
 </p>
+
 ## Installation
 ```
 $ npm install atmo -g
 ```
+
 ## Features
 - Http endpoints
 - Socket server
@@ -35,7 +37,6 @@ $ npm install atmo -g
   - `atmo-gen-expressjs-es5` - [ExpressJS/ES5 Generator](https://github.com/Raathigesh/AtmoExpressES5Generator)
 - https://zeit.co/now deployable projects
 - Sleek UI
- 
 
 ## Usage
 Execute the following command
@@ -53,14 +54,13 @@ Take a look at the UI of Atmo.
 
 http://atmo.surge.sh/ (This demo is just to showcase the UI.)
 
-## Docs
+## Guide
 - [Creating a socket endpoint and connecting to it](https://github.com/Raathigesh/Atmo/blob/master/docs/SocketEndpoint.md)
 - [Creating a proxy endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/ProxyEndpoint.md)
 - [Creating a json-server endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/JsonServerEndpoint.md)
 - [Creating a graphql endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/GraphqlEndpoint.md)
 - [Generating code](https://github.com/Raathigesh/Atmo/blob/master/docs/GeneratingProjectViaGenerators.md)
 - [Deploying a generated project via Zeit's now](https://github.com/Raathigesh/Atmo/blob/master/docs/DeployingViaNow.md)
-
 
 ## Contribute
 For any problem/question or if you think a feature that could make Atmo more useful, do not hesitate to open an issue.
