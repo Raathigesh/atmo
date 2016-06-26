@@ -29,7 +29,7 @@ app.use(express.static(__dirname + '../../../dist'));
 /**
  * Port of the dashboard server
  */
-var port = 3333;
+var port = process.env.PORT || 3333;
 
 /**
  * Start the dashboard server
