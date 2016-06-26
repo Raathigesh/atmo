@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoLogo.png" alt="Atmo" height="300">
    <br>
-  <h4 align="center">Server side tool for prototyping</h4>
+  <h4 align="center">UI based Server Side Api Mocking for Prototyping</h4>
 </h1>
 
 <p align="center">
