@@ -39,7 +39,7 @@ function createApiServer(port, static, logs) {
   }
 
   server.listen(port, function () {
-    console.log(chalk.green('API is available at: http://localhost:' + port));
+    console.log(chalk.green('Api: http://localhost:' + port));
   });
 
   enableDestroy(server);

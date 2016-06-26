@@ -18,10 +18,10 @@ var generatorsDataFile = path.join(__dirname, '../../cache/generators.json');
 var npmi = require('npmi');
 var figlet = require('figlet');
 
-console.log(chalk.blue(figlet.textSync(' Atmo')));
-console.log(chalk.gray('Server side tool for prototyping'));
-console.log(chalk.gray('---------------------------------'));
-console.log(chalk.gray('          Version '+ pack.version));
+console.log(chalk.blue(figlet.textSync('        Atmo')));
+console.log(chalk.gray('UI based Server Side Api Mocking for Prototyping'));
+console.log(chalk.gray('------------------------------------------------'));
+console.log(chalk.gray('                Version '+ pack.version));
 console.log(chalk.gray(''));
 
 app.use(express.static(path.resolve(__dirname, '../../dist')));
@@ -35,7 +35,7 @@ var port = process.env.PORT || 3333;
  * Start the dashboard server
  */
 server.listen(port, function () {
-  console.log(chalk.yellow('Atmo dashboard is available at: http://localhost:' + port));
+  console.log(chalk.yellow('Atmo mission control: http://localhost:' + port));
 });
 
 /**
