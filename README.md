@@ -50,9 +50,7 @@ $ atmo
 - `--logs` will print out the access logs to console (`atmo --logs`)
 
 ## UI Demo
-Take a look at the UI of Atmo.
-
-http://atmo.surge.sh/ (This demo is just to showcase the UI.)
+Take a look at the UI of Atmo. http://atmo.surge.sh/ (This demo is just to showcase the UI.)
 
 ## Guide
 - [Creating a socket endpoint and connecting to it](https://github.com/Raathigesh/Atmo/blob/master/docs/SocketEndpoint.md)
