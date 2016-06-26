@@ -58,6 +58,8 @@ http://atmo.surge.sh/ (This demo is just to showcase the UI.)
 - [Creating a proxy endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/ProxyEndpoint.md)
 - [Creating a json-server endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/JsonServerEndpoint.md)
 - [Creating a graphql endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/GraphqlEndpoint.md)
+- [Generating code](https://github.com/Raathigesh/Atmo/blob/master/docs/GeneratingProjectViaGenerators.md)
+- [Deploying a generated project via Zeit's now](https://github.com/Raathigesh/Atmo/blob/master/docs/DeployingViaNow.md)
 
 
 ## Contribute
