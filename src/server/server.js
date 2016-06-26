@@ -24,7 +24,7 @@ console.log(chalk.gray('---------------------------------'));
 console.log(chalk.gray('          Version '+ pack.version));
 console.log(chalk.gray(''));
 
-app.use(express.static(__dirname + '../../../dist'));
+app.use(express.static(path.resolve(__dirname, '../../../dist')));
 
 /**
  * Port of the dashboard server
