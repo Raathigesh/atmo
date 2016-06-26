@@ -98,9 +98,18 @@ function addGenarator(name) {
  * Install the generator npm package programmatically
  */
 function installGenerator(name, socket) {
+  var justThePackageName = name;
+  var justTheVersion = 'latest';
+
+  if (name.indexOf('@') >= 0) {
+    justThePackageName = name.substring(0, name.indexOf("@"));
+    justTheVersion = name.substring(name.indexOf("@") + 1, name.length);
+  }
+
   var options = {
-    name: name,
-    path: '.', 
+    name: justThePackageName,
+    path: __dirname,
+    version: justTheVersion,
     forceInstall: true,
     npmLoad: {
       loglevel: 'silent'
