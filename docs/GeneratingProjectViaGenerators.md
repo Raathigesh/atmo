@@ -1,5 +1,5 @@
 # Generating project via generators
-Atmo has generators which allows you generate source code which you could use to make advanced changes or deploy it.
+Atmo has generators which allows you generate source code which you could use to make changes or deploy it.
 
 ![Widget Frame](./images/Generator.PNG)
 
