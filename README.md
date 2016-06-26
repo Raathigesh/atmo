@@ -48,6 +48,13 @@ $ atmo
 - `--static` will serve the content in the folder `public` in your current working directory (`atmo --static`)
 - `--logs` will print out the access logs to console (`atmo --logs`)
 
+## UI Demo
+Take a look at the UI of Atmo.
+
+http://atmo.surge.sh/
+
+**This demo is just to showcase the UI. Deploying will not work.**
+
 ## Docs
 - [Creating a socket endpoint and connecting to it](https://github.com/Raathigesh/Atmo/blob/master/docs/SocketEndpoint.md)
 - [Creating a proxy endpoint](https://github.com/Raathigesh/Atmo/blob/master/docs/ProxyEndpoint.md)
