@@ -1,0 +1,20 @@
+{
+  "name": "atmo-api",
+  "version": "1.0.0",
+  "description": "Atmo generated API",
+  "main": "index.js",
+  "scripts": {
+     "start": "node server.js"
+  },
+  "author": "atmo",
+  "license": "ISC",
+  "dependencies": {  
+    
+    "socket.io": "^1.4.5",
+    
+    
+    "express-http-proxy": "^0.7.1",
+    
+    "express": "^4.13.4"
+  }
+}
