@@ -70,7 +70,7 @@ npm run dev
 `````
 Launch the api server.
 ````bash
-npm run serve
+npm run server
 ````
 
 #### Write a generator
