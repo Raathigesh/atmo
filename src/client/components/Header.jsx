@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import AddEndpoint from './AddEndpoint';
 import Generator from './Generator';
-import FileSaver from 'file-saver';
 
 class Header extends Component {
   onDownload = () => {
