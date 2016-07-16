@@ -5,9 +5,9 @@ class ResponseCode extends Component {
     super(props);
     this.state = {
       responseCodes: [{
-          label: '100 Continue',
-          value: '100'
-        }, {
+        label: '100 Continue',
+        value: '100'
+      }, {
           label: '101 Switching Protocol',
           value: '101'
         }, {
@@ -179,19 +179,25 @@ class ResponseCode extends Component {
       return (<div className="item" onClick={() => { this.handleOnChange(responseCode.value) } }>
         {responseCode.label}
       </div>);
-    }); 
- 
+    });
+
     return (
       <div ref="responseCodeDropdown" className="ui floating blue labeled icon dropdown button">
         <i className="wizard icon"></i>
         <span className="text">{this.getLabel(this.props.selectedValue) }</span>
         <div className="menu">
+          <div className="ui icon search input">
+            <i className="search icon"></i>
+            <input type="text" placeholder="Search..." />
+          </div>
+          <div className="divider"></div>
           <div className="header">
             <i className="tags icon"></i>
             Response Code
           </div>
-          <div className="divider"></div>
-          {items}
+          <div className="scrolling menu">
+            {items}
+          </div>
         </div>
       </div>
     );
