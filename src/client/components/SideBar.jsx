@@ -24,7 +24,7 @@ const SideBar = (props) => {
         <h4 className="ui header">
           <i className={`lightning ${props.status.color} icon`}></i>
           <div className="content">
-            <a href={url}>{url}</a>
+            <a href={url} target="_blank">{url}</a>
             <div className="sub header">{props.status.message}</div>
           </div>
         </h4>
