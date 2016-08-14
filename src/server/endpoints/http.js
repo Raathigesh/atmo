@@ -57,9 +57,16 @@ function addRoute(app, endpoint) {
 
 function responseCallback(req, res, endpoint) {
   setHeaders(res, endpoint.headers);
-  setContentTypeHeader(res, endpoint.response.contentType.contentType);
+  
   res.status(endpoint.response.responseCode);
-  res.send(endpoint.response.content);
+
+  if(endpoint.response.contentType.type === 'JavaScript') {
+    setContentTypeHeader(res, 'application/json');
+    eval(endpoint.response.content);
+  } else {
+    setContentTypeHeader(res, endpoint.response.contentType.contentType);
+    res.send(endpoint.response.content);
+  }  
 }
 
 function setHeaders(res, headers) {

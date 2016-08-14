@@ -23,6 +23,8 @@ class Response extends React.Component {
       mode = 'html';
     } else if (contentType === 'XML') {
       mode = 'xml';
+    } else if (contentType === 'JavaScript') {
+       mode = 'javascript';
     }
 
     return mode;

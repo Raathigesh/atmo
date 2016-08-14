@@ -1,4 +1,4 @@
-#How to proxy a Url with Atmo
+# How to proxy a Url with Atmo
 Atmo supports to proxy any url with ease.
 
 ![Widget Frame](./images/ProxyEndpoint.PNG)
