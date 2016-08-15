@@ -30,7 +30,20 @@ class AppState {
     this.initialize();
     this.status = initial;
 
-    this.beamer = new Beamer('http://localhost:3333');
+    /**
+     * When in production build, the server which is serving the html is the same server
+     * handling the other functionality as well. So just connect to the current origin.
+     */
+    let devServerUrl = window.location.origin;
+
+    // While developing and when the app is served through webpack-dev-server, we want
+    // to connect to the localhost server specifically. __DEV__ is configured in webpack config
+    // through DefinePlugin.
+    if (__DEV__) {
+      devServerUrl = 'http://localhost:3333';
+    }
+
+    this.beamer = new Beamer(devServerUrl);
     this.beamer.onStart((data) => {
       this.port = data.port;
       this.loadSpec(data.spec);

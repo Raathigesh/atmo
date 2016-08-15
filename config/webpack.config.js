@@ -36,6 +36,9 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
+    }),
+    new webpack.DefinePlugin({
+      __DEV__: JSON.stringify(JSON.parse('true')),
     })
   ],
   stats: {

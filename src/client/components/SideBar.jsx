@@ -17,7 +17,7 @@ const SideBar = (props) => {
     )
   });
 
-  let url = `http://localhost:${props.port}${props.currentEndpoint.displayEndpoint}`;
+  let url = `${window.location.protocol}//${window.location.hostname}:${props.port}${props.currentEndpoint.displayEndpoint}`;
   return (
     <div className="ui vertical fluid menu">
       <div className="item">
