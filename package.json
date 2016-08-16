@@ -1,6 +1,6 @@
 {
   "name": "atmo",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Server side powertool for prototyping",
   "main": "src/server/index.js",
   "scripts": {
