@@ -3,7 +3,8 @@ var http = require('http');
 var path = require('path');
 var chalk = require('chalk');
 var enableDestroy = require('server-destroy');
-var morgan = require('morgan')
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
 
 var app = null;
 var server = null;
@@ -33,6 +34,9 @@ function createApiServer(port, static, logs) {
   if (logs) {
     app.use(morgan('dev'));
   }
+
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
 
   if (static) {
     app.use(express.static(path.join(process.cwd(), 'public')));
