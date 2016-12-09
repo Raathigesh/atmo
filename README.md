@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoLogo.png" alt="Atmo" height="300">
+  <img src="https://raw.githubusercontent.com/Raathigesh/Atmo/master/docs/AtmoRevamp.png" alt="Atmo" height="600">
    <br>
   <h4 align="center">Server Side Api Mocking made easy with UI</h4>
 </h1>
