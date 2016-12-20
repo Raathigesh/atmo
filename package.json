@@ -1,6 +1,6 @@
 {
   "name": "atmo",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "description": "Server side powertool for prototyping",
   "main": "src/server/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
   "homepage": "https://github.com/Raathigesh/Atmo",
   "dependencies": {
     "apollo-server": "^0.1.2",
-    "atmo-gen-expressjs-es5": "0.0.7",
+    "atmo-gen-expressjs-es5": "0.1.0",
     "body-parser": "1.15.2",
     "chalk": "^1.1.3",
     "express": "^4.13.4",
