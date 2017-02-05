@@ -72,4 +72,4 @@ module.exports = {
   createApiServer: createApiServer,
   deploy: deploy,
   getJsonServerDb: getJsonServerDb
-}
+};

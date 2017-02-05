@@ -1,14 +1,21 @@
-function httpModule(app, spec) {
+function allowCrossDomain(req, res, next) {
+  // intercept OPTIONS method
+  if ('OPTIONS' == req.method) {
+    var allowHeaders = req.headers['access-control-request-headers'] ? req.headers['access-control-request-headers'] + ',' : '';
+    allowHeaders += 'Content-Type,Authorization';
 
-  /**
-   * To support CORS pre-flight requests.
-   */
-  app.options("/*", function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.send(200);
-  });
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', allowHeaders);
+
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+}
+
+function httpModule(app, spec) {
+  app.use(allowCrossDomain);
 
   for (var i = 0; i < spec.endpoints.length; i++) {
     addRoute(app, spec.endpoints[i]);
