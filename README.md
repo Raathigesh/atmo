@@ -20,6 +20,8 @@
 </p>
 
 ## Installation
+
+[![Join the chat at https://gitter.im/atmo-connect/Lobby](https://badges.gitter.im/atmo-connect/Lobby.svg)](https://gitter.im/atmo-connect/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ```
 $ npm install atmo -g
 ```
