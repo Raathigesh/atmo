@@ -3,7 +3,8 @@
         "noImplicitAny": true,
         "removeComments": true,
         "jsx": "react",
-        "allowJs": true
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true
     },
     "awesomeTypescriptLoaderOptions": {
     }
