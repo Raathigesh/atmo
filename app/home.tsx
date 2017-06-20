@@ -1,5 +1,4 @@
 import * as React from "react";
-import "./style.css";
 import { css } from "glamor";
 import Header from "./components/header";
 import SideBar from "./components/sidebar";
