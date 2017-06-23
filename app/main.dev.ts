@@ -1,5 +1,3 @@
-/* eslint global-require: 1, flowtype-errors/show-errors: 0 */
-
 /**
  * This module executes inside of electron's main process. You can start
  * electron renderer process from here and communicate with the other processes
@@ -12,7 +10,7 @@
 import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
 
-let mainWindow = null;
+let mainWindow: any = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');

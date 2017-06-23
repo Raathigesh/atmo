@@ -2,13 +2,13 @@
  * Webpack config for production electron main process
  */
 
-import webpack from 'webpack';
-import merge from 'webpack-merge';
-import BabiliPlugin from 'babili-webpack-plugin';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import baseConfig from './webpack.config.base';
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const BabiliPlugin = require('babili-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const baseConfig = require('./webpack.config.base');
 
-export default merge.smart(baseConfig, {
+module.exports = merge.smart(baseConfig, {
   devtool: 'source-map',
 
   target: 'electron-main',
@@ -18,7 +18,7 @@ export default merge.smart(baseConfig, {
   // 'main.js' in root
   output: {
     path: __dirname,
-    filename: './app/main.prod.js'
+    filename: './build/main.prod.js'
   },
 
   plugins: [

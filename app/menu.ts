@@ -1,7 +1,9 @@
 import { app, Menu, shell } from 'electron';
 
 export default class MenuBuilder {
-  constructor(mainWindow) {
+  mainWindow: any;
+
+  constructor(mainWindow: any) {
     this.mainWindow = mainWindow;
   }
 
@@ -18,7 +20,7 @@ export default class MenuBuilder {
       template = this.buildDefaultTemplate();
     }
 
-    const menu = Menu.buildFromTemplate(template);
+    const menu = Menu.buildFromTemplate(template as any);
     Menu.setApplicationMenu(menu);
 
     return menu;
@@ -26,7 +28,7 @@ export default class MenuBuilder {
 
   setupDevelopmentEnvironment() {
     this.mainWindow.openDevTools();
-    this.mainWindow.webContents.on('context-menu', (e, props) => {
+    this.mainWindow.webContents.on('context-menu', (e: any, props: any) => {
       const { x, y } = props;
 
       Menu
@@ -46,7 +48,7 @@ export default class MenuBuilder {
       submenu: [
         { label: 'About ElectronReact', selector: 'orderFrontStandardAboutPanel:' },
         { type: 'separator' },
-        { label: 'Services', submenu: [] },
+        { label: 'Services', submenu: [] as any },
         { type: 'separator' },
         { label: 'Hide ElectronReact', accelerator: 'Command+H', selector: 'hide:' },
         { label: 'Hide Others', accelerator: 'Command+Shift+H', selector: 'hideOtherApplications:' },

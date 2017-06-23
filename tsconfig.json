@@ -4,7 +4,8 @@
         "removeComments": true,
         "jsx": "react",
         "allowJs": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "target": "es5"
     },
     "awesomeTypescriptLoaderOptions": {
     }
