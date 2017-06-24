@@ -1,14 +1,60 @@
-# Atmo
+<h1 align="center">
+  <img alt="SuperNova Boilerplate"
+    src="https://rawgithub.com/Black-Monolith/SuperNova/master/logo.svg">
+</h1>
 
-Atmo next is a complete re-write of atmo.
+<p align="center">
+  <img alt="Electron + React + Redux + TypeScript + Webpack"
+    src="https://rawgithub.com/Black-Monolith/SuperNova/master/icons.svg">
+</p>
 
-Look at the below issue for what to expect from this re-write.
-https://github.com/Raathigesh/atmo/issues/34
+<p align="center">
+  <a href="https://david-dm.org/black-monolith/LightCycle">
+    <img alt="Dependencies Status"
+      src="https://img.shields.io/david/black-monolith/supernova.svg?style=flat-square">
+  </a>
+  <a href="https://david-dm.org/black-monolith/LightCycle?type=dev">
+    <img alt="Dev Dependencies Status"
+      src="https://img.shields.io/david/dev/black-monolith/supernova.svg?style=flat-square">
+  </a>
+</p>
 
-## Contribute
+Development Mode
+----------------
 
-- Clone the 'next' branch
-- `yarn install` to install the dependencies
-- Run the below commands in two separate shells
-    - `npm run shell` - Will start the electron shell
-    - `npm run server` - Will start the webpack build server
+```sh
+yarn dev
+```
+
+Will build the Main Process with `webpack --watch` and the Renderer Process with `webpack-dev-server`
+
+
+Production Build
+----------------
+
+```sh
+yarn build
+```
+
+Will build both Main Process and Renderer Process with `webpack`
+
+
+Start Application
+-----------------
+
+```sh
+yarn start
+```
+
+Will start Electron Application.
+
+Use this same command for both Development Mode and Production Build.
+
+
+Visual Studio Code
+------------------
+
+SuperNova comes with configuration for VSCode:
+
+- `⌘` + `⇧` + `B` to build the application and choose between Development and Build modes
+- `⌘` + `R` to run the application in Debug Mode
