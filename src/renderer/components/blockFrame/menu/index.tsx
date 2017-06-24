@@ -1,11 +1,16 @@
 import * as React from "react";
+import styled from "styled-components";
 
-const Menu = ({ style }: { style?: any }) => {
+const Menu = () => {
+  const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+  `;
   return (
-    <div className="pt-button-group pt-minimal" {...style}>
-      <a className="pt-button pt-icon-trash" role="button">Remove</a>
-      <a className="pt-button pt-icon-move" role="button">Move</a>
-    </div>
+    <Container>
+      <a className="pt-button pt-icon-trash pt-minimal" role="button" />
+      <a className="pt-button pt-icon-move pt-minimal" role="button" />
+    </Container>
   );
 };
 

@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as http from 'http';
-import Promise from 'bluebird';
+import * as Promise from 'bluebird';
 
 const app: express.Express = express();
 const server = http.createServer(app);

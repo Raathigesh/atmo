@@ -34,4 +34,5 @@ const config = module.exports = merge(
   common.parts.setupStyles(),
   common.parts.loadImages(),
   common.parts.loadFonts(),
+  common.parts.lint(),
 )

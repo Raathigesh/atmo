@@ -35,6 +35,16 @@ const config = exports.config =
  */
 const parts = exports.parts = {
 
+  lint: () => ({
+    module: {
+      loaders: [{
+        test: /\.tsx$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+      }],        
+    }
+  }),
+
   rendererHotReload: () => ({
     devServer: {
       hot: true,
