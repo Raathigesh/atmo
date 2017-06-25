@@ -1,8 +1,8 @@
 import * as React from "react";
-import Card from "../card";
-import HttpBase from "../../blocks/httpBase";
-import Headers from "../../blocks/headers";
-import Response from '../../blocks/response';
+import Card from "../../../lib/components/card";
+import HttpBase from "../../../lib/blocks/httpBase";
+import Headers from "../../../lib/blocks/headers";
+import Response from "../../../lib/blocks/response";
 import AddBlock from "./addBlock";
 import { css } from "glamor";
 
@@ -15,8 +15,8 @@ const Composer = () => {
     <Card style={container}>
       <HttpBase />
       <Headers />
-			<Response />
-			<AddBlock />
+      <Response />
+      <AddBlock />
     </Card>
   );
 };

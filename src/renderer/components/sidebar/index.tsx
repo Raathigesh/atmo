@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Menu, MenuItem, MenuDivider, Intent } from "@blueprintjs/core";
-import Card from "../card";
+import Card from "../../../lib/components/card";
 
 const componentName = () => {
   return (
