@@ -5,8 +5,8 @@
         "jsx": "react",
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "target": "es5"
+        "target": "es5",
+        "experimentalDecorators": true
     },
-    "awesomeTypescriptLoaderOptions": {
-    }
+    "awesomeTypescriptLoaderOptions": {}
 }
