@@ -1,6 +1,6 @@
 import { observable } from "mobx";
 
-export default class Composition {
+export default class Endpoint {
   @observable private blocks: { [key: string]: any } = {};
 
   public addBlock(name: string, blockInstance: any) {
