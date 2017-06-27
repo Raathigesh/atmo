@@ -1,21 +1,10 @@
 import { observable } from "mobx";
+import Block from "./Block";
 
 export default class Endpoint {
-  @observable private blocks: { [key: string]: any } = {};
+  @observable public blocks: Block[] = [];
 
-  public addBlock(name: string, blockInstance: any) {
-    if (this.blocks[name]) {
-      throw new Error("Block with the name already exists");
-    }
-
-    this.blocks[name] = blockInstance;
-  }
-
-  public removeBlock(name: string) {
-    if (!this.blocks[name]) {
-      throw new Error("Block with the name does not exist");
-    }
-
-    delete this.blocks[name];
+  public addBlock(block: Block) {
+    this.blocks.push(block);
   }
 }

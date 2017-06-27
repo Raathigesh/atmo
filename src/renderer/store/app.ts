@@ -1,14 +1,15 @@
 import { observable } from "mobx";
 import Endpoint from "./EndPoint";
 
-import HttpBaseStore from "../../lib/blocks/httpBase/store/store";
+import httpBaseBlock from "../../lib/blocks/httpBase";
+import Block from "./Block";
 
 class App {
-  @observable private endpoints: Endpoint[] = [];
+  @observable public endpoints: Endpoint[] = [];
 
   constructor() {
     const endpoint = new Endpoint();
-    endpoint.addBlock("base", new HttpBaseStore());
+    endpoint.addBlock(httpBaseBlock);
     this.addEndpoint(endpoint);
   }
 

@@ -6,28 +6,28 @@ import { css } from "glamor";
 import Store from "../store/store";
 
 interface IHttpBase {
-  model: Store;
+  store: Store;
 }
 
-const HttpBase = ({ model }: IHttpBase) => {
+const HttpBase = ({ store }: IHttpBase) => {
   const editableStyle = css({
     fontSize: "22px",
     marginLeft: "10px"
   });
 
   const handleMethodChange = (method: string) => {
-    model.updateMethod(method);
+    store.updateMethod(method);
   };
 
   const handleUrlChange = (url: string) => {
-    model.updateUrl(url);
+    store.updateUrl(url);
   };
 
   return (
     <BlockFrame title="Http" hideMenu>
       <Select
-        options={model.methods}
-        selection={model.method}
+        options={store.methods}
+        selection={store.method}
         onChange={handleMethodChange}
       />
       <EditableText className={`${editableStyle}`} onChange={handleUrlChange} />

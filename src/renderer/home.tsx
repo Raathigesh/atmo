@@ -3,39 +3,41 @@ const { css } = require("glamor");
 import Header from "./components/header";
 import SideBar from "./components/sidebar";
 import Composer from "./components/composer";
+import app from "./store/app";
+import styled from "styled-components";
 
 export default function Home() {
-  const container = css({
-    display: "flex",
-    flexDirection: "column"
-  });
+  const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+  `;
 
-  const sidebarContainer = css({
-    width: "300px"
-  });
+  const SidebarContainer = styled.div`
+    width: 300px;
+  `;
 
-  const contentContainer = css({
-    display: "flex",
-    flexDirection: "row"
-  });
+  const ContentContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+  `;
 
-  const composerContainer = css({
-    width: "100%"
-  });
+  const ComposerContainer = styled.div`
+    width: 100%;
+  `;
 
   return (
-    <div {...container}>
+    <Container>
       <div>
         <Header />
       </div>
-      <div {...contentContainer}>
-        <div {...sidebarContainer}>
+      <ContentContainer>
+        <SidebarContainer>
           <SideBar />
-        </div>
-        <div {...composerContainer}>
-          <Composer />
-        </div>
-      </div>
-    </div>
+        </SidebarContainer>
+        <ComposerContainer>
+          <Composer endpoint={app.endpoints[0]} />
+        </ComposerContainer>
+      </ContentContainer>
+    </Container>
   );
 }
