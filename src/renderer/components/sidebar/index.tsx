@@ -1,32 +1,40 @@
 import * as React from "react";
 import { Menu, MenuItem, MenuDivider, Intent } from "@blueprintjs/core";
-import Card from "../../../lib/components/card";
+import styled from "styled-components";
+import Card from "../card";
 
-const componentName = () => {
+interface ISideBar {
+  className?: string;
+}
+
+const SideBar = ({ className }: ISideBar) => {
   return (
-    <Card>
+    <Card className={className}>
       <Menu>
         <MenuItem
-          iconName="pt-icon-link"
+          iconName="pt-icon-circle"
           onClick={this.handleClick}
           text="/home/view"
           intent={Intent.PRIMARY}
+          label={<span className="pt-icon-drag-handle-vertical" />}
         />
         <MenuItem
-          iconName="pt-icon-link"
+          iconName="pt-icon-circle"
           onClick={this.handleClick}
           text="/home/view"
         />
         <MenuItem
-          iconName="pt-icon-link"
+          iconName="pt-icon-circle"
           onClick={this.handleClick}
           text="/home/view"
         />
-        <MenuDivider />
-        <MenuItem text="Settings..." iconName="cog" />
       </Menu>
     </Card>
   );
 };
 
-export default componentName;
+export default styled(SideBar)`
+  height: 100%;
+  margin-right: 10px;
+  padding: 3px !important;
+`;

@@ -1,20 +1,34 @@
 import { observable } from "mobx";
-import Endpoint from "./EndPoint";
+import Endpoint from "./Endpoint";
 
-import httpBaseBlock from "../../lib/blocks/httpBase";
-import Block from "./Block";
+interface IHttpMethod {
+  value: string;
+  label: string;
+}
 
 class App {
+  @observable public methods: IHttpMethod[];
   @observable public endpoints: Endpoint[] = [];
 
   constructor() {
-    const endpoint = new Endpoint();
-    endpoint.addBlock(httpBaseBlock);
-    this.addEndpoint(endpoint);
-  }
-
-  public addEndpoint(endpoint: Endpoint) {
-    this.endpoints.push(endpoint);
+    this.methods = [
+      {
+        value: "get",
+        label: "GET"
+      },
+      {
+        value: "post",
+        label: "POST"
+      },
+      {
+        value: "put",
+        label: "PUT"
+      },
+      {
+        value: "delete",
+        label: "DELETE"
+      }
+    ];
   }
 }
 

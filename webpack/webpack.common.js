@@ -1,69 +1,66 @@
-const webpack = require('webpack')
-const CleanWebpack = require('clean-webpack-plugin')
-const HtmlWebpack = require('html-webpack-plugin')
-const { join } = require('path')
+const webpack = require("webpack");
+const CleanWebpack = require("clean-webpack-plugin");
+const HtmlWebpack = require("html-webpack-plugin");
+const { join } = require("path");
 
-const projectRoot = exports.projectRoot = join(__dirname, '..')
-const isProduction = exports.isProduction = process.env.NODE_ENV === 'production'
+const projectRoot = (exports.projectRoot = join(__dirname, ".."));
+const isProduction = (exports.isProduction =
+  process.env.NODE_ENV === "production");
 
 /**
  * Configuration common paths
  */
-const paths = exports.paths = {
-  source: join(projectRoot, 'src'),
-  images: join(projectRoot, 'src/renderer/assets/images'),
-  build: join(projectRoot, 'app'),
-}
-
+const paths = (exports.paths = {
+  source: join(projectRoot, "src"),
+  images: join(projectRoot, "src/renderer/assets/images"),
+  build: join(projectRoot, "app")
+});
 
 /**
  * Common configuration between development and production
  */
-const config = exports.config =
-  {
-    resolve: {
-      modules: [
-        'node_modules'
-      ],
-      extensions: ['.ts', '.tsx', '.js', '.jsx']
-    }
+const config = (exports.config = {
+  resolve: {
+    modules: ["node_modules"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   }
-
+});
 
 /**
  * Configuration splitted in functions for modularity
  */
-const parts = exports.parts = {
-
+const parts = (exports.parts = {
   lint: () => ({
     module: {
-      loaders: [{
-        test: /\.tsx$/,
-        enforce: 'pre',
-        loader: 'tslint-loader',
-      }],        
+      loaders: [
+        {
+          test: /\.tsx$/,
+          enforce: "pre",
+          loader: "tslint-loader"
+        }
+      ]
     }
   }),
 
   rendererHotReload: () => ({
     devServer: {
       hot: true,
-      host: 'localhost',
+      host: "localhost",
       port: 8080,
       historyApiFallback: true
     },
 
     entry: {
       renderer: [
-        'react-hot-loader/patch',
-        'webpack-dev-server/client?http://localhost:8080',
-        'webpack/hot/only-dev-server',
+        "react-hot-loader/patch",
+        "webpack-dev-server/client?http://localhost:8080",
+        "webpack/hot/only-dev-server"
       ]
     },
 
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NamedModulesPlugin(),
+      new webpack.NamedModulesPlugin()
     ]
   }),
 
@@ -71,8 +68,8 @@ const parts = exports.parts = {
     module: {
       loaders: [
         {
-          test: /\.tsx?$/,
-          loaders: ['awesome-typescript-loader']
+          test: /\.(tsx|ts)?$/,
+          loaders: ["awesome-typescript-loader"]
         }
       ]
     }
@@ -104,8 +101,8 @@ const parts = exports.parts = {
     module: {
       loaders: [
         {
-          test: /\.svg$/,
-          loader: 'file-loader',
+          test: /\.(png|jpg|gif)$/,
+          loader: "file-loader",
           include: paths
         }
       ]
@@ -117,9 +114,9 @@ const parts = exports.parts = {
       loaders: [
         {
           test: /\.(eot|svg|ttf|woff|woff2)$/,
-          loader: 'url-loader',
+          loader: "url-loader",
           query: {
-            name: 'fonts/[hash].[ext]'
+            name: "fonts/[hash].[ext]"
           },
           include: paths
         }
@@ -132,38 +129,38 @@ const parts = exports.parts = {
       loaders: [
         {
           test: /\.css$/,
-          loaders: ['style-loader', 'css-loader']
+          loaders: ["style-loader", "css-loader"]
         }
       ]
     }
   }),
 
-  createHtmlIndex: (template) => ({
+  createHtmlIndex: template => ({
     plugins: [
       new HtmlWebpack({
         template,
 
         // Do not append chunks to body as we use `require`
         // directly in template to load renderer chunk
-        excludeChunks: ['main']
+        excludeChunks: ["main"]
       })
     ]
   }),
 
-  extractBundle: (options) => ({
+  extractBundle: options => ({
     entry: [options.entry],
     plugins: [
       new webpack.optimize.CommonsChunkPlugin({
-        names: [options.name, 'manifest']
+        names: [options.name, "manifest"]
       })
     ]
   }),
 
-  clean: (path) => ({
+  clean: path => ({
     plugins: [
       new CleanWebpack([path], {
         root: process.cwd()
       })
     ]
   })
-}
+});
