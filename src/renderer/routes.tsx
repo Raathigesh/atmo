@@ -1,4 +1,4 @@
-import * as React from 'react';
+/*import * as React from 'react';
 const { Switch, Route } = require('react-router');
 import HomePage from './Home';
 
@@ -9,3 +9,4 @@ export default () => (
     </Switch>
   </HomePage>
 );
+*/

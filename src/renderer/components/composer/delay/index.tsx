@@ -11,8 +11,8 @@ const Delay = () => {
       sliderColor="#EF233C"
       thumbColor="#2B2D42"
       trackColor="#D90429"
-      thumbSize={20}
-      sliderSize={7}
+      thumbSize={15}
+      sliderSize={1}
     />
   );
 };

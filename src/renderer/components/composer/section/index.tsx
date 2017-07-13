@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Segment, Label, Image, SemanticCOLORS } from "semantic-ui-react";
+import { Segment, Label, Image, Header } from "semantic-ui-react";
 import styled from "styled-components";
 
 interface ISectionHeadingProp {
@@ -20,9 +20,12 @@ const Section = ({ title, children }: ISectionHeadingProp) => {
 
   return (
     <div>
-      <RedLabel as="a" ribbon>
+      {/*<RedLabel as="a" ribbon>
         {title}
-      </RedLabel>
+      </RedLabel>*/}
+      <Header size="tiny" color="grey">
+        {title}
+      </Header>
       <Container>
         {children}
       </Container>

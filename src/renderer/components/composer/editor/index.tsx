@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Tab2, Tabs2, Button, Intent } from "@blueprintjs/core";
 import styled from "styled-components";
 const brace = require("brace");
 import "brace/mode/java";

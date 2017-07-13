@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const CleanWebpack = require("clean-webpack-plugin");
 const HtmlWebpack = require("html-webpack-plugin");
+const RewriteImportPlugin = require("less-plugin-rewrite-import");
 const { join } = require("path");
 
 const projectRoot = (exports.projectRoot = join(__dirname, ".."));
@@ -22,7 +23,10 @@ const paths = (exports.paths = {
 const config = (exports.config = {
   resolve: {
     modules: ["node_modules"],
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    alias: {
+      "../../theme.config$": join(__dirname, "../semantic/theme.config")
+    }
   }
 });
 
@@ -130,6 +134,17 @@ const parts = (exports.parts = {
         {
           test: /\.css$/,
           loaders: ["style-loader", "css-loader"]
+        }
+      ]
+    }
+  }),
+
+  setupLess: paths => ({
+    module: {
+      loaders: [
+        {
+          test: /\.less/,
+          loaders: ["style-loader", "css-loader", "less-loader"]
         }
       ]
     }
