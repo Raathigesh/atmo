@@ -42,4 +42,17 @@ export default class Endpoint {
   setDelay = (delay: number) => {
     this.delay = delay;
   };
+
+  toJson() {
+    return {
+      url: this.url,
+      method: this.method,
+      headers: this.headers.map(header => header.toJson()),
+      response: this.response.toJson(),
+      responseCode: this.responseCode,
+      delay: this.delay
+    };
+  }
+
+  static deserialize() {}
 }

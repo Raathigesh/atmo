@@ -8,7 +8,8 @@
     "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod",
     "dev-main": "webpack --watch --config ./webpack/target/main",
     "dev-renderer": "webpack-dev-server --config ./webpack/target/renderer",
-    "dev": "concurrently \"npm run dev-renderer\" \"npm run dev-main\""
+    "dev": "concurrently \"npm run dev-renderer\" \"npm run dev-main\"",
+    "app": "electron-packager ./app Atmo"
   },
   "repository": "git@github.com:Raathigesh/atmo.git",
   "author": "Raathigeshan <raathigesh92@gmail.com>",
@@ -42,6 +43,7 @@
     "cross-env": "^3.2.4",
     "css-loader": "^0.28.4",
     "electron-debug": "^1.2.0",
+    "electron-packager": "^8.7.2",
     "file-loader": "^0.10.0",
     "glamor": "^2.20.25",
     "html-webpack-plugin": "^2.28.0",

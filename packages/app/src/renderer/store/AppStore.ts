@@ -39,4 +39,10 @@ export default class AppStore {
   moveEndpoint = (fromIndex: number, toIndex: number) => {
     this.endpoints.move(fromIndex, toIndex);
   };
+
+  toJson() {
+    return {
+      endpoints: this.endpoints.map(endpoint => endpoint.toJson())
+    };
+  }
 }
