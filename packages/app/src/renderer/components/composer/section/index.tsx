@@ -4,27 +4,31 @@ import styled from "styled-components";
 
 interface ISectionHeadingProp {
   title: string;
+  headerComponents?: any[];
   children: any;
 }
 
-const Section = ({ title, children }: ISectionHeadingProp) => {
-  const Container = styled.div`
-    margin-top: 15px;
-    margin-bottom: 20px;
-  `;
+const Container = styled.div`
+  margin-top: 15px;
+  margin-bottom: 20px;
+`;
 
-  const RedLabel = styled(Label)`
+const RedLabel = styled(Label)`
     background-color: #8D99AE !important;
     color: white !important;
   `;
 
+const Section = ({
+  title,
+  children,
+  headerComponents
+}: ISectionHeadingProp) => {
   return (
     <div>
-      {/*<RedLabel as="a" ribbon>
-        {title}
-      </RedLabel>*/}
       <Header size="tiny" color="grey">
         {title}
+        {"  "}
+        {headerComponents}
       </Header>
       <Container>
         {children}

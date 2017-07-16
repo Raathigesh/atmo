@@ -1,19 +1,45 @@
 import * as React from "react";
-import { Header } from "semantic-ui-react";
+import styled from "styled-components";
+import { Header, Label, Icon } from "semantic-ui-react";
 const { default: ReactSimpleRange } = require("react-simple-range");
 import Section from "../section";
-const Delay = () => {
+
+interface IDelay {
+  value: number;
+  onChange: (value: number) => void;
+}
+
+const AddHeader = styled.a`
+  font-size: 12px;
+  cursor: pointer;
+  color: grey;
+`;
+
+const Delay = ({ value, onChange }: IDelay) => {
+  const headerComponents = [
+    <Header as="h5" floated="right">
+      <Icon.Group>
+        <Icon name="hourglass end" color="grey" />
+      </Icon.Group>
+      <AddHeader>{`${value} sec`}</AddHeader>
+    </Header>
+  ];
+
   return (
-    <ReactSimpleRange
-      label
-      min={0}
-      max={60}
-      sliderColor="#EF233C"
-      thumbColor="#2B2D42"
-      trackColor="#D90429"
-      thumbSize={15}
-      sliderSize={1}
-    />
+    <Section title="Simulate Delay" headerComponents={headerComponents}>
+      <ReactSimpleRange
+        value={value}
+        onChange={data => onChange(data.value)}
+        label
+        min={0}
+        max={60}
+        sliderColor="#EF233C"
+        thumbColor="#2B2D42"
+        trackColor="#D90429"
+        thumbSize={15}
+        sliderSize={1}
+      />
+    </Section>
   );
 };
 

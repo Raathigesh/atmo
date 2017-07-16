@@ -1,12 +1,14 @@
 {
-  "name": "node-typescript-boilerplate",
-  "version": "0.0.0",
-  "description": "Minimalistic boilerplate to quick-start Node.js development in TypeScript.",
+  "name": "atmo-core",
+  "version": "0.1.0",
+  "description": "Core atmo api server",
   "engineStrict": true,
   "engines": {
     "node": ">= 6.9.0"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.16.4",
+    "@types/express": "^4.0.36",
     "@types/jest": "~20.0.2",
     "@types/node": "~6.0.78",
     "jest": "~20.0.0",
@@ -14,8 +16,10 @@
     "tslint": "~5.4.3",
     "tslint-microsoft-contrib": "~5.0.1",
     "tsutils": "~2.5.1",
-    "typescript": "~2.4.1"
+    "typescript": "~2.4.1",
+    "tslib": "~1.7.1"
   },
+  "main": "./build/src/index.js",
   "scripts": {
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
@@ -26,17 +30,16 @@
     "test-only": "jest --coverage",
     "test:watch": "jest --watch"
   },
-  "author": "Jakub Synowiec <github@jakubsynowiec.info>",
+  "repository": "git@github.com:Raathigesh/atmo.git",
+  "author": "Raathigeshan <raathigesh92@gmail.com>",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jsynowiec/node-typescript-boilerplate.git"
-  },
   "bugs": {
-    "url": "https://github.com/jsynowiec/node-typescript-boilerplate/issues"
+    "url": "https://github.com/Raathigesh/atmo/issues"
   },
-  "homepage": "https://github.com/jsynowiec/node-typescript-boilerplate#readme",
   "dependencies": {
-    "tslib": "~1.7.1"
+    "bluebird": "^3.5.0",
+    "express": "^4.15.3",
+    "server-destroy": "^1.0.1",
+    "body-parser": "^1.17.2"
   }
 }

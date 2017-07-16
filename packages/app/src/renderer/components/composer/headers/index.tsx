@@ -9,41 +9,92 @@ import {
 } from "semantic-ui-react";
 import styled from "styled-components";
 import Section from "../section";
+import Stores from "../../../store";
+import { observer } from "mobx-react";
 
-const HeaderRow = () => {
-  const SlimInput = styled(Input)`
+interface IHeaderRow {
+  header: Stores.Header;
+  onKeyChange: (value: string) => void;
+  onValueChange: (value: string) => void;
+  onRemove: (id: string) => void;
+}
+
+const HeaderRow = observer(
+  ({ header, onRemove, onKeyChange, onValueChange }: IHeaderRow) => {
+    const SlimInput = styled(Input)`
       height: 23px;
   `;
 
+    return (
+      <Table.Row>
+        <Table.Cell collapsing>
+          <Checkbox
+            slider
+            checked={header.active}
+            onChange={() => {
+              header.toggleActive();
+            }}
+          />
+        </Table.Cell>
+        <Table.Cell>
+          <SlimInput
+            defaultValue={header.key}
+            onChange={(event, data) => onKeyChange(data.value)}
+          />
+        </Table.Cell>
+        <Table.Cell>
+          <SlimInput
+            defaultValue={header.value}
+            onChange={(event, data) => onValueChange(data.value)}
+          />
+        </Table.Cell>
+        <Table.Cell textAlign="center">
+          <Icon link name="close" onClick={() => onRemove(header.id)} />
+        </Table.Cell>
+      </Table.Row>
+    );
+  }
+);
+
+interface IHeader {
+  headers: Stores.Header[];
+  currentEndpoint: Stores.Endpoint;
+}
+
+const AddHeader = styled.a`
+  font-size: 12px;
+  cursor: pointer;
+  color: grey;
+`;
+
+const Headers = ({ headers, currentEndpoint }: IHeader) => {
+  const headerItems = headers.map(header =>
+    <HeaderRow
+      header={header}
+      onRemove={currentEndpoint.removeHeader}
+      onKeyChange={header.setKey}
+      onValueChange={header.setValue}
+    />
+  );
+
+  const headerComponents = [
+    <Header as="h5" floated="right" onClick={() => currentEndpoint.addHeader()}>
+      <Icon.Group>
+        <Icon name="add circle" color="grey" />
+      </Icon.Group>
+      <AddHeader>Add new header</AddHeader>
+    </Header>
+  ];
+
   return (
-    <Table.Row>
-      <Table.Cell collapsing>
-        <Checkbox slider />
-      </Table.Cell>
-      <Table.Cell>
-        <SlimInput />
-      </Table.Cell>
-      <Table.Cell>
-        <SlimInput />
-      </Table.Cell>
-      <Table.Cell textAlign="center">
-        <Icon link name="close" />
-      </Table.Cell>
-    </Table.Row>
+    <Section title="Headers" headerComponents={headerComponents}>
+      <Table compact celled definition>
+        <Table.Body>
+          {headerItems}
+        </Table.Body>
+      </Table>
+    </Section>
   );
 };
 
-const Headers = () => {
-  return (
-    <Table compact celled definition>
-      <Table.Body>
-        <HeaderRow />
-        <HeaderRow />
-        <HeaderRow />
-        <HeaderRow />
-      </Table.Body>
-    </Table>
-  );
-};
-
-export default Headers;
+export default observer(Headers);

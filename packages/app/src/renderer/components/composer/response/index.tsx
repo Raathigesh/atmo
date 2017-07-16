@@ -1,31 +1,62 @@
 import * as React from "react";
-import { Icon, Menu, MenuItem, Header } from "semantic-ui-react";
-import Section from "../section";
+import { Menu, Icon } from "semantic-ui-react";
 
-const Response = () => {
-  return (
-    <Menu fluid widths={4}>
-      <Menu.Item name="gamepad" active>
-        <Icon name="quote left" />
-        Json
-      </Menu.Item>
+interface IResponse {
+  activeItem?: string;
+  setActiveItem: (value: string) => void;
+}
 
-      <Menu.Item name="video camera">
-        <Icon name="file code outline" />
-        Xml
-      </Menu.Item>
+interface State {
+  activeItem?: string;
+}
 
-      <Menu.Item name="video play">
-        <Icon name="file text outline" />
-        Text
-      </Menu.Item>
+export default class MenuExampleBasic extends React.Component<
+  IResponse,
+  State
+> {
+  handleItemClick = (e, { name }) => this.props.setActiveItem(name);
 
-      <Menu.Item name="video play">
-        <Icon name="code" />
-        Custom
-      </Menu.Item>
-    </Menu>
-  );
-};
+  render() {
+    const { activeItem } = this.props;
 
-export default Response;
+    return (
+      <Menu>
+        <Menu.Item
+          name="json"
+          active={activeItem === "json"}
+          onClick={this.handleItemClick}
+        >
+          <Icon name="quote left" />
+          Json
+        </Menu.Item>
+
+        <Menu.Item
+          name="xml"
+          active={activeItem === "xml"}
+          onClick={this.handleItemClick}
+        >
+          <Icon name="file code outline" />
+          Xml
+        </Menu.Item>
+
+        <Menu.Item
+          name="text"
+          active={activeItem === "text"}
+          onClick={this.handleItemClick}
+        >
+          <Icon name="file text outline" />
+          Text
+        </Menu.Item>
+
+        <Menu.Item
+          name="custom"
+          active={activeItem === "custom"}
+          onClick={this.handleItemClick}
+        >
+          <Icon name="code" />
+          Custom
+        </Menu.Item>
+      </Menu>
+    );
+  }
+}

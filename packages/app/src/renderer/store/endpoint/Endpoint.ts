@@ -15,6 +15,7 @@ export default class Endpoint {
   constructor() {
     this.id = shortid.generate();
     this.response = new Response();
+    this.headers.push(new Header(shortid.generate(), "", ""));
   }
 
   @action
@@ -28,12 +29,17 @@ export default class Endpoint {
   };
 
   @action
-  addHeader = (key: string, value: string) => {
+  addHeader = (key: string = "", value: string = "") => {
     this.headers.push(new Header(shortid.generate(), key, value));
   };
 
   @action
   removeHeader = (id: string) => {
     this.headers.remove(this.headers.find(header => header.id === id));
+  };
+
+  @action
+  setDelay = (delay: number) => {
+    this.delay = delay;
   };
 }

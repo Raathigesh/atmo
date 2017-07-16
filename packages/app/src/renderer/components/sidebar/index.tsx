@@ -24,6 +24,11 @@ interface ISideBar {
   moveEndpoint: (fromIndex: number, toIndex: number) => void;
 }
 
+const MinimalSidebar = styled(Sidebar)`
+    background-color: #1D3557 !important;
+    color: gray;
+  `;
+
 function Side({
   endpoints,
   currentEndpoint,
@@ -32,11 +37,6 @@ function Side({
   onEndpointDelete,
   moveEndpoint
 }: ISideBar) {
-  const MinimalSidebar = styled(Sidebar)`
-    background-color: #1D3557 !important;
-    color: gray;
-  `;
-
   const UrlElement = SortableElement(Url);
   const UrlContainer = SortableContainer(Menu.Menu);
 

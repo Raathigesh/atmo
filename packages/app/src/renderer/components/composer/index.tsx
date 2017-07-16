@@ -18,19 +18,23 @@ interface IComponser {
   setUrl: (url: string) => void;
 }
 
-const Composer = ({ endpoint }: IComponser) => {
-  const ComposerCard = styled(Card)`
+const ComposerCard = styled(Card)`
     height: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
   `;
 
-  const ControlPanel = styled.div`padding: 10px;`;
+const ControlPanel = styled.div`padding: 10px;`;
 
+const Composer = ({ endpoint }: IComponser) => {
   return (
     <ComposerCard>
-      <SplitPanel split="vertical" defaultSize={600}>
+      <SplitPanel
+        split="vertical"
+        defaultSize={600}
+        paneStyle={{ overflow: "auto" }}
+      >
         <ControlPanel>
           <Segment basic>
             <Section title="Url">
@@ -41,21 +45,23 @@ const Composer = ({ endpoint }: IComponser) => {
               />
             </Section>
 
-            <Section title="Headers">
-              <Headers />
-            </Section>
+            <Headers headers={endpoint.headers} currentEndpoint={endpoint} />
 
             <Section title="Response Type">
-              <Response />
+              <Response
+                activeItem={endpoint.response.type}
+                setActiveItem={endpoint.response.setType}
+              />
             </Section>
 
             <Section title="Response Code">
-              <ResponseCode />
+              <ResponseCode
+                responseCode={endpoint.response.responseContent}
+                setResponseCode={endpoint.response.setResponseContent}
+              />
             </Section>
 
-            <Section title="Simulate Delay">
-              <Delay />
-            </Section>
+            <Delay value={endpoint.delay} onChange={endpoint.setDelay} />
           </Segment>
         </ControlPanel>
         <div>

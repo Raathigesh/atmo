@@ -11,7 +11,7 @@ import { app, BrowserWindow } from "electron";
 import { format } from "url";
 import { join } from "path";
 import MenuBuilder from "./menu";
-import { startServer } from "./server/index";
+const { default: atmoServer } = require("atmo-core");
 
 let mainWindow: any = null;
 
@@ -53,7 +53,7 @@ app.on("ready", async () => {
           slashes: true
         })
       : // Load from Webpack DevServer
-        "http://localhost:8080/app/index.html"
+        "http://localhost:8080/app/index.html?react_perf"
   );
 
   mainWindow.webContents.on("did-finish-load", () => {
@@ -61,14 +61,29 @@ app.on("ready", async () => {
       throw new Error('"mainWindow" is not defined');
     }
 
-    // start the api server
-    startServer()
-      .then((info: any) => {
-        console.log(`Server started on port ${info.port}`);
-      })
-      .catch((err: Error) => {
-        console.log(`Life is not so good up here ${err}`);
-      });
+    const spec = {
+      endpoints: [
+        {
+          delay: 0,
+          headers: [],
+          method: "get",
+          url: "/sample",
+          statusCode: 200,
+          response: {
+            contentType: "json",
+            content: "{'sample': 'hello world'}"
+          }
+        }
+      ],
+      server: {
+        port: 9000,
+        staticFolder: "."
+      }
+    };
+
+    atmoServer(spec).start().then(() => {
+      console.log("Server started..");
+    });
 
     mainWindow.show();
     mainWindow.focus();

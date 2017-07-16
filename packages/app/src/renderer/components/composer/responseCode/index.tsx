@@ -3,13 +3,22 @@ import { Dropdown } from "semantic-ui-react";
 import Section from "../section";
 import statusOptions from "./options";
 
-const ResponseCode = () => {
+interface IResponseCode {
+  responseCode: string;
+  setResponseCode: (responseCode: string) => void;
+}
+
+const ResponseCode = ({ responseCode, setResponseCode }: IResponseCode) => {
   return (
     <Dropdown
-      placeholder="Select Country"
+      placeholder="Select Response Code"
       fluid
       search
       selection
+      value={responseCode}
+      onChange={(event, data) => {
+        setResponseCode(data.value as string);
+      }}
       options={statusOptions}
     />
   );

@@ -12,6 +12,13 @@ export default class AppStore {
   @action
   setCurrentEndpoint = (id: string) => {
     this.currentEndpoint = this.endpoints.find(endpoint => endpoint.id === id);
+    (window as any).Perf.stop();
+    (window as any).Perf.printWasted(
+      (window as any).Perf.getLastMeasurements()
+    );
+    (window as any).Perf.printOperations(
+      (window as any).Perf.getLastMeasurements()
+    );
   };
 
   @action
