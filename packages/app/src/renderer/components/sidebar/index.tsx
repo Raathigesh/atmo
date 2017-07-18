@@ -22,6 +22,7 @@ interface ISideBar {
   onEndpointSelection: (id: string) => void;
   onEndpointDelete: (id: string) => void;
   moveEndpoint: (fromIndex: number, toIndex: number) => void;
+  openPreferenceDialog: () => void;
 }
 
 const MinimalSidebar = styled(Sidebar)`
@@ -29,13 +30,18 @@ const MinimalSidebar = styled(Sidebar)`
     color: gray;
   `;
 
+const SideBarItem = styled(Menu.Item)`
+  background-color: grey !important;
+`;
+
 function Side({
   endpoints,
   currentEndpoint,
   addEndpoint,
   onEndpointSelection,
   onEndpointDelete,
-  moveEndpoint
+  moveEndpoint,
+  openPreferenceDialog
 }: ISideBar) {
   const UrlElement = SortableElement(Url);
   const UrlContainer = SortableContainer(Menu.Menu);
@@ -67,7 +73,7 @@ function Side({
           </small>
         </strong>
       </Menu.Item>
-      <Menu.Item
+      <SideBarItem
         name="browse"
         as="a"
         color="blue"
@@ -77,21 +83,24 @@ function Side({
       >
         <Icon name="plus" />
         New Endpoint
-      </Menu.Item>
-      <Menu.Item name="browse" as="a" color="blue">
+      </SideBarItem>
+      <SideBarItem name="browse" as="a" color="blue">
         <Icon name="wizard" />
         Deploy
-      </Menu.Item>
-      <Menu.Item name="browse" as="a" color="blue">
+      </SideBarItem>
+      <SideBarItem name="browse" as="a" color="blue">
         <Icon name="cloud" />
         Remote Deploy
-      </Menu.Item>
-      <Menu.Item name="browse" as="a">
+      </SideBarItem>
+      <SideBarItem name="browse" as="a" color="blue">
+        <Icon name="save" />
+        Save
+      </SideBarItem>
+      <SideBarItem name="browse" as="a" onClick={openPreferenceDialog}>
         <Icon name="options" />
         Project Settings
-      </Menu.Item>
+      </SideBarItem>
       <Menu.Item>
-        Endpoints
         <UrlContainer
           useDragHandle
           onSortEnd={move => {

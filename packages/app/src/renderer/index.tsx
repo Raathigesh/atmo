@@ -7,7 +7,7 @@ import ViewStore from "./store/ViewStore";
 import "semantic-ui-less/semantic.less";
 import "./global.css";
 
-const view = ViewStore.create();
+const view = new ViewStore();
 const state = new AppStore();
 
 render(

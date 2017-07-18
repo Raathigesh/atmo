@@ -1,9 +1,14 @@
 import * as React from "react";
 import { Header, Modal, Button, Input } from "semantic-ui-react";
 
-export default function SystemSettings() {
+interface ISystemSettings {
+  open: boolean;
+  close: () => void;
+}
+
+export default function SystemSettings({ open, close }: ISystemSettings) {
   return (
-    <Modal>
+    <Modal open={open}>
       <Modal.Header>Project Preference</Modal.Header>
       <Modal.Content>
         <Header size="tiny">
@@ -20,6 +25,7 @@ export default function SystemSettings() {
           icon="checkmark"
           labelPosition="right"
           content="Done"
+          onClick={close}
         />
       </Modal.Actions>
     </Modal>

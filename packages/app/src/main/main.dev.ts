@@ -11,7 +11,8 @@ import { app, BrowserWindow } from "electron";
 import { format } from "url";
 import { join } from "path";
 import MenuBuilder from "./menu";
-const { default: atmoServer } = require("atmo-core");
+import { listen } from "./messageHandler";
+// const { default: atmoServer } = require("atmo-core");
 
 let mainWindow: any = null;
 
@@ -38,6 +39,9 @@ app.on("window-all-closed", () => {
 });
 
 app.on("ready", async () => {
+  listen({
+    onDeply: (spec: any) => {}
+  });
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
@@ -81,9 +85,9 @@ app.on("ready", async () => {
       }
     };
 
-    atmoServer(spec).start().then(() => {
+    /*  atmoServer(spec).start().then(() => {
       console.log("Server started..");
-    });
+    }); */
 
     mainWindow.show();
     mainWindow.focus();

@@ -1,7 +1,18 @@
-import { types, getParent } from "mobx-state-tree";
+import { observable, action } from "mobx";
+import { bind, memoize, debounce } from "decko";
 
-const ViewStore = types.model("ViewStore", {
-  isProjectPreferenceOpen: false
-});
+export default class ViewStore {
+  @observable isProjectPreferenceOpen = false;
 
-export default ViewStore;
+  @bind
+  @action
+  openProjectPreferenceDialog() {
+    this.isProjectPreferenceOpen = true;
+  }
+
+  @bind
+  @action
+  closeProjectPreferenceDialog() {
+    this.isProjectPreferenceOpen = false;
+  }
+}
