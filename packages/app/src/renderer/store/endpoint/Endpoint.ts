@@ -39,6 +39,11 @@ export default class Endpoint {
   };
 
   @action
+  setResponseCode = (code: string) => {
+    this.responseCode = code;
+  };
+
+  @action
   setDelay = (delay: number) => {
     this.delay = delay;
   };

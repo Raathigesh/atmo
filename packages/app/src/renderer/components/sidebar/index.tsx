@@ -23,6 +23,8 @@ interface ISideBar {
   onEndpointDelete: (id: string) => void;
   moveEndpoint: (fromIndex: number, toIndex: number) => void;
   openPreferenceDialog: () => void;
+  save: () => void;
+  deploy: () => void;
 }
 
 const MinimalSidebar = styled(Sidebar)`
@@ -41,7 +43,9 @@ function Side({
   onEndpointSelection,
   onEndpointDelete,
   moveEndpoint,
-  openPreferenceDialog
+  openPreferenceDialog,
+  save,
+  deploy
 }: ISideBar) {
   const UrlElement = SortableElement(Url);
   const UrlContainer = SortableContainer(Menu.Menu);
@@ -84,7 +88,7 @@ function Side({
         <Icon name="plus" />
         New Endpoint
       </SideBarItem>
-      <SideBarItem name="browse" as="a" color="blue">
+      <SideBarItem name="browse" as="a" color="blue" onClick={deploy}>
         <Icon name="wizard" />
         Deploy
       </SideBarItem>
@@ -92,7 +96,7 @@ function Side({
         <Icon name="cloud" />
         Remote Deploy
       </SideBarItem>
-      <SideBarItem name="browse" as="a" color="blue">
+      <SideBarItem name="browse" as="a" color="blue" onClick={save}>
         <Icon name="save" />
         Save
       </SideBarItem>

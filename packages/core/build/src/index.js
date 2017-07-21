@@ -5,10 +5,12 @@ var express = require("express");
 var http = require("http");
 var enableDestroy = require("server-destroy");
 var Promise = require("bluebird");
-function atmoServer(spec) {
+var app;
+var server = null;
+function atmoServer() {
     var serverWithApp = null;
     return {
-        start: function () {
+        start: function (spec) {
             return new Promise(function (resolve, reject) {
                 serverWithApp = createServer(spec);
                 serverWithApp.server.listen(9000, function (err) {
@@ -23,10 +25,8 @@ function atmoServer(spec) {
 }
 exports.default = atmoServer;
 function createServer(spec) {
-    var app;
-    var server = null;
     if (server) {
-        server.distroy();
+        server.destroy();
     }
     app = express();
     server = http.createServer(app);

@@ -13,9 +13,14 @@ import styled from "styled-components";
 
 const IntroContainer = styled.div`margin-top: 50px;`;
 
-export default function IntroDialog() {
+interface IIntroDialog {
+  open: boolean;
+  openProject: () => void;
+}
+
+export default function IntroDialog({ open, openProject }: IIntroDialog) {
   return (
-    <Modal dimmer="blurring" open={false}>
+    <Modal dimmer="blurring" open={open}>
       <Modal.Content image>
         <Grid>
           <Grid.Row>
@@ -46,6 +51,7 @@ export default function IntroDialog() {
                   }}
                   defaultValue=""
                 />
+                <Button onClick={openProject}>Open</Button>
               </IntroContainer>
             </Grid.Column>
 

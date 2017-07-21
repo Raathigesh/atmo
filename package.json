@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
+    "jsonfile": "^3.0.1",
     "lerna": "^2.0.0"
   }
 }

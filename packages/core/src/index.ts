@@ -5,12 +5,14 @@ const enableDestroy = require("server-destroy");
 // tslint:disable-next-line
 const Promise = require("bluebird");
 import spec, { IEndpoint, IHeader } from "./spec";
+let app: express.Express;
+let server = null;
 
-export default function atmoServer(spec: spec) {
+export default function atmoServer() {
   let serverWithApp = null;
 
   return {
-    start: () => {
+    start: (spec: spec) => {
       return new Promise(
         (resolve: () => void, reject: (err: Error) => void) => {
           serverWithApp = createServer(spec);
@@ -27,10 +29,8 @@ export default function atmoServer(spec: spec) {
 }
 
 function createServer(spec: spec) {
-  let app: express.Express;
-  let server = null;
   if (server) {
-    server.distroy();
+    server.destroy();
   }
 
   app = express();

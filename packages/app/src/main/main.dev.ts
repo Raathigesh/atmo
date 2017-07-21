@@ -12,9 +12,10 @@ import { format } from "url";
 import { join } from "path";
 import MenuBuilder from "./menu";
 import { listen } from "./messageHandler";
-// const { default: atmoServer } = require("atmo-core");
+const { default: atmoServer } = require("atmo-core");
 
 let mainWindow: any = null;
+let server: any = null;
 
 if (
   process.env.NODE_ENV === "development" ||
@@ -25,6 +26,31 @@ if (
   const p = path.join(__dirname, "..", "app", "node_modules");
   require("module").globalPaths.push(p);
 }
+
+const spec = {
+  endpoints: [
+    {
+      delay: 0,
+      headers: [],
+      method: "get",
+      url: "/sample",
+      statusCode: 200,
+      response: {
+        contentType: "json",
+        content: "{'sample': 'hello world'}"
+      }
+    }
+  ],
+  server: {
+    port: 9000,
+    staticFolder: "."
+  }
+};
+
+server = atmoServer();
+server.start(spec).then(() => {
+  console.log("Server started..");
+});
 
 /**
  * Add event listeners...
@@ -40,7 +66,11 @@ app.on("window-all-closed", () => {
 
 app.on("ready", async () => {
   listen({
-    onDeply: (spec: any) => {}
+    onDeply: (spec: any) => {
+      server.start(spec).then(() => {
+        console.log("redeployed..");
+      });
+    }
   });
   mainWindow = new BrowserWindow({
     show: false,
@@ -64,30 +94,6 @@ app.on("ready", async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-
-    const spec = {
-      endpoints: [
-        {
-          delay: 0,
-          headers: [],
-          method: "get",
-          url: "/sample",
-          statusCode: 200,
-          response: {
-            contentType: "json",
-            content: "{'sample': 'hello world'}"
-          }
-        }
-      ],
-      server: {
-        port: 9000,
-        staticFolder: "."
-      }
-    };
-
-    /*  atmoServer(spec).start().then(() => {
-      console.log("Server started..");
-    }); */
 
     mainWindow.show();
     mainWindow.focus();

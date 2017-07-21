@@ -19,12 +19,12 @@ interface IHeaderRow {
   onRemove: (id: string) => void;
 }
 
+const SlimInput = styled(Input)`
+      height: 23px;
+`;
+
 const HeaderRow = observer(
   ({ header, onRemove, onKeyChange, onValueChange }: IHeaderRow) => {
-    const SlimInput = styled(Input)`
-      height: 23px;
-  `;
-
     return (
       <Table.Row>
         <Table.Cell collapsing>

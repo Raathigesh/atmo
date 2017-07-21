@@ -42,7 +42,13 @@ export default class AppStore {
 
   toJson() {
     return {
-      endpoints: this.endpoints.map(endpoint => endpoint.toJson())
+      endpoints: this.endpoints.map(endpoint => endpoint.toJson()),
+      server: {
+        port: 9000,
+        staticFolder: "."
+      }
     };
   }
 }
+
+export const appStore = new AppStore();

@@ -21,6 +21,7 @@ import Endpoint from "./store/endpoint/Endpoint";
 import IntroDialog from "./components/introDialog";
 import AppStore from "./store/AppStore";
 import ViewStore from "./store/ViewStore";
+import ProjectStore from "./store/ProjectStore";
 
 interface IHome {
   currentEndpoint?: Endpoint;
@@ -33,6 +34,10 @@ interface IHome {
   moveEndpoint: (fromIndex: number, toIndex: number) => void;
   openPreferenceDialog: () => void;
   closePreferenceDialog: () => void;
+  save: () => void;
+  isIntroDialogOpen: boolean;
+  openProject: () => void;
+  deploy: () => void;
 }
 
 function Home({
@@ -45,7 +50,11 @@ function Home({
   onEndpointDelete,
   moveEndpoint,
   openPreferenceDialog,
-  closePreferenceDialog
+  closePreferenceDialog,
+  save,
+  isIntroDialogOpen,
+  openProject,
+  deploy
 }: IHome) {
   const Container = styled.div`
     display: flex;
@@ -68,6 +77,8 @@ function Home({
           onEndpointDelete={onEndpointDelete}
           moveEndpoint={moveEndpoint}
           openPreferenceDialog={openPreferenceDialog}
+          save={save}
+          deploy={deploy}
         />
         <Sidebar.Pusher>
           <Composer endpoint={currentEndpoint} setUrl={setUrl} />
@@ -75,7 +86,7 @@ function Home({
             open={isPreferenceDialogOpen}
             close={closePreferenceDialog}
           />
-          <IntroDialog />
+          <IntroDialog open={isIntroDialogOpen} openProject={openProject} />
         </Sidebar.Pusher>
       </Sidebar.Pushable>
     </Container>
@@ -83,7 +94,15 @@ function Home({
 }
 
 export default inject(
-  ({ state, view }: { state: AppStore; view: ViewStore }) => ({
+  ({
+    state,
+    view,
+    project
+  }: {
+    state: AppStore;
+    view: ViewStore;
+    project: ProjectStore;
+  }) => ({
     endpoints: state.endpoints,
     currentEndpoint: state.currentEndpoint,
     setUrl: state.currentEndpoint.setUrl,
@@ -93,6 +112,10 @@ export default inject(
     moveEndpoint: state.moveEndpoint,
     openPreferenceDialog: view.openProjectPreferenceDialog,
     isPreferenceDialogOpen: view.isProjectPreferenceOpen,
-    closePreferenceDialog: view.closeProjectPreferenceDialog
+    closePreferenceDialog: view.closeProjectPreferenceDialog,
+    save: project.save,
+    isIntroDialogOpen: view.isProjectIntro,
+    openProject: project.open,
+    deploy: project.deploy
   })
 )(Home as any);

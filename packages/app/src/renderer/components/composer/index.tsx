@@ -56,8 +56,8 @@ const Composer = ({ endpoint }: IComponser) => {
 
             <Section title="Response Code">
               <ResponseCode
-                responseCode={endpoint.response.responseContent}
-                setResponseCode={endpoint.response.setResponseContent}
+                responseCode={endpoint.responseCode}
+                setResponseCode={endpoint.setResponseCode}
               />
             </Section>
 

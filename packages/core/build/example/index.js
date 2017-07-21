@@ -20,7 +20,11 @@ var spec = {
         staticFolder: "."
     }
 };
-src_1.default(spec).start().then(function () {
+var server = src_1.default();
+server.start(spec).then(function () {
     console.log("Server started..");
+});
+server.start(spec).then(function () {
+    console.log("Server started again..");
 });
 //# sourceMappingURL=index.js.map

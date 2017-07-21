@@ -21,6 +21,12 @@ const spec: ISpec = {
   }
 };
 
-atmoServer(spec).start().then(() => {
+const server = atmoServer();
+
+server.start(spec).then(() => {
   console.log("Server started..");
+});
+
+server.start(spec).then(() => {
+  console.log("Server started again..");
 });

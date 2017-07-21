@@ -1,8 +1,9 @@
 import { observable, action } from "mobx";
-import { bind, memoize, debounce } from "decko";
+import { bind } from "decko";
 
 export default class ViewStore {
   @observable isProjectPreferenceOpen = false;
+  @observable isProjectIntro = false;
 
   @bind
   @action
