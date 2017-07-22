@@ -49,8 +49,8 @@ export default class MenuExampleBasic extends React.Component<
         </Menu.Item>
 
         <Menu.Item
-          name="custom"
-          active={activeItem === "custom"}
+          name="javascript"
+          active={activeItem === "javascript"}
           onClick={this.handleItemClick}
         >
           <Icon name="code" />

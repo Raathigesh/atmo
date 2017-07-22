@@ -1,14 +1,19 @@
 import * as React from "react";
 const { default: AceEditor } = require("react-ace");
 import "brace/mode/json";
+import "brace/mode/xml";
+import "brace/mode/markdown";
+import "brace/mode/javascript";
 import "brace/theme/github";
 
 interface IEditor {
   mode: string;
+  code: string;
+  onChange: (code: string) => void;
   className?: string;
 }
 
-function Editor({ className, mode }: IEditor) {
+function Editor({ className, mode, code, onChange }: IEditor) {
   return (
     <AceEditor
       mode={mode}
@@ -18,6 +23,8 @@ function Editor({ className, mode }: IEditor) {
       className={className}
       height="calc(100vh)"
       width="100%"
+      value={code}
+      onChange={onChange}
     />
   );
 }

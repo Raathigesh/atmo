@@ -7,7 +7,7 @@ export default class Response {
   @observable type: ResponseType;
   @observable responseContent: string;
 
-  constructor(type: ResponseType = "json", responseContent: string = "200") {
+  constructor(type: ResponseType = "json", responseContent: string = "") {
     this.type = type;
     this.responseContent = responseContent;
   }

@@ -16,7 +16,7 @@ const Container = styled.div`
 const RedLabel = styled(Label)`
     background-color: #8D99AE !important;
     color: white !important;
-  `;
+`;
 
 const Section = ({
   title,

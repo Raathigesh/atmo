@@ -65,7 +65,11 @@ const Composer = ({ endpoint }: IComponser) => {
           </Segment>
         </ControlPanel>
         <div>
-          <Editor mode={endpoint.response.typeForEditor} />
+          <Editor
+            mode={endpoint.response.typeForEditor}
+            code={endpoint.response.responseContent}
+            onChange={endpoint.response.setResponseContent}
+          />
         </div>
       </SplitPanel>
     </ComposerCard>
