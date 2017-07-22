@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Dropdown } from "semantic-ui-react";
-import Section from "../section";
+import Section from "../Section";
 import statusOptions from "./options";
 
 interface IResponseCode {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import Select from "../../../components/select";
+import Select from "../../components/Select";
 import { Dropdown, Input } from "semantic-ui-react";
 import styled from "styled-components";
 

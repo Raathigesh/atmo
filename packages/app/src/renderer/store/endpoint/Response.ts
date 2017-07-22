@@ -1,23 +1,37 @@
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
+import { bind } from "decko";
+
+type ResponseType = "json" | "xml" | "javascript" | "text";
 
 export default class Response {
-  @observable type: string;
+  @observable type: ResponseType;
   @observable responseContent: string;
 
-  constructor(type: string = "json", responseContent: string = "200") {
+  constructor(type: ResponseType = "json", responseContent: string = "200") {
     this.type = type;
     this.responseContent = responseContent;
   }
 
+  @bind
   @action
-  setType = (value: string) => {
+  setType(value: ResponseType) {
     this.type = value;
-  };
+  }
 
+  @bind
   @action
-  setResponseContent = (response: string) => {
+  setResponseContent(response: string) {
     this.responseContent = response;
-  };
+  }
+
+  @computed
+  get typeForEditor() {
+    if (this.type === "text") {
+      return "markdown"; // Ace editor does not understand text
+    }
+
+    return this.type;
+  }
 
   toJson() {
     return {
@@ -30,7 +44,7 @@ export default class Response {
     type,
     responseContent
   }: {
-    type: string;
+    type: ResponseType;
     responseContent: string;
   }) {
     return new Response(type, responseContent);

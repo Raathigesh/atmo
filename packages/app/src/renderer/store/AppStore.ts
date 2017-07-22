@@ -1,4 +1,5 @@
 import { observable, action, computed, IObservableArray } from "mobx";
+import { bind } from "decko";
 import Endpoint from "./endpoint/Endpoint";
 
 export default class AppStore {
@@ -9,8 +10,9 @@ export default class AppStore {
     this.addEndpoint("/");
   }
 
+  @bind
   @action
-  setCurrentEndpoint = (id: string) => {
+  setCurrentEndpoint(id: string) {
     this.currentEndpoint = this.endpoints.find(endpoint => endpoint.id === id);
     (window as any).Perf.stop();
     (window as any).Perf.printWasted(
@@ -19,26 +21,29 @@ export default class AppStore {
     (window as any).Perf.printOperations(
       (window as any).Perf.getLastMeasurements()
     );
-  };
+  }
 
+  @bind
   @action
-  addEndpoint = (url: string = "") => {
+  addEndpoint(url: string = "") {
     const endpoint = new Endpoint();
     endpoint.setUrl(url);
 
     this.currentEndpoint = endpoint;
     this.endpoints.push(endpoint);
-  };
+  }
 
+  @bind
   @action
-  deleteEndpoint = (id: string) => {
+  deleteEndpoint(id: string) {
     this.endpoints.remove(this.endpoints.find(endpoint => endpoint.id === id));
-  };
+  }
 
+  @bind
   @action
-  moveEndpoint = (fromIndex: number, toIndex: number) => {
+  moveEndpoint(fromIndex: number, toIndex: number) {
     this.endpoints.move(fromIndex, toIndex);
-  };
+  }
 
   toJson() {
     return {

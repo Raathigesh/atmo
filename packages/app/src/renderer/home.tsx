@@ -1,5 +1,5 @@
 import * as React from "react";
-import Composer from "./components/composer";
+import Composer from "./components/composer/Composer";
 import { inject } from "mobx-react";
 import styled from "styled-components";
 import {
@@ -15,10 +15,10 @@ import {
   Label
 } from "semantic-ui-react";
 import DevTools from "mobx-react-devtools";
-import Side from "./components/sidebar";
-import SystemSettings from "./components/systemSettings";
+import Side from "./components/sidebar/Sidebar";
+import SystemSettings from "./components/SystemSettings";
 import Endpoint from "./store/endpoint/Endpoint";
-import IntroDialog from "./components/introDialog";
+import IntroDialog from "./components/IntroDialog";
 import AppStore from "./store/AppStore";
 import ViewStore from "./store/ViewStore";
 import ProjectStore from "./store/ProjectStore";

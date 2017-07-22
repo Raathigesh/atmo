@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Header, Label, Icon } from "semantic-ui-react";
 const { default: ReactSimpleRange } = require("react-simple-range");
-import Section from "../section";
+import Section from "./Section";
 
 interface IDelay {
   value: number;

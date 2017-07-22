@@ -1,6 +1,7 @@
 import Header from "./Header";
 import Response from "./Response";
 const shortid = require("shortid");
+import { bind } from "decko";
 import { observable, action, IObservableArray } from "mobx";
 
 export default class Endpoint {
@@ -18,35 +19,41 @@ export default class Endpoint {
     this.headers.push(new Header(shortid.generate(), "", ""));
   }
 
+  @bind
   @action
-  setUrl = (url: string) => {
+  setUrl(url: string) {
     this.url = url;
-  };
+  }
 
+  @bind
   @action
-  setMethod = (method: string) => {
+  setMethod(method: string) {
     this.method = method;
-  };
+  }
 
+  @bind
   @action
-  addHeader = (key: string = "", value: string = "") => {
+  addHeader(key: string = "", value: string = "") {
     this.headers.push(new Header(shortid.generate(), key, value));
-  };
+  }
 
+  @bind
   @action
-  removeHeader = (id: string) => {
+  removeHeader(id: string) {
     this.headers.remove(this.headers.find(header => header.id === id));
-  };
+  }
 
+  @bind
   @action
-  setResponseCode = (code: string) => {
+  setResponseCode(code: string) {
     this.responseCode = code;
-  };
+  }
 
+  @bind
   @action
-  setDelay = (delay: number) => {
+  setDelay(delay: number) {
     this.delay = delay;
-  };
+  }
 
   toJson() {
     return {

@@ -29,7 +29,7 @@ export default function IntroDialog({ open, openProject }: IIntroDialog) {
                 <Header as="h2" icon>
                   <img
                     className="ui mini right spaced image"
-                    src={require("../../assets/logo.png")}
+                    src={require("../assets/logo.png")}
                   />
                   <strong>
                     Atmo &nbsp;<small>

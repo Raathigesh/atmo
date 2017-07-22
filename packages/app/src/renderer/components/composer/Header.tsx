@@ -8,8 +8,8 @@ import {
   Header
 } from "semantic-ui-react";
 import styled from "styled-components";
-import Section from "../section";
-import Stores from "../../../store";
+import Section from "./Section";
+import Stores from "../../store";
 import { observer } from "mobx-react";
 
 interface IHeaderRow {

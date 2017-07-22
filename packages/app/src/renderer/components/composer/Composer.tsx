@@ -1,15 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
 const SplitPanel = require("react-split-pane");
-import Card from "../card";
-import Url from "./url";
-import Headers from "./headers";
-import Editor from "./editor";
-import Response from "./response";
-import ResponseCode from "./responseCode";
-import Delay from "./delay";
+import Card from "../Card";
+import Url from "./Url";
+import Headers from "./Header";
+import Editor from "./Editor";
+import Response from "./Response";
+import ResponseCode from "./responseCode/ResponseCode";
+import Delay from "./Delay";
 import { Segment, Label } from "semantic-ui-react";
-import Section from "./section";
+import Section from "./Section";
 import { observer } from "mobx-react";
 import Endpoint from "../../store/endpoint/Endpoint";
 
@@ -65,7 +65,7 @@ const Composer = ({ endpoint }: IComponser) => {
           </Segment>
         </ControlPanel>
         <div>
-          <Editor />
+          <Editor mode={endpoint.response.typeForEditor} />
         </div>
       </SplitPanel>
     </ComposerCard>

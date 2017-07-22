@@ -1,15 +1,18 @@
 import * as React from "react";
 const { default: AceEditor } = require("react-ace");
+import "brace/mode/json";
+import "brace/theme/github";
 
-interface IJson {
+interface IEditor {
+  mode: string;
   className?: string;
 }
 
-function Editor({ className }: IJson) {
+function Editor({ className, mode }: IEditor) {
   return (
     <AceEditor
-      mode={"javascript"}
-      theme="monokai"
+      mode={mode}
+      theme="github"
       name="UNIQUE_ID_OF_DIV"
       editorProps={{ $blockScrolling: true }}
       className={className}
