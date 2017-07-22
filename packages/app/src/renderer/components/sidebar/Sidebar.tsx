@@ -28,12 +28,18 @@ interface ISideBar {
 }
 
 const MinimalSidebar = styled(Sidebar)`
-    background-color: #1D3557 !important;
+    background-color: #2d2d2d !important;
     color: gray;
   `;
 
 const SideBarItem = styled(Menu.Item)`
-  background-color: grey !important;
+  background-color: #7d7d7d !important;
+`;
+
+const Logo = styled.img`
+  height: 40px !important;
+  margin-left: 36px !important;
+  width: 183px !important;
 `;
 
 function Side({
@@ -67,15 +73,10 @@ function Side({
   return (
     <MinimalSidebar as={Menu} animation="push" visible={true} vertical inverted>
       <Menu.Item>
-        <img
+        <Logo
           className="ui mini right spaced image"
           src={require("../../assets/logo.png")}
         />
-        <strong>
-          Atmo &nbsp;<small>
-            <em>1.0.0</em>
-          </small>
-        </strong>
       </Menu.Item>
       <SideBarItem
         name="browse"

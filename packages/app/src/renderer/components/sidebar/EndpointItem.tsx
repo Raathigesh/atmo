@@ -20,6 +20,10 @@ interface IUrl {
   onDelete: (id: string) => void;
 }
 
+const MethodLabel = styled(Label)`
+  background-color: #ff6a4d !important;
+`;
+
 const Url = ({ id, label, link, method, active, onClick, onDelete }: IUrl) => {
   let Reorder = SortableHandle(styled(Icon)`
     cursor: grabbing;
@@ -35,9 +39,9 @@ const Url = ({ id, label, link, method, active, onClick, onDelete }: IUrl) => {
       }}
       active={active}
     >
-      <Label color="teal">
+      <MethodLabel>
         {method.toUpperCase()}
-      </Label>
+      </MethodLabel>
       <Icon name="circle thin" />
       <Reorder
         name="resize vertical"

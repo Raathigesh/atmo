@@ -33,9 +33,9 @@ const Delay = ({ value, onChange }: IDelay) => {
         label
         min={0}
         max={60}
-        sliderColor="#EF233C"
-        thumbColor="#2B2D42"
-        trackColor="#D90429"
+        sliderColor="#2d2d2d"
+        thumbColor="#ff6a4d"
+        trackColor="#ff6a4d"
         thumbSize={15}
         sliderSize={1}
       />
