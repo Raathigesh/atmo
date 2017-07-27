@@ -10,7 +10,7 @@ export default class Endpoint {
   @observable method: string = "get";
   @observable headers: IObservableArray<Header> = observable([]);
   @observable response: Response;
-  @observable responseCode: string = "200";
+  @observable statusCode: string = "200";
   @observable delay: number = 0;
 
   constructor() {
@@ -46,7 +46,7 @@ export default class Endpoint {
   @bind
   @action
   setResponseCode(code: string) {
-    this.responseCode = code;
+    this.statusCode = code;
   }
 
   @bind
@@ -61,7 +61,7 @@ export default class Endpoint {
       method: this.method,
       headers: this.headers.map(header => header.toJson()),
       response: this.response.toJson(),
-      responseCode: this.responseCode,
+      statusCode: this.statusCode,
       delay: this.delay
     };
   }

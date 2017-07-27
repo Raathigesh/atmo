@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Dropdown } from "semantic-ui-react";
+import { observer } from "mobx-react";
 import Section from "../Section";
 import statusOptions from "./options";
 
@@ -24,4 +25,4 @@ const ResponseCode = ({ responseCode, setResponseCode }: IResponseCode) => {
   );
 };
 
-export default ResponseCode;
+export default observer(ResponseCode);

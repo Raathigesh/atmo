@@ -52,57 +52,90 @@ function createServer(spec: spec) {
   };
 }
 
-function updateRoutes(app: express.Express, endpoints: IEndpoint[]) {
+function updateRoutes(serverApp: express.Express, endpoints: IEndpoint[]) {
   for (const endpoint of endpoints) {
-    addRoute(app, endpoint);
+    addRoute(serverApp, endpoint);
   }
 }
 
-function addRoute(app: express.Express, endpoint: IEndpoint) {
+function addRoute(serverApp: express.Express, endpoint: IEndpoint) {
   if (endpoint.method === "get") {
-    app.get(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.get(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "post") {
-    app.post(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.post(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "put") {
-    app.put(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.put(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "patch") {
-    app.patch(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.patch(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "delete") {
-    app.delete(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.delete(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "copy") {
-    app.copy(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.copy(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "head") {
-    app.head(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.head(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "options") {
-    app.options(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.options(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "purge") {
-    app.purge(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.purge(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "lock") {
-    app.lock(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.lock(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   } else if (endpoint.method === "unlock") {
-    app.unlock(endpoint.url, (req: express.Request, res: express.Response) => {
-      responseCallback(res, endpoint);
-    });
+    serverApp.unlock(
+      endpoint.url,
+      (req: express.Request, res: express.Response) => {
+        responseCallback(res, endpoint);
+      }
+    );
   }
 }
 

@@ -17,6 +17,7 @@
   "dependencies": {
     "@types/es6-promise": "0.0.32",
     "atmo-core": "0.1.0",
+    "body-parser": "^1.17.2",
     "decko": "^1.2.0",
     "electron": "^1.6.11",
     "electron-settings": "^3.1.1",
@@ -60,6 +61,7 @@
     "react-addons-css-transition-group": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-hot-loader": "3.0.0-beta.6",
+    "react-notification-system": "^0.2.14",
     "react-router": "^4.1.1",
     "react-simple-range": "^1.5.2",
     "react-sortable-hoc": "^0.6.5",

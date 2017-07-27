@@ -1,4 +1,5 @@
 import * as React from "react";
+import { observer } from "mobx-react";
 const { default: AceEditor } = require("react-ace");
 import "brace/mode/json";
 import "brace/mode/xml";
@@ -29,4 +30,4 @@ function Editor({ className, mode, code, onChange }: IEditor) {
   );
 }
 
-export default Editor;
+export default observer(Editor);

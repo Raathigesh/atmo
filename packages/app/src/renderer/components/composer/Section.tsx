@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Segment, Label, Image, Header } from "semantic-ui-react";
 import styled from "styled-components";
+import { observer } from "mobx-react";
 
 interface ISectionHeadingProp {
   title: string;
@@ -37,4 +38,4 @@ const Section = ({
   );
 };
 
-export default Section;
+export default observer(Section);

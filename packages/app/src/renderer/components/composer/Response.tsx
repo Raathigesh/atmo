@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Menu, Icon } from "semantic-ui-react";
-
+import { observer } from "mobx-react";
 interface IResponse {
   activeItem?: string;
   setActiveItem: (value: string) => void;
@@ -10,6 +10,7 @@ interface State {
   activeItem?: string;
 }
 
+@observer
 export default class MenuExampleBasic extends React.Component<
   IResponse,
   State

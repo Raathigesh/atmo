@@ -2,7 +2,6 @@ import * as React from "react";
 import { Menu, MenuItem, Sidebar, Icon, Label } from "semantic-ui-react";
 import { observer } from "mobx-react";
 import styled from "styled-components";
-const generateName = require("sillyname");
 import { withHandlers, compose } from "recompose";
 import {
   SortableContainer,
@@ -42,6 +41,14 @@ const Logo = styled.img`
   width: 183px !important;
 `;
 
+function displayUrl(url: string) {
+  if (url.length > 20) {
+    return `${url.substring(0, 20)}...`;
+  }
+
+  return url;
+}
+
 function Side({
   endpoints,
   currentEndpoint,
@@ -60,7 +67,7 @@ function Side({
     return (
       <UrlElement
         index={index}
-        label={endpoint.url}
+        label={displayUrl(endpoint.url)}
         onClick={onEndpointSelection}
         id={endpoint.id}
         method={endpoint.method}
@@ -83,7 +90,7 @@ function Side({
         as="a"
         color="blue"
         onClick={() => {
-          addEndpoint(`/${generateName()}`.replace(" ", ""));
+          addEndpoint("/unicorns");
         }}
       >
         <Icon name="plus" />

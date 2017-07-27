@@ -4,7 +4,7 @@ const jsonfile = require("jsonfile");
 import { ProjectPreference, RecentProjects } from "./settings";
 
 interface ICallbacks {
-  onDeply?: (spec: any) => void;
+  onDeploy?: (spec: any, event?: any) => void;
   onProjectPreference?: (preference: any) => void;
   onRecentProjects?: (projects: any[]) => void;
 }
@@ -17,7 +17,7 @@ export function listen(callbacks: ICallbacks = {}) {
     });
   });
   ipcMain.on("deploy", (event, spec) => {
-    callbacks.onDeply(spec);
+    callbacks.onDeploy(spec, event);
   });
 
   ipcMain.on("projectPreference", (event, preference) => {
@@ -38,10 +38,20 @@ export function listen(callbacks: ICallbacks = {}) {
     });
   });
 
-  ipcMain.on("open", (event, spec) => {
+  ipcMain.on("open", (event, args) => {
     dialog.showOpenDialog({}, filename => {
-      console.log(filename);
-      event.sender.send("open", jsonfile.readFileSync(filename[0]));
+      if (args.action === "CertPath") {
+        event.sender.send("open", {
+          action: args.action,
+          path: filename
+        });
+      } else {
+        event.sender.send("open", {
+          action: args.args,
+          path: filename,
+          content: jsonfile.readFileSync(filename[0])
+        });
+      }
     });
   });
 }

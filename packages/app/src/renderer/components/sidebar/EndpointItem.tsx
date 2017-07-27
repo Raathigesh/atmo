@@ -24,10 +24,12 @@ const MethodLabel = styled(Label)`
   background-color: #ff6a4d !important;
 `;
 
-const Url = ({ id, label, link, method, active, onClick, onDelete }: IUrl) => {
-  let Reorder = SortableHandle(styled(Icon)`
+const EndpointDragHandle = styled(Icon)`
     cursor: grabbing;
-  `);
+`;
+
+const Url = ({ id, label, link, method, active, onClick, onDelete }: IUrl) => {
+  let Reorder = SortableHandle(EndpointDragHandle);
 
   return (
     <Menu.Item

@@ -37,26 +37,24 @@ const Composer = ({ endpoint }: IComponser) => {
       >
         <ControlPanel>
           <Segment basic>
-            <Section title="Url">
-              <Url
-                url={endpoint.url}
-                onUrlChange={endpoint.setUrl}
-                onMethodChange={endpoint.setMethod}
-              />
-            </Section>
+            <Url
+              url={endpoint.url}
+              onUrlChange={endpoint.setUrl}
+              onMethodChange={endpoint.setMethod}
+            />
 
             <Headers headers={endpoint.headers} currentEndpoint={endpoint} />
 
             <Section title="Response Type">
               <Response
-                activeItem={endpoint.response.type}
+                activeItem={endpoint.response.contentType}
                 setActiveItem={endpoint.response.setType}
               />
             </Section>
 
             <Section title="Response Code">
               <ResponseCode
-                responseCode={endpoint.responseCode}
+                responseCode={endpoint.statusCode}
                 setResponseCode={endpoint.setResponseCode}
               />
             </Section>
@@ -67,7 +65,7 @@ const Composer = ({ endpoint }: IComponser) => {
         <div>
           <Editor
             mode={endpoint.response.typeForEditor}
-            code={endpoint.response.responseContent}
+            code={endpoint.response.content}
             onChange={endpoint.response.setResponseContent}
           />
         </div>

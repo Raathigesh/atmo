@@ -4,39 +4,39 @@ import { bind } from "decko";
 type ResponseType = "json" | "xml" | "javascript" | "text";
 
 export default class Response {
-  @observable type: ResponseType;
-  @observable responseContent: string;
+  @observable contentType: ResponseType;
+  @observable content: string;
 
   constructor(type: ResponseType = "json", responseContent: string = "") {
-    this.type = type;
-    this.responseContent = responseContent;
+    this.contentType = type;
+    this.content = responseContent;
   }
 
   @bind
   @action
   setType(value: ResponseType) {
-    this.type = value;
+    this.contentType = value;
   }
 
   @bind
   @action
   setResponseContent(response: string) {
-    this.responseContent = response;
+    this.content = response;
   }
 
   @computed
   get typeForEditor() {
-    if (this.type === "text") {
+    if (this.contentType === "text") {
       return "markdown"; // Ace editor does not understand text
     }
 
-    return this.type;
+    return this.contentType;
   }
 
   toJson() {
     return {
-      type: this.type,
-      responseContent: this.responseContent
+      contentType: this.contentType,
+      content: this.content
     };
   }
 

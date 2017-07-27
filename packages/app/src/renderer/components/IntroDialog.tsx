@@ -11,12 +11,17 @@ import {
 } from "semantic-ui-react";
 import styled from "styled-components";
 
-const IntroContainer = styled.div`margin-top: 50px;`;
-
 interface IIntroDialog {
   open: boolean;
   openProject: () => void;
 }
+
+const Logo = styled.img`
+  height: 40px !important;
+  margin-left: 128px !important;
+  width: 183px !important;
+  margin-bottom: 9px;
+`;
 
 export default function IntroDialog({ open, openProject }: IIntroDialog) {
   return (
@@ -25,34 +30,29 @@ export default function IntroDialog({ open, openProject }: IIntroDialog) {
         <Grid>
           <Grid.Row>
             <Grid.Column width={8}>
-              <IntroContainer>
+              <div>
                 <Header as="h2" icon>
-                  <img
+                  <Logo
                     className="ui mini right spaced image"
-                    src={require("../assets/logo.png")}
+                    src={require("../assets/darkLogo.png")}
                   />
-                  <strong>
-                    Atmo &nbsp;<small>
-                      <em>1.0.0</em>
-                    </small>
-                  </strong>
-                  <Header.Subheader>
-                    Manage your account settings and set e-mail preferences.
-                  </Header.Subheader>
                 </Header>
                 <Input
                   placeholder="Give the project a name"
                   fluid
                   action={{
-                    color: "teal",
+                    color: "orange",
                     labelPosition: "right",
                     icon: "arrow right",
                     content: "Create"
                   }}
                   defaultValue=""
                 />
-                <Button onClick={openProject}>Open</Button>
-              </IntroContainer>
+                <Divider horizontal>Or</Divider>
+                <Button basic color="orange" onClick={openProject} fluid>
+                  Open a saved project
+                </Button>
+              </div>
             </Grid.Column>
 
             <Grid.Column width={8}>

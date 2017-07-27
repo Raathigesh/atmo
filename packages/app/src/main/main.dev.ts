@@ -66,8 +66,9 @@ app.on("window-all-closed", () => {
 
 app.on("ready", async () => {
   listen({
-    onDeply: (spec: any) => {
+    onDeploy: (spec: any, event: any) => {
       server.start(spec).then(() => {
+        event.sender.send("deployed");
         console.log("redeployed..");
       });
     }

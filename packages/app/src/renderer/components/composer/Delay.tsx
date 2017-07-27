@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Header, Label, Icon } from "semantic-ui-react";
 const { default: ReactSimpleRange } = require("react-simple-range");
+import { observer } from "mobx-react";
 import Section from "./Section";
 
 interface IDelay {
@@ -43,4 +44,4 @@ const Delay = ({ value, onChange }: IDelay) => {
   );
 };
 
-export default Delay;
+export default observer(Delay);
