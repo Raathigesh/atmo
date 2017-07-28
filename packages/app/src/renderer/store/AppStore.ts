@@ -36,6 +36,7 @@ export default class AppStore {
   @bind
   @action
   deleteEndpoint(id: string) {
+    this.setCurrentEndpoint(this.endpoints[0].id);
     this.endpoints.remove(this.endpoints.find(endpoint => endpoint.id === id));
   }
 

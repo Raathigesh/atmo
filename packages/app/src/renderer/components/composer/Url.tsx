@@ -35,7 +35,7 @@ const PreviewUrl = ({ url }: { url: string }) => {
 
 const HttpBase = ({ url, onUrlChange, onMethodChange }: IHttpBase) => {
   return (
-    <Section title="Url" headerComponents={[<PreviewUrl url={url} />]}>
+    <Section title="Url" headerComponents={<PreviewUrl url={url} />}>
       <Input
         defaultValue={url}
         action={

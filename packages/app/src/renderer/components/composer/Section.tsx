@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 
 interface ISectionHeadingProp {
   title: string;
-  headerComponents?: any[];
+  headerComponents?: any;
   children: any;
 }
 

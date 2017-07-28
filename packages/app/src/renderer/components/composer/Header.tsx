@@ -68,8 +68,9 @@ const AddHeader = styled.a`
 `;
 
 const Headers = ({ headers, currentEndpoint }: IHeader) => {
-  const headerItems = headers.map(header =>
+  const headerItems = headers.map((header, index) =>
     <HeaderRow
+      key={index}
       header={header}
       onRemove={currentEndpoint.removeHeader}
       onKeyChange={header.setKey}
@@ -77,14 +78,14 @@ const Headers = ({ headers, currentEndpoint }: IHeader) => {
     />
   );
 
-  const headerComponents = [
+  const headerComponents = (
     <Header as="h5" floated="right" onClick={() => currentEndpoint.addHeader()}>
       <Icon.Group>
         <Icon name="add circle" color="grey" />
       </Icon.Group>
       <AddHeader>Add new header</AddHeader>
     </Header>
-  ];
+  );
 
   return (
     <Section title="Headers" headerComponents={headerComponents}>

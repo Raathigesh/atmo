@@ -17,14 +17,14 @@ const AddHeader = styled.a`
 `;
 
 const Delay = ({ value, onChange }: IDelay) => {
-  const headerComponents = [
+  const headerComponents = (
     <Header as="h5" floated="right">
       <Icon.Group>
         <Icon name="hourglass end" color="grey" />
       </Icon.Group>
       <AddHeader>{`${value} sec`}</AddHeader>
     </Header>
-  ];
+  );
 
   return (
     <Section title="Simulate Delay" headerComponents={headerComponents}>

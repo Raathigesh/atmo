@@ -33,6 +33,7 @@ const Url = ({ id, label, link, method, active, onClick, onDelete }: IUrl) => {
 
   return (
     <Menu.Item
+      key={id}
       as="a"
       name="search"
       onClick={() => {
@@ -45,13 +46,15 @@ const Url = ({ id, label, link, method, active, onClick, onDelete }: IUrl) => {
         {method.toUpperCase()}
       </MethodLabel>
       <Icon name="circle thin" />
-      <Reorder
-        name="resize vertical"
-        onClick={() => {
+      <Reorder name="resize vertical" />
+      {label}
+      <Icon
+        name="trash outline"
+        onClick={event => {
+          event.stopPropagation();
           onDelete(id);
         }}
       />
-      {label}
     </Menu.Item>
   );
 };
