@@ -2,7 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var bodyParser = require("body-parser");
 var express = require("express");
+var fs = require("fs");
 var http = require("http");
+var https = require("https");
 var enableDestroy = require("server-destroy");
 var Promise = require("bluebird");
 var app;
@@ -13,11 +15,13 @@ function atmoServer() {
         start: function (spec) {
             return new Promise(function (resolve, reject) {
                 serverWithApp = createServer(spec);
-                serverWithApp.server.listen(9000, function (err) {
+                serverWithApp.server.listen(spec.server.port, function (err) {
                     if (err) {
                         reject(err);
                     }
-                    resolve();
+                    var serverUrl = serverWithApp.protocol + "://localhost:" + spec
+                        .server.port;
+                    resolve(serverUrl);
                 });
             });
         }
@@ -29,86 +33,63 @@ function createServer(spec) {
         server.destroy();
     }
     app = express();
-    server = http.createServer(app);
+    var protocol = "http";
+    if (spec.preference &&
+        spec.preference.certificatePath &&
+        spec.preference.keyPath) {
+        var options = {
+            key: fs.readFileSync(spec.preference.keyPath),
+            cert: fs.readFileSync(spec.preference.certificatePath),
+            requestCert: false,
+            rejectUnauthorized: false
+        };
+        server = https.createServer(options, app);
+        protocol = "https";
+    }
+    else {
+        server = http.createServer(app);
+    }
+    enableDestroy(server);
     app.use(bodyParser());
     app.use(bodyParser.urlencoded({ extended: true }));
+    if (spec.preference && spec.preference.assetsDirectory) {
+        app.use(express.static(spec.preference.assetsDirectory));
+    }
     server.listen(spec.server.port, function () {
         console.log("http://localhost:" + spec.server.port);
     });
-    enableDestroy(server);
     updateRoutes(app, spec.endpoints);
     return {
+        protocol: protocol,
         server: server,
         app: app
     };
 }
-function updateRoutes(app, endpoints) {
+function updateRoutes(serverApp, endpoints) {
     for (var _i = 0, endpoints_1 = endpoints; _i < endpoints_1.length; _i++) {
         var endpoint = endpoints_1[_i];
-        addRoute(app, endpoint);
+        addRoute(serverApp, endpoint);
     }
 }
-function addRoute(app, endpoint) {
-    if (endpoint.method === "get") {
-        app.get(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "post") {
-        app.post(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "put") {
-        app.put(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "patch") {
-        app.patch(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "delete") {
-        app.delete(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "copy") {
-        app.copy(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "head") {
-        app.head(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "options") {
-        app.options(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "purge") {
-        app.purge(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "lock") {
-        app.lock(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
-    else if (endpoint.method === "unlock") {
-        app.unlock(endpoint.url, function (req, res) {
-            responseCallback(res, endpoint);
-        });
-    }
+function addRoute(serverApp, endpoint) {
+    serverApp[endpoint.method](endpoint.url, function (req, res) {
+        if (endpoint.delay === 0) {
+            responseCallback(req, res, endpoint);
+        }
+        else {
+            setTimeout(function () {
+                console.log("executing......");
+                responseCallback(req, res, endpoint);
+            }, endpoint.delay * 1000);
+        }
+    });
 }
-function responseCallback(res, endpoint) {
+function responseCallback(req, res, endpoint) {
     setHeaders(res, endpoint.headers);
     res.status(endpoint.statusCode);
-    if (endpoint.response.contentType === "JavaScript") {
+    if (endpoint.response.contentType === "javascript") {
+        var request = req;
+        var response = res;
         eval(endpoint.response.content);
     }
     else {

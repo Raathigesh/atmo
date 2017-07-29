@@ -14,7 +14,9 @@ import { observer } from "mobx-react";
 import Endpoint from "../../store/endpoint/Endpoint";
 
 interface IComponser {
+  baseUrl: string;
   endpoint: Endpoint;
+  onUrlClick: (url: string) => void;
   setUrl: (url: string) => void;
 }
 
@@ -27,7 +29,7 @@ const ComposerCard = styled(Card)`
 
 const ControlPanel = styled.div`padding: 10px;`;
 
-const Composer = ({ endpoint }: IComponser) => {
+const Composer = ({ endpoint, baseUrl, onUrlClick }: IComponser) => {
   return (
     <ComposerCard>
       <SplitPanel
@@ -38,9 +40,11 @@ const Composer = ({ endpoint }: IComponser) => {
         <ControlPanel>
           <Segment basic>
             <Url
+              baseUrl={baseUrl}
               url={endpoint.url}
               onUrlChange={endpoint.setUrl}
               onMethodChange={endpoint.setMethod}
+              onUrlClick={onUrlClick}
             />
 
             <Headers headers={endpoint.headers} currentEndpoint={endpoint} />

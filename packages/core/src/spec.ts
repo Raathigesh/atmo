@@ -34,6 +34,12 @@ interface ISpec {
     port: number;
     staticFolder: string;
   };
+  preference?: {
+    zeitToken: string;
+    certificatePath: string;
+    keyPath: string;
+    assetsDirectory: string;
+  };
 }
 
 export default ISpec;

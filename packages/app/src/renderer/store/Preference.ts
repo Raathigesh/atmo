@@ -2,21 +2,42 @@ import { observable, action } from "mobx";
 
 export default class Preference {
   @observable zeitToken: string = "";
-  @observable certificatePath: string = "54654654654";
-  @observable keyPath: string = "asdasdasdasdasd";
+  @observable certificatePath: string = "";
+  @observable keyPath: string = "";
+  @observable port: number = 9000;
+  @observable assetsDirectory: string = "";
 
-  @action.bound
+  @action
   setZeitToken(token: string) {
     this.zeitToken = token;
   }
 
-  @action.bound
+  @action
   setCertificatePath(path: string) {
     this.certificatePath = path;
   }
 
-  @action.bound
+  @action
   setKeyPath(path: string) {
     this.keyPath = path;
+  }
+
+  @action
+  setPort(port: number) {
+    this.port = port;
+  }
+
+  @action
+  setAssetsDirectory(directory: string) {
+    this.assetsDirectory = directory;
+  }
+
+  toJson() {
+    return {
+      zeitToken: this.zeitToken,
+      certificatePath: this.certificatePath,
+      keyPath: this.keyPath,
+      assetsDirectory: this.assetsDirectory
+    };
   }
 }

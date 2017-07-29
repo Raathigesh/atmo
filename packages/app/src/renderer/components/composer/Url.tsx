@@ -5,10 +5,12 @@ import { Dropdown, Input, Icon, Header } from "semantic-ui-react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
-interface IHttpBase {
+interface IUrl {
+  baseUrl: string;
   url: string;
   onUrlChange: (url: string) => void;
   onMethodChange: (method: string) => void;
+  onUrlClick: (url: string) => void;
 }
 
 const LinkIcon = styled(Icon)`
@@ -23,9 +25,22 @@ const options = [
   { key: "delete", text: "DELETE", value: "delete" }
 ];
 
-const PreviewUrl = ({ url }: { url: string }) => {
+const PreviewUrl = ({
+  url,
+  onUrlClick
+}: {
+  url: string;
+  onUrlClick: (url: string) => void;
+}) => {
   return (
-    <Header as="h5" floated="right" onClick={() => {}}>
+    <Header
+      as="h5"
+      floated="right"
+      onClick={(event: any) => {
+        event.preventDefault();
+        onUrlClick(url);
+      }}
+    >
       <a href={url} target="_blank">
         {url}
       </a>
@@ -33,9 +48,20 @@ const PreviewUrl = ({ url }: { url: string }) => {
   );
 };
 
-const HttpBase = ({ url, onUrlChange, onMethodChange }: IHttpBase) => {
+const Url = ({
+  url,
+  baseUrl,
+  onUrlChange,
+  onMethodChange,
+  onUrlClick
+}: IUrl) => {
   return (
-    <Section title="Url" headerComponents={<PreviewUrl url={url} />}>
+    <Section
+      title="Url"
+      headerComponents={
+        <PreviewUrl url={`${baseUrl}${url}`} onUrlClick={onUrlClick} />
+      }
+    >
       <Input
         defaultValue={url}
         action={
@@ -58,4 +84,4 @@ const HttpBase = ({ url, onUrlChange, onMethodChange }: IHttpBase) => {
   );
 };
 
-export default observer(HttpBase);
+export default observer(Url);

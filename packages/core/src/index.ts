@@ -1,6 +1,8 @@
 const bodyParser = require("body-parser");
 import * as express from "express";
+const fs = require("fs");
 import * as http from "http";
+import * as https from "https";
 const enableDestroy = require("server-destroy");
 // tslint:disable-next-line
 const Promise = require("bluebird");
@@ -14,13 +16,15 @@ export default function atmoServer() {
   return {
     start: (spec: spec) => {
       return new Promise(
-        (resolve: () => void, reject: (err: Error) => void) => {
+        (resolve: (baseUrl: string) => void, reject: (err: Error) => void) => {
           serverWithApp = createServer(spec);
-          serverWithApp.server.listen(9000, (err: Error) => {
+          serverWithApp.server.listen(spec.server.port, (err: Error) => {
             if (err) {
               reject(err);
             }
-            resolve();
+            const serverUrl = `${serverWithApp.protocol}://localhost:${spec
+              .server.port}`;
+            resolve(serverUrl);
           });
         }
       );
@@ -34,19 +38,41 @@ function createServer(spec: spec) {
   }
 
   app = express();
-  server = http.createServer(app);
+  let protocol = "http";
+
+  if (
+    spec.preference &&
+    spec.preference.certificatePath &&
+    spec.preference.keyPath
+  ) {
+    const options = {
+      key: fs.readFileSync(spec.preference.keyPath),
+      cert: fs.readFileSync(spec.preference.certificatePath),
+      requestCert: false,
+      rejectUnauthorized: false
+    };
+    server = https.createServer(options, app);
+    protocol = "https";
+  } else {
+    server = http.createServer(app);
+  }
+  enableDestroy(server);
 
   app.use(bodyParser());
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  if (spec.preference && spec.preference.assetsDirectory) {
+    app.use(express.static(spec.preference.assetsDirectory));
+  }
 
   server.listen(spec.server.port, () => {
     console.log(`http://localhost:${spec.server.port}`);
   });
 
-  enableDestroy(server);
   updateRoutes(app, spec.endpoints);
 
   return {
+    protocol,
     server,
     app
   };
@@ -59,91 +85,31 @@ function updateRoutes(serverApp: express.Express, endpoints: IEndpoint[]) {
 }
 
 function addRoute(serverApp: express.Express, endpoint: IEndpoint) {
-  if (endpoint.method === "get") {
-    serverApp.get(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "post") {
-    serverApp.post(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "put") {
-    serverApp.put(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "patch") {
-    serverApp.patch(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "delete") {
-    serverApp.delete(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "copy") {
-    serverApp.copy(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "head") {
-    serverApp.head(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "options") {
-    serverApp.options(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "purge") {
-    serverApp.purge(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "lock") {
-    serverApp.lock(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  } else if (endpoint.method === "unlock") {
-    serverApp.unlock(
-      endpoint.url,
-      (req: express.Request, res: express.Response) => {
-        responseCallback(res, endpoint);
-      }
-    );
-  }
+  serverApp[
+    endpoint.method
+  ](endpoint.url, (req: express.Request, res: express.Response) => {
+    if (endpoint.delay === 0) {
+      responseCallback(req, res, endpoint);
+    } else {
+      setTimeout(() => {
+        console.log("executing......");
+        responseCallback(req, res, endpoint);
+      }, endpoint.delay * 1000);
+    }
+  });
 }
 
-function responseCallback(res: express.Response, endpoint: IEndpoint) {
+function responseCallback(
+  req: express.Request,
+  res: express.Response,
+  endpoint: IEndpoint
+) {
   setHeaders(res, endpoint.headers);
   res.status(endpoint.statusCode);
 
-  if (endpoint.response.contentType === "JavaScript") {
+  if (endpoint.response.contentType === "javascript") {
+    const request = req;
+    const response = res;
     eval(endpoint.response.content);
   } else {
     res.send(endpoint.response.content);

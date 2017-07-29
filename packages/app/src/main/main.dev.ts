@@ -48,9 +48,6 @@ const spec = {
 };
 
 server = atmoServer();
-server.start(spec).then(() => {
-  console.log("Server started..");
-});
 
 /**
  * Add event listeners...
@@ -67,8 +64,8 @@ app.on("window-all-closed", () => {
 app.on("ready", async () => {
   listen({
     onDeploy: (spec: any, event: any) => {
-      server.start(spec).then(() => {
-        event.sender.send("deployed");
+      server.start(spec).then((baseUrl: string) => {
+        event.sender.send("deployed", baseUrl);
         console.log("redeployed..");
       });
     }

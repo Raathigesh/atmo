@@ -16,6 +16,16 @@ export default class Response {
   @action
   setType(value: ResponseType) {
     this.contentType = value;
+
+    if (this.contentType === "javascript") {
+      this.content = `
+      // Following variables are available for you to use
+      // request: express js request object
+      // response: express js response object
+      `;
+    } else {
+      this.content = "";
+    }
   }
 
   @bind

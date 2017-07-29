@@ -16,14 +16,14 @@ import {
 } from "semantic-ui-react";
 import DevTools from "mobx-react-devtools";
 import Side from "./components/sidebar/Sidebar";
-import SystemSettings from "./components/SystemSettings";
+import ProjectPreference from "./components/Preference/Preference";
 import Endpoint from "./store/endpoint/Endpoint";
 import IntroDialog from "./components/IntroDialog";
 import AppStore from "./store/AppStore";
 import ViewStore from "./store/ViewStore";
-import ProjectStore from "./store/ProjectStore";
+import { ProjectStore } from "./store/ProjectStore";
 import Preference from "./store/Preference";
-import Notification, { INotification } from "./store/NotificationStore";
+import { Notification } from "./store/NotificationStore";
 import Notify from "./components/Notification";
 
 const Container = styled.div`
@@ -53,7 +53,6 @@ export default class Home extends React.Component<IHome, {}> {
     const { state, view, project, notification } = this.props;
     return (
       <Container>
-        <DevTools />
         <Sidebar.Pushable as={Segment}>
           <Side
             onEndpointSelection={state.setCurrentEndpoint}
@@ -67,22 +66,25 @@ export default class Home extends React.Component<IHome, {}> {
             deploy={project.deploy}
           />
           <Sidebar.Pusher>
+            <Notify message={notification.message} level={notification.level} />
             <Composer
+              baseUrl={project.baseUrl}
+              onUrlClick={project.openUrl}
               endpoint={state.currentEndpoint}
               setUrl={state.currentEndpoint.setUrl}
             />
-            <SystemSettings
+            <ProjectPreference
               open={view.isProjectPreferenceOpen}
               close={view.closeProjectPreferenceDialog}
               preference={project.preference}
               browseCertPath={project.getCertificatePath}
               browseKeyPath={project.getKeyPath}
+              browseAssetPath={project.getAssetPath}
             />
             <IntroDialog
               open={view.isProjectIntro}
               openProject={project.open}
             />
-            <Notify notification={notification.notification} />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </Container>

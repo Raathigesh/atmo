@@ -1,4 +1,4 @@
-const { ipcMain, dialog } = require("electron");
+const { ipcMain, dialog, shell } = require("electron");
 const jsonfile = require("jsonfile");
 
 import { ProjectPreference, RecentProjects } from "./settings";
@@ -40,7 +40,11 @@ export function listen(callbacks: ICallbacks = {}) {
 
   ipcMain.on("open", (event, args) => {
     dialog.showOpenDialog({}, filename => {
-      if (args.action === "CertPath") {
+      if (
+        args.action === "CertPath" ||
+        args.action === "KeyPath" ||
+        args.action === "AssetPath"
+      ) {
         event.sender.send("open", {
           action: args.action,
           path: filename
@@ -53,5 +57,9 @@ export function listen(callbacks: ICallbacks = {}) {
         });
       }
     });
+  });
+
+  ipcMain.on("openUrl", (event, url) => {
+    shell.openExternal(url);
   });
 }

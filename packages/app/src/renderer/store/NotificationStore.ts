@@ -1,25 +1,23 @@
 import { observable, action } from "mobx";
 import { bind } from "decko";
 
-export interface INotification {
-  message: string;
-  level: string;
-}
+export class Notification {
+  @observable level: string = "info";
+  @observable message: string = "message";
 
-export default class NotificationStore {
-  @observable notification: INotification;
-
-  constructor() {
-    this.notification = null;
-  }
-
+  @action
   success(message: string) {
-    debugger;
-    this.notification = {
-      message: "sdsdsd",
-      level: "success"
-    };
+    this.level = "info";
+    this.message = message;
+
+    setTimeout(
+      action(() => {
+        this.message = "";
+      }),
+      1000
+    );
   }
 }
 
-export const notification = new NotificationStore();
+const notification = new Notification();
+export default notification;

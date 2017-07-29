@@ -1,6 +1,7 @@
 import { observable, action, computed, IObservableArray } from "mobx";
 import { bind } from "decko";
 import Endpoint from "./endpoint/Endpoint";
+import projectStore from "./ProjectStore";
 
 export default class AppStore {
   @observable endpoints: IObservableArray<Endpoint> = observable([]);
@@ -52,7 +53,8 @@ export default class AppStore {
       server: {
         port: 9000,
         staticFolder: "."
-      }
+      },
+      preference: projectStore.preference.toJson()
     };
   }
 }
