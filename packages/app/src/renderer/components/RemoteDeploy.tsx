@@ -21,6 +21,7 @@ interface IPreference {
   deployments: Deployment[];
   isDeploying: boolean;
   isFetching: boolean;
+  isTokenConfigured: boolean;
   close: () => void;
   openInBrowser: (url: string) => void;
   deployProject: () => void;
@@ -39,18 +40,27 @@ const RemoteDeploy = ({
   openInBrowser,
   deployProject,
   deleteDeployment,
-  fetchDeployments
+  fetchDeployments,
+  isTokenConfigured
 }: IPreference) => {
   return (
     <Modal open={open}>
       <Modal.Header>Zeit Deployments</Modal.Header>
       <Modal.Content>
         <Segment basic loading={isFetching}>
+          {isTokenConfigured === false &&
+            <Message
+              warning
+              header="Zeit API token is not configured"
+              content="Configure Zeit's API token by vising project preference > Advanced. Getting a token is so easy."
+            />}
           {deployments.length === 0 &&
+            isTokenConfigured &&
             <Message visible>
               No deployments available for this project
             </Message>}
           {deployments.length > 0 &&
+            isTokenConfigured &&
             <Table basic="very" selectable>
               <Table.Header>
                 <Table.Row>
@@ -100,6 +110,7 @@ const RemoteDeploy = ({
           labelPosition="right"
           content="Fetch deployments"
           onClick={fetchDeployments}
+          disabled={!isTokenConfigured}
         />
         <Button
           basic
@@ -109,6 +120,7 @@ const RemoteDeploy = ({
           content="Deploy now"
           onClick={deployProject}
           loading={isDeploying}
+          disabled={!isTokenConfigured}
         />
       </Modal.Actions>
     </Modal>

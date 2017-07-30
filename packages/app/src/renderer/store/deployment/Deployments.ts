@@ -18,23 +18,28 @@ export default class Deployments {
   @action.bound
   getRecentDeployments() {
     this.isFetching = true;
-    this.now.getDeployments().then(deployments => {
-      this.recentDeployments.clear();
-      deployments
-        .filter(deployment => deployment.name === this.name)
-        .map(deployment => {
-          this.recentDeployments.push(
-            new Deployment(
-              deployment.uid,
-              deployment.name,
-              deployment.url,
-              deployment.created,
-              this.now
-            )
-          );
-        });
-      this.isFetching = false;
-    });
+    this.now
+      .getDeployments()
+      .then(deployments => {
+        this.recentDeployments.clear();
+        deployments
+          .filter(deployment => deployment.name === this.name)
+          .map(deployment => {
+            this.recentDeployments.push(
+              new Deployment(
+                deployment.uid,
+                deployment.name,
+                deployment.url,
+                deployment.created,
+                this.now
+              )
+            );
+          });
+        this.isFetching = false;
+      })
+      .catch(() => {
+        this.isFetching = false;
+      });
   }
 
   @action.bound

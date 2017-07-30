@@ -12,6 +12,7 @@ interface IPreference {
   browseCertPath: () => void;
   browseKeyPath: () => void;
   browseAssetPath: () => void;
+  onOpenUrl: (url: string) => void;
 }
 
 const PreferenceModal = ({
@@ -21,7 +22,8 @@ const PreferenceModal = ({
   setZeitToken,
   browseCertPath,
   browseKeyPath,
-  browseAssetPath
+  browseAssetPath,
+  onOpenUrl
 }: IPreference) => {
   const panes = [
     {
@@ -40,6 +42,7 @@ const PreferenceModal = ({
             setZeitToken={setZeitToken}
             browseCertPath={browseCertPath}
             browseKeyPath={browseKeyPath}
+            onOpenUrl={onOpenUrl}
           />
         </Tab.Pane>
     }

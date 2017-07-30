@@ -9,6 +9,7 @@ interface IAdvancedPreference {
   setZeitToken: (token: string) => void;
   browseCertPath: () => void;
   browseKeyPath: () => void;
+  onOpenUrl: (url: string) => void;
 }
 
 const ClearDiv = styled.div`height: 10px;`;
@@ -17,14 +18,24 @@ function AdvancedPreference({
   preference,
   browseCertPath,
   browseKeyPath,
-  setZeitToken
+  setZeitToken,
+  onOpenUrl
 }: IAdvancedPreference) {
   return (
     <div>
       <Header size="tiny">
         Zeit Access Token
         <Header.Subheader>
-          Manage your account settings and set e-mail preferences.
+          Click{" "}
+          <a
+            href="#"
+            onClick={() => {
+              onOpenUrl("https://zeit.co/account/tokens");
+            }}
+          >
+            here
+          </a>{" "}
+          to generate a token from Zeit.
         </Header.Subheader>
       </Header>
       <Input

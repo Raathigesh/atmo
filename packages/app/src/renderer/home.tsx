@@ -82,6 +82,7 @@ export default class Home extends React.Component<IHome, {}> {
               browseCertPath={project.getCertificatePath}
               browseKeyPath={project.getKeyPath}
               browseAssetPath={project.getAssetPath}
+              onOpenUrl={project.openUrl}
             />
             <IntroDialog
               open={view.isProjectIntro}
@@ -99,6 +100,7 @@ export default class Home extends React.Component<IHome, {}> {
               isDeploying={project.deployments.isDeploying}
               isFetching={project.deployments.isFetching}
               fetchDeployments={project.deployments.getRecentDeployments}
+              isTokenConfigured={project.preference.isZeitTokenConfigured}
             />
           </Sidebar.Pusher>
         </Sidebar.Pushable>

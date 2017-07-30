@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 
 export default class Preference {
   @observable zeitToken: string = "";
@@ -30,6 +30,11 @@ export default class Preference {
   @action
   setAssetsDirectory(directory: string) {
     this.assetsDirectory = directory;
+  }
+
+  @computed
+  get isZeitTokenConfigured() {
+    return this.zeitToken !== "";
   }
 
   toJson() {
