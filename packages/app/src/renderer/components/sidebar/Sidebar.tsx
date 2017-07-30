@@ -40,7 +40,11 @@ const MinimalSidebar = styled(Sidebar)`
   `;
 
 const SideBarItem = styled(Menu.Item)`
-  background-color: #7d7d7d !important;
+  background-color: #1b1b1b !important;
+  border-right: ${props =>
+    props.highlight
+      ? "5px solid #ff6a4d !important;"
+      : "5px solid #3c3c3c !important;"};
 `;
 
 const Logo = styled.img`
@@ -106,7 +110,7 @@ function Side({
         <Icon name="plus" />
         New Endpoint
       </SideBarItem>
-      <SideBarItem name="browse" as="a" color="blue" onClick={deploy}>
+      <SideBarItem name="browse" as="a" color="blue" onClick={deploy} highlight>
         <Icon name="wizard" />
         Deploy
       </SideBarItem>

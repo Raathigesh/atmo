@@ -20,7 +20,8 @@ interface IHeaderRow {
 }
 
 const SlimInput = styled(Input)`
-      height: 23px;
+    height: 23px;
+    width: 100%;
 `;
 
 const HeaderRow = observer(

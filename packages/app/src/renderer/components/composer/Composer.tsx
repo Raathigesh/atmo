@@ -28,7 +28,11 @@ const ComposerCard = styled(Card)`
     flex-direction: column;
   `;
 
-const ControlPanel = styled.div`padding: 10px;`;
+const ControlPanel = styled.div`
+  padding: 10px;
+  background-color: #f9f9f9 !important;
+  height: 100%;
+`;
 
 const Composer = ({ endpoint, baseUrl, onUrlClick }: IComponser) => {
   return (
