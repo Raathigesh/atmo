@@ -27,26 +27,6 @@ if (
   require("module").globalPaths.push(p);
 }
 
-const spec = {
-  endpoints: [
-    {
-      delay: 0,
-      headers: [],
-      method: "get",
-      url: "/sample",
-      statusCode: 200,
-      response: {
-        contentType: "json",
-        content: "{'sample': 'hello world'}"
-      }
-    }
-  ],
-  server: {
-    port: 9000,
-    staticFolder: "."
-  }
-};
-
 server = atmoServer();
 
 /**
@@ -73,7 +53,10 @@ app.on("ready", async () => {
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
-    height: 728
+    height: 728,
+    webPreferences: {
+      webSecurity: false
+    }
   });
 
   mainWindow.loadURL(

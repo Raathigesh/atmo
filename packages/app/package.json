@@ -23,6 +23,7 @@
     "electron-settings": "^3.1.1",
     "express": "^4.15.3",
     "less-plugin-rewrite-import": "^0.1.1",
+    "now-client": "^1.1.1",
     "react-addons-perf": "^15.4.2",
     "semantic-ui-react": "^0.71.0"
   },

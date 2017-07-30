@@ -9,7 +9,6 @@ import {
   Menu,
   Image,
   Icon,
-  Header,
   Input,
   Dropdown,
   Label
@@ -64,6 +63,7 @@ export default class Home extends React.Component<IHome, {}> {
             openPreferenceDialog={view.openProjectPreferenceDialog}
             save={project.save}
             deploy={project.deploy}
+            remoteDeploy={project.remoteDeploy}
           />
           <Sidebar.Pusher>
             <Notify message={notification.message} level={notification.level} />
@@ -75,6 +75,7 @@ export default class Home extends React.Component<IHome, {}> {
             />
             <ProjectPreference
               open={view.isProjectPreferenceOpen}
+              setZeitToken={project.setZeitToken}
               close={view.closeProjectPreferenceDialog}
               preference={project.preference}
               browseCertPath={project.getCertificatePath}
@@ -83,7 +84,7 @@ export default class Home extends React.Component<IHome, {}> {
             />
             <IntroDialog
               open={view.isProjectIntro}
-              openProject={project.open}
+              openProject={project.openProject}
             />
           </Sidebar.Pusher>
         </Sidebar.Pushable>

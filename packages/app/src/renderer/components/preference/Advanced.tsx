@@ -6,6 +6,7 @@ import Preference from "../../store/Preference";
 
 interface IAdvancedPreference {
   preference: Preference;
+  setZeitToken: (token: string) => void;
   browseCertPath: () => void;
   browseKeyPath: () => void;
 }
@@ -15,7 +16,8 @@ const ClearDiv = styled.div`height: 10px;`;
 function AdvancedPreference({
   preference,
   browseCertPath,
-  browseKeyPath
+  browseKeyPath,
+  setZeitToken
 }: IAdvancedPreference) {
   return (
     <div>
@@ -25,7 +27,15 @@ function AdvancedPreference({
           Manage your account settings and set e-mail preferences.
         </Header.Subheader>
       </Header>
-      <Input placeholder="" fluid floated="right" />
+      <Input
+        placeholder=""
+        fluid
+        floated="right"
+        value={preference.zeitToken}
+        onChange={(event: any, data: any) => {
+          setZeitToken(data.value);
+        }}
+      />
 
       <Header size="tiny" dividing>
         Certificate

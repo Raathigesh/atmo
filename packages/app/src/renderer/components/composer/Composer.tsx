@@ -3,6 +3,7 @@ import styled from "styled-components";
 const SplitPanel = require("react-split-pane");
 import Card from "../Card";
 import Url from "./Url";
+import InfoBar from "../Header";
 import Headers from "./Header";
 import Editor from "./Editor";
 import Response from "./Response";

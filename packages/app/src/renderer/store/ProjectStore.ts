@@ -1,8 +1,17 @@
 import { observable, action, runInAction, autorun, computed } from "mobx";
-const { ipcRenderer } = require("electron");
 import { appStore } from "./AppStore";
 import notification from "./NotificationStore";
 import Preference from "./Preference";
+import Deployment from "./Deployment";
+import MessageHandler, {
+  openProject,
+  save,
+  saveToken,
+  openDialog,
+  deployProject,
+  openExternalUrlInBrowser,
+  fetchInitialConfig
+} from "./MessageHandler";
 
 export class ProjectStore {
   @observable name: string;
@@ -12,74 +21,98 @@ export class ProjectStore {
     name: string;
     path: string;
   }[];
-
   @observable preference: Preference = new Preference();
+  @observable deployment: Deployment = new Deployment();
 
   constructor() {
-    ipcRenderer.on("open", (event, arg) => {
-      if (arg.action === "CertPath") {
+    MessageHandler({
+      hello: initialConfig => {
         runInAction(() => {
-          this.preference.setCertificatePath(arg.path[0]);
+          this.preference.setZeitToken(initialConfig.zeitToken);
         });
-      } else if (arg.action === "KeyPath") {
+      },
+      onAssetPath: path => {
         runInAction(() => {
-          this.preference.setKeyPath(arg.path[0]);
+          this.preference.setAssetsDirectory(path);
         });
-      } else if (arg.action === "AssetPath") {
+      },
+      onKeyPath: path => {
         runInAction(() => {
-          this.preference.setAssetsDirectory(arg.path[0]);
+          this.preference.setKeyPath(path);
+        });
+      },
+      onCertPath: path => {
+        runInAction(() => {
+          this.preference.setCertificatePath(path);
+        });
+      },
+      deployed: (baseUrl: string) => {
+        runInAction(() => {
+          this.baseUrl = baseUrl;
+          notification.success("Your changes have been deployed");
         });
       }
     });
 
-    ipcRenderer.on("deployed", (event: any, baseUrl: string) => {
-      runInAction(() => {
-        this.baseUrl = baseUrl;
-        notification.success("Your changes have been deployed");
-      });
+    autorun(() => {
+      this.deployment.initialize(this.preference.zeitToken);
     });
+
+    fetchInitialConfig();
   }
 
   @action
   public save() {
-    ipcRenderer.send("save", appStore.toJson());
+    save(appStore.toJson());
   }
 
   @action
-  public open() {
-    ipcRenderer.send("open");
+  public openProject() {
+    openProject();
+  }
+
+  @action.bound
+  public setZeitToken(token: string) {
+    this.preference.setZeitToken(token);
+    saveToken(token);
   }
 
   @action
   public getCertificatePath() {
-    ipcRenderer.send("open", {
+    openDialog({
       action: "CertPath"
     });
   }
 
   @action
   public getKeyPath() {
-    ipcRenderer.send("open", {
+    openDialog({
       action: "KeyPath"
     });
   }
 
   @action
   public getAssetPath() {
-    ipcRenderer.send("open", {
+    openDialog({
       action: "AssetPath"
     });
   }
 
   @action
   public deploy = () => {
-    ipcRenderer.send("deploy", appStore.toJson());
-    console.log(appStore.toJson());
+    deployProject(appStore.toJson());
+  };
+
+  @action
+  public remoteDeploy = () => {
+    this.deployment.deploy(appStore.toJson()).then(function(res) {
+      console.log(res.json());
+    });
   };
 
   @action
   public openUrl = (url: string) => {
-    ipcRenderer.send("openUrl", url);
+    openExternalUrlInBrowser(url);
   };
 }
 

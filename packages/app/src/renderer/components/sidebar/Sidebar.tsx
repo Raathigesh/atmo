@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Menu, MenuItem, Sidebar, Icon, Label } from "semantic-ui-react";
+import {
+  Menu,
+  MenuItem,
+  Sidebar,
+  Icon,
+  Label,
+  Dropdown
+} from "semantic-ui-react";
 import { observer } from "mobx-react";
 import styled from "styled-components";
 import { withHandlers, compose } from "recompose";
@@ -24,6 +31,7 @@ interface ISideBar {
   openPreferenceDialog: () => void;
   save: () => void;
   deploy: () => void;
+  remoteDeploy: () => void;
 }
 
 const MinimalSidebar = styled(Sidebar)`
@@ -61,7 +69,8 @@ function Side({
   moveEndpoint,
   openPreferenceDialog,
   save,
-  deploy
+  deploy,
+  remoteDeploy
 }: ISideBar) {
   const urls = endpoints.map((endpoint, index) => {
     return (
@@ -101,7 +110,7 @@ function Side({
         <Icon name="wizard" />
         Deploy
       </SideBarItem>
-      <SideBarItem name="browse" as="a" color="blue">
+      <SideBarItem name="browse" as="a" color="blue" onClick={remoteDeploy}>
         <Icon name="cloud" />
         Remote Deploy
       </SideBarItem>

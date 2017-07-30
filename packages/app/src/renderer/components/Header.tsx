@@ -1,23 +1,36 @@
 import * as React from "react";
 import styled from "styled-components";
+import { Button, Dropdown, Menu, Header, Icon } from "semantic-ui-react";
 
-interface IHeader {
-  className?: string;
+const StyledMenu = styled.div`
+  padding-top: 8px;
+  padding-left: 20px;
+  margin-bottom: 0px !important;
+  border-radius: 0px !important;
+  box-shadow: initial !important;
+`;
+
+const ServerStatus = styled(Icon)`
+  background-color: #4eb14e !important;
+`;
+
+class Info extends React.Component<{}, {}> {
+  state = { activeItem: "home" };
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  render() {
+    const { activeItem } = this.state;
+
+    return (
+      <StyledMenu>
+        <ServerStatus name="check" circular size="small" />
+        Server is up and running
+        <ServerStatus name="check" circular size="small" />
+        Your remote deploy
+      </StyledMenu>
+    );
+  }
 }
 
-const Header = ({ className }: IHeader) => {
-  return (
-    <nav className={`pt-navbar ${className}`}>
-      <div className="pt-navbar-group pt-align-left">
-        <div className="pt-navbar-heading">Atmo</div>
-      </div>
-      <div className="pt-navbar-group pt-align-right">
-        <button className="pt-button pt-minimal pt-icon-cog" />
-      </div>
-    </nav>
-  );
-};
-
-export default styled(Header)`
-  margin-bottom: 10px;
-`;
+export default Info;

@@ -1,19 +1,19 @@
 const settings = require("electron-settings");
 
-const PROJECT_PREFERENCE = "ZEIT_AUTH_TOKEN";
-export const ProjectPreference = {
+const ZEIT_AUTH_TOKEN = "ZEIT_AUTH_TOKEN";
+export const ZeitToken = {
   get: () => {
-    settings.get(PROJECT_PREFERENCE);
+    return settings.get(ZEIT_AUTH_TOKEN);
   },
   set: (preference: any) => {
-    settings.set(PROJECT_PREFERENCE, preference);
+    settings.set(ZEIT_AUTH_TOKEN, preference);
   }
 };
 
 const RECENT_PROJECTS = "RECENT_PROJECTS";
 export const RecentProjects = {
   get: () => {
-    settings.get(RECENT_PROJECTS);
+    return settings.get(RECENT_PROJECTS);
   },
   set: (recentProjects: any) => {
     settings.set(RECENT_PROJECTS, recentProjects);

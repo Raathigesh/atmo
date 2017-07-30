@@ -7,6 +7,7 @@ import Preference from "../../store/Preference";
 interface IPreference {
   open: boolean;
   preference: Preference;
+  setZeitToken: (token: string) => void;
   close: () => void;
   browseCertPath: () => void;
   browseKeyPath: () => void;
@@ -17,6 +18,7 @@ const PreferenceModal = ({
   open,
   close,
   preference,
+  setZeitToken,
   browseCertPath,
   browseKeyPath,
   browseAssetPath
@@ -35,6 +37,7 @@ const PreferenceModal = ({
         <Tab.Pane attached={false}>
           <Advanced
             preference={preference}
+            setZeitToken={setZeitToken}
             browseCertPath={browseCertPath}
             browseKeyPath={browseKeyPath}
           />
