@@ -1,19 +1,27 @@
 import { observable, action } from "mobx";
-import { bind } from "decko";
 
 export default class ViewStore {
   @observable isProjectPreferenceOpen = false;
   @observable isProjectIntro = false;
+  @observable isRemoteDeployOpen = false;
 
-  @bind
-  @action
+  @action.bound
   openProjectPreferenceDialog() {
     this.isProjectPreferenceOpen = true;
   }
 
-  @bind
-  @action
+  @action.bound
   closeProjectPreferenceDialog() {
     this.isProjectPreferenceOpen = false;
+  }
+
+  @action.bound
+  openRemoteDeployDialog() {
+    this.isRemoteDeployOpen = true;
+  }
+
+  @action.bound
+  closeRemoteDeployDialog() {
+    this.isRemoteDeployOpen = false;
   }
 }

@@ -2,7 +2,7 @@ import { observable, action, runInAction, autorun, computed } from "mobx";
 import { appStore } from "./AppStore";
 import notification from "./NotificationStore";
 import Preference from "./Preference";
-import Deployment from "./Deployment";
+import Deployments from "./deployment/Deployments";
 import MessageHandler, {
   openProject,
   save,
@@ -14,7 +14,7 @@ import MessageHandler, {
 } from "./MessageHandler";
 
 export class ProjectStore {
-  @observable name: string;
+  @observable name: string = "new-project";
   @observable baseUrl: string = "";
   @observable
   recentProjects: {
@@ -22,7 +22,7 @@ export class ProjectStore {
     path: string;
   }[];
   @observable preference: Preference = new Preference();
-  @observable deployment: Deployment = new Deployment();
+  @observable deployments: Deployments = new Deployments();
 
   constructor() {
     MessageHandler({
@@ -55,7 +55,7 @@ export class ProjectStore {
     });
 
     autorun(() => {
-      this.deployment.initialize(this.preference.zeitToken);
+      this.deployments.initialize(this.preference.zeitToken, this.name);
     });
 
     fetchInitialConfig();
@@ -105,8 +105,8 @@ export class ProjectStore {
 
   @action
   public remoteDeploy = () => {
-    this.deployment.deploy(appStore.toJson()).then(function(res) {
-      console.log(res.json());
+    this.deployments.deploy(appStore.toJson()).then(res => {
+      console.log(res);
     });
   };
 

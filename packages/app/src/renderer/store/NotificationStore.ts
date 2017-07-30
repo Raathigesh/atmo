@@ -3,7 +3,7 @@ import { bind } from "decko";
 
 export class Notification {
   @observable level: string = "info";
-  @observable message: string = "message";
+  @observable message: string = "";
 
   @action
   success(message: string) {

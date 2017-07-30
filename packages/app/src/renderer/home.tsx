@@ -24,6 +24,7 @@ import { ProjectStore } from "./store/ProjectStore";
 import Preference from "./store/Preference";
 import { Notification } from "./store/NotificationStore";
 import Notify from "./components/Notification";
+import RemoteDeploy from "./components/RemoteDeploy";
 
 const Container = styled.div`
   display: flex;
@@ -63,7 +64,7 @@ export default class Home extends React.Component<IHome, {}> {
             openPreferenceDialog={view.openProjectPreferenceDialog}
             save={project.save}
             deploy={project.deploy}
-            remoteDeploy={project.remoteDeploy}
+            remoteDeploy={view.openRemoteDeployDialog}
           />
           <Sidebar.Pusher>
             <Notify message={notification.message} level={notification.level} />
@@ -85,6 +86,19 @@ export default class Home extends React.Component<IHome, {}> {
             <IntroDialog
               open={view.isProjectIntro}
               openProject={project.openProject}
+            />
+            <RemoteDeploy
+              projectName={project.name}
+              open={view.isRemoteDeployOpen}
+              close={view.closeRemoteDeployDialog}
+              preference={project.preference}
+              deployments={project.deployments.recentDeployments}
+              deleteDeployment={project.deployments.deleteDeployment}
+              openInBrowser={project.openUrl}
+              deployProject={project.remoteDeploy}
+              isDeploying={project.deployments.isDeploying}
+              isFetching={project.deployments.isFetching}
+              fetchDeployments={project.deployments.getRecentDeployments}
             />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
