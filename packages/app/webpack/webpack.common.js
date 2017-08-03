@@ -2,7 +2,8 @@ const webpack = require("webpack");
 const CleanWebpack = require("clean-webpack-plugin");
 const HtmlWebpack = require("html-webpack-plugin");
 const RewriteImportPlugin = require("less-plugin-rewrite-import");
-const { join } = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const { join, resolve } = require("path");
 
 const projectRoot = (exports.projectRoot = join(__dirname, ".."));
 const isProduction = (exports.isProduction =
@@ -79,6 +80,23 @@ const parts = (exports.parts = {
     }
   }),
 
+  compileJavaScript: () => ({
+    module: {
+      loaders: [
+        {
+          test: /\.js?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+            options: {
+              presets: ["env"]
+            }
+          }
+        }
+      ]
+    }
+  }),
+
   // Define a variable statically during build process
   setFreeVariable: (key, value) => ({
     plugins: [
@@ -128,23 +146,37 @@ const parts = (exports.parts = {
     }
   }),
 
-  setupStyles: paths => ({
+  setupStyles: () => ({
     module: {
       loaders: [
         {
           test: /\.css$/,
           loaders: ["style-loader", "css-loader"]
+        },
+        {
+          test: /\.less/,
+          loaders: ["style-loader", "css-loader", "less-loader"]
         }
       ]
     }
   }),
 
-  setupLess: paths => ({
+  setupProdStyles: paths => ({
     module: {
       loaders: [
         {
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: ["css-loader"]
+          })
+        },
+        {
           test: /\.less/,
-          loaders: ["style-loader", "css-loader", "less-loader"]
+          use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: ["css-loader", "less-loader"]
+          })
         }
       ]
     }
@@ -157,9 +189,20 @@ const parts = (exports.parts = {
 
         // Do not append chunks to body as we use `require`
         // directly in template to load renderer chunk
-        excludeChunks: ["main"]
+        excludeChunks: ["main"],
+        minify: {
+          collapseWhitespace: true,
+          removeComments: true,
+          removeRedundantAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true
+        }
       })
     ]
+  }),
+
+  extractCss: () => ({
+    plugins: [new ExtractTextPlugin("styles.css")]
   }),
 
   extractBundle: options => ({

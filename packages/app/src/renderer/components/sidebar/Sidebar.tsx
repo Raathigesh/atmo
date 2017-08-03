@@ -61,9 +61,6 @@ function displayUrl(url: string) {
   return url;
 }
 
-const UrlElement = SortableElement(Url);
-const UrlContainer = SortableContainer(Menu.Menu);
-
 function Side({
   endpoints,
   currentEndpoint,
@@ -76,7 +73,9 @@ function Side({
   deploy,
   remoteDeploy
 }: ISideBar) {
+  const UrlContainer = SortableContainer(Menu.Menu);
   const urls = endpoints.map((endpoint, index) => {
+    const UrlElement = SortableElement(Url);
     return (
       <UrlElement
         key={index}

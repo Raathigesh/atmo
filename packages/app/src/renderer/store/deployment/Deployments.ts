@@ -1,4 +1,4 @@
-const NowClient = require("now-client");
+const { default: NowClient } = require("now-client-isomorphic");
 import { observable, action, IObservableArray, runInAction } from "mobx";
 import Deployment from "./Deployment";
 

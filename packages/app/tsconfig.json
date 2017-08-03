@@ -8,5 +8,7 @@
     "target": "es5",
     "experimentalDecorators": true
   },
-  "awesomeTypescriptLoaderOptions": {}
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true
+  }
 }

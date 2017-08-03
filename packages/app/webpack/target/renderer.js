@@ -27,11 +27,14 @@ const config = (module.exports = merge(
   common.parts.createHtmlIndex(
     join(common.paths.source, "renderer/index.html")
   ),
-  common.parts.loadImages(common.paths.images),
   common.parts.compileTypescript(),
-  common.parts.setupStyles(),
+  common.parts.compileJavaScript(),
+  common.isProduction
+    ? common.parts.setupProdStyles()
+    : common.parts.setupStyles(),
   common.parts.loadImages(),
   common.parts.loadFonts(),
   common.parts.lint(),
-  common.parts.setupLess()
+  common.isProduction ? common.parts.minify() : {},
+  common.isProduction ? common.parts.extractCss() : {}
 ));
