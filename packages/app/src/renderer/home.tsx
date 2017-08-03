@@ -15,7 +15,7 @@ import {
 } from "semantic-ui-react";
 import DevTools from "mobx-react-devtools";
 import Side from "./components/sidebar/Sidebar";
-import ProjectPreference from "./components/Preference/Preference";
+import ProjectPreference from "./components/preference/Preference";
 import Endpoint from "./store/endpoint/Endpoint";
 import IntroDialog from "./components/IntroDialog";
 import AppStore from "./store/AppStore";

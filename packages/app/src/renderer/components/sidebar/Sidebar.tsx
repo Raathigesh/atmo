@@ -18,7 +18,7 @@ import {
 } from "react-sortable-hoc";
 
 import Url from "./EndpointItem";
-import Card from "../card";
+import Card from "../Card";
 import Endpoint from "../../store/endpoint/Endpoint";
 
 interface ISideBar {
