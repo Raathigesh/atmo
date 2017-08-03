@@ -37,3 +37,13 @@ server.stop().then(() => {
     console.log('All done');
 });
 ```
+
+## Running the developement build
+```sh
+npm run watch
+```
+
+## Building the lib
+```sh
+npm run build
+```
