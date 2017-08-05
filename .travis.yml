@@ -1,0 +1,12 @@
+sudo: false
+language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+node_js:
+  - '4'
+before_script: cd packages/app
+script:
+  - npm run build
