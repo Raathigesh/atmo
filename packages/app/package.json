@@ -2,14 +2,17 @@
   "name": "atmo",
   "version": "1.0.0",
   "description": "Change the way you write mock API",
-  "main": "./app/main.js",
+  "main": "./main.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development electron ./app/main.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod",
+    "build-main": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.main.prod",
+    "build-renderer": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod",
+    "build": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
     "dev-main": "webpack --watch --config ./webpack/target/main",
     "dev-renderer": "webpack-dev-server --config ./webpack/target/renderer",
     "dev": "concurrently \"npm run dev-renderer\" \"npm run dev-main\"",
-    "app": "electron-packager ./app Atmo"
+    "app": "electron-packager ./app Atmo",
+    "shipit": "npm run build && npm run app"
   },
   "repository": "git@github.com:Raathigesh/atmo.git",
   "author": "Raathigeshan <raathigesh92@gmail.com>",
@@ -47,6 +50,7 @@
     "brace": "^0.10.0",
     "clean-webpack-plugin": "^0.1.15",
     "concurrently": "^3.5.0",
+    "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^3.2.4",
     "css-loader": "^0.28.4",
     "electron-debug": "^1.2.0",

@@ -9,7 +9,7 @@ const rendererTarget = require("./target/renderer");
  * Compile both mainTarget and rendererTarget using production config
  */
 const config = (module.exports = merge.smart(
-  rendererTarget,
+  mainTarget,
   {
     // Use same target for both main and renderer processes
     target: "electron",

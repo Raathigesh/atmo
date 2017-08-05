@@ -63,7 +63,7 @@ app.on("ready", async () => {
     process.env.NODE_ENV === "production"
       ? // Load file in app folder
         format({
-          pathname: join(app.getAppPath(), "app/index.html"),
+          pathname: join(app.getAppPath(), "index.html"),
           protocol: "file:",
           slashes: true
         })
