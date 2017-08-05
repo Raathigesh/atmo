@@ -15,13 +15,6 @@ export default class AppStore {
   @action
   setCurrentEndpoint(id: string) {
     this.currentEndpoint = this.endpoints.find(endpoint => endpoint.id === id);
-    (window as any).Perf.stop();
-    (window as any).Perf.printWasted(
-      (window as any).Perf.getLastMeasurements()
-    );
-    (window as any).Perf.printOperations(
-      (window as any).Perf.getLastMeasurements()
-    );
   }
 
   @bind
@@ -47,8 +40,38 @@ export default class AppStore {
     this.endpoints.move(fromIndex, toIndex);
   }
 
+  @action.bound
+  reset() {
+    this.endpoints.clear();
+  }
+
+  @action.bound
+  initializeFromObject(endpoints) {
+    this.reset();
+
+    for (let ep of endpoints) {
+      const endpoint = new Endpoint();
+      endpoint.setMethod(ep.method);
+      endpoint.setDelay(ep.delay);
+      endpoint.setResponseCode(ep.statusCode);
+      endpoint.setUrl(ep.url);
+      endpoint.response.setType(ep.response.contentType);
+      endpoint.response.setResponseContent(ep.response.content);
+
+      for (let header of ep.headers) {
+        endpoint.addHeader(header.key, header.value);
+      }
+
+      this.endpoints.push(endpoint);
+    }
+
+    if (this.endpoints.length > 0) {
+      this.setCurrentEndpoint(this.endpoints[0].id);
+    }
+  }
+
   toJson() {
-    return {
+    const spec = {
       endpoints: this.endpoints.map(endpoint => endpoint.toJson()),
       server: {
         port: 9000,
@@ -56,6 +79,8 @@ export default class AppStore {
       },
       preference: projectStore.preference.toJson()
     };
+    console.log(spec);
+    return spec;
   }
 }
 

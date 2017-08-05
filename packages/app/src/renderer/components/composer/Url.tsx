@@ -63,7 +63,7 @@ const Url = ({
       }
     >
       <Input
-        defaultValue={url}
+        value={url}
         action={
           <Dropdown
             button

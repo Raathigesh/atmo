@@ -2,7 +2,7 @@ import { observable, action } from "mobx";
 
 export default class ViewStore {
   @observable isProjectPreferenceOpen = false;
-  @observable isProjectIntro = false;
+  @observable isProjectIntro = true;
   @observable isRemoteDeployOpen = false;
 
   @action.bound
@@ -24,4 +24,11 @@ export default class ViewStore {
   closeRemoteDeployDialog() {
     this.isRemoteDeployOpen = false;
   }
+
+  @action.bound
+  closeProjectIntroDialog() {
+    this.isProjectIntro = false;
+  }
 }
+
+export const viewState = new ViewStore();

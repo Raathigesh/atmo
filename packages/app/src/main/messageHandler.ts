@@ -29,14 +29,20 @@ export function listen(callbacks: ICallbacks = {}) {
   });
 
   ipcMain.on("recentProjects", (event, recentProjects) => {
+    console.log(JSON.stringify(recentProjects));
     RecentProjects.set(recentProjects);
     callbacks.onRecentProjects && callbacks.onRecentProjects(recentProjects);
   });
 
-  ipcMain.on("save", (event, spec) => {
+  ipcMain.on("save", (event, arg) => {
     dialog.showSaveDialog({}, filename => {
-      jsonfile.writeFile(filename, spec, function(err) {
-        console.error(err);
+      jsonfile.writeFile(filename, arg.spec, function(err) {
+        if (!err) {
+          event.sender.send("onSaveSuccess", {
+            name: arg.name,
+            path: filename
+          });
+        }
       });
     });
   });
@@ -52,9 +58,9 @@ export function listen(callbacks: ICallbacks = {}) {
           action: args.action,
           path: filename
         });
-      } else {
+      } else if (args.action === "OpenProject") {
         event.sender.send("open", {
-          action: args.args,
+          action: args.action,
           path: filename,
           content: jsonfile.readFileSync(filename[0])
         });

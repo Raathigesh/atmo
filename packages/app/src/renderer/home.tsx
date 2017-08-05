@@ -17,7 +17,7 @@ import DevTools from "mobx-react-devtools";
 import Side from "./components/sidebar/Sidebar";
 import ProjectPreference from "./components/preference/Preference";
 import Endpoint from "./store/endpoint/Endpoint";
-import IntroDialog from "./components/IntroDialog";
+import IntroDialog from "./components/IntroDialog/IntroDialog";
 import AppStore from "./store/AppStore";
 import ViewStore from "./store/ViewStore";
 import { ProjectStore } from "./store/ProjectStore";
@@ -25,6 +25,7 @@ import Preference from "./store/Preference";
 import { Notification } from "./store/NotificationStore";
 import Notify from "./components/Notification";
 import RemoteDeploy from "./components/RemoteDeploy";
+import { bind } from "decko";
 
 const Container = styled.div`
   display: flex;
@@ -49,6 +50,13 @@ interface IHome {
 @inject("notification")
 @observer
 export default class Home extends React.Component<IHome, {}> {
+  @bind
+  handleCreateNewProject(projectName: string) {
+    const { view, project } = this.props;
+    view.closeProjectIntroDialog();
+    project.createNewProject(projectName);
+  }
+
   render() {
     const { state, view, project, notification } = this.props;
     return (
@@ -87,6 +95,8 @@ export default class Home extends React.Component<IHome, {}> {
             <IntroDialog
               open={view.isProjectIntro}
               openProject={project.openProject}
+              onCreateProject={this.handleCreateNewProject}
+              recentProjects={project.recentProjects}
             />
             <RemoteDeploy
               projectName={project.name}

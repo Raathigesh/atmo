@@ -3,16 +3,15 @@ import { render } from "react-dom";
 import Root from "./home";
 import { Provider } from "mobx-react";
 import AppStore, { appStore } from "./store/AppStore";
-import ViewStore from "./store/ViewStore";
+import ViewStore, { viewState } from "./store/ViewStore";
 import projectStore, { ProjectStore } from "./store/ProjectStore";
 import notification from "./store/NotificationStore";
 import "semantic-ui-less/semantic.less";
 import "./global.css";
 
-const view = new ViewStore();
 render(
   <Provider
-    view={view}
+    view={viewState}
     state={appStore}
     project={projectStore}
     notification={notification}

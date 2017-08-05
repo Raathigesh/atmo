@@ -16,7 +16,6 @@ export default class Endpoint {
   constructor() {
     this.id = shortid.generate();
     this.response = new Response();
-    this.headers.push(new Header(shortid.generate(), "", ""));
   }
 
   @bind

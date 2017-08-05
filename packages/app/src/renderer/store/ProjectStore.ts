@@ -2,25 +2,27 @@ import { observable, action, runInAction, autorun, computed } from "mobx";
 import { appStore } from "./AppStore";
 import notification from "./NotificationStore";
 import Preference from "./Preference";
+import { viewState } from "./ViewStore";
 import Deployments from "./deployment/Deployments";
 import MessageHandler, {
-  openProject,
   save,
   saveToken,
   openDialog,
   deployProject,
   openExternalUrlInBrowser,
-  fetchInitialConfig
+  fetchInitialConfig,
+  updateRecentProjects
 } from "./MessageHandler";
 
+export interface IRecentProject {
+  name: string;
+  path: string;
+}
+
 export class ProjectStore {
-  @observable name: string = "new-project";
+  @observable name: string = "";
   @observable baseUrl: string = "";
-  @observable
-  recentProjects: {
-    name: string;
-    path: string;
-  }[];
+  @observable recentProjects: IRecentProject[] = [];
   @observable preference: Preference = new Preference();
   @observable deployments: Deployments = new Deployments();
 
@@ -29,6 +31,7 @@ export class ProjectStore {
       hello: initialConfig => {
         runInAction(() => {
           this.preference.setZeitToken(initialConfig.zeitToken);
+          this.setRecentProjects(initialConfig.recentProjects);
         });
       },
       onAssetPath: path => {
@@ -51,6 +54,14 @@ export class ProjectStore {
           this.baseUrl = baseUrl;
           notification.success("Your changes have been deployed");
         });
+      },
+      onOpenProject: (content: string) => {
+        this.initialFromString(content);
+        viewState.closeProjectIntroDialog();
+      },
+      onSuccessfulProjectSave: (name: string, path: string) => {
+        this.setRecentProject(name, path);
+        updateRecentProjects(this.toJson().recentProjects);
       }
     });
 
@@ -61,14 +72,16 @@ export class ProjectStore {
     fetchInitialConfig();
   }
 
-  @action
+  @action.bound
   public save() {
     save(appStore.toJson());
   }
 
-  @action
+  @action.bound
   public openProject() {
-    openProject();
+    openDialog({
+      action: "OpenProject"
+    });
   }
 
   @action.bound
@@ -77,43 +90,88 @@ export class ProjectStore {
     saveToken(token);
   }
 
-  @action
+  @action.bound
+  public setRecentProject(name: string, path: string) {
+    this.recentProjects.push({
+      name,
+      path
+    });
+  }
+
+  @action.bound
+  public setRecentProjects(recentProjects: any[]) {
+    recentProjects.map(project => {
+      this.recentProjects.push(project);
+    });
+  }
+
+  @action.bound
   public getCertificatePath() {
     openDialog({
       action: "CertPath"
     });
   }
 
-  @action
+  @action.bound
   public getKeyPath() {
     openDialog({
       action: "KeyPath"
     });
   }
 
-  @action
+  @action.bound
   public getAssetPath() {
     openDialog({
       action: "AssetPath"
     });
   }
 
-  @action
-  public deploy = () => {
+  @action.bound
+  public deploy() {
     deployProject(appStore.toJson());
-  };
+  }
 
-  @action
-  public remoteDeploy = () => {
+  @action.bound
+  public remoteDeploy() {
     this.deployments.deploy(appStore.toJson()).then(res => {
       console.log(res);
     });
-  };
+  }
 
-  @action
-  public openUrl = (url: string) => {
+  @action.bound
+  public openUrl(url: string) {
     openExternalUrlInBrowser(url);
-  };
+  }
+
+  @action.bound
+  createNewProject(name: string) {
+    this.name = name;
+  }
+
+  @action.bound
+  initialFromString(specObj: any) {
+    const {
+      assetsDirectory,
+      certificatePath,
+      keyPath,
+      zeitToken
+    } = specObj.preference;
+    this.preference.setAssetsDirectory(assetsDirectory);
+    this.preference.setCertificatePath(certificatePath);
+    this.preference.setKeyPath(keyPath);
+    this.preference.setZeitToken(zeitToken);
+    this.preference.setPort(specObj.server.port);
+    appStore.initializeFromObject(specObj.endpoints);
+  }
+
+  toJson() {
+    return {
+      recentProjects: this.recentProjects.map(project => ({
+        name: project.name,
+        path: project.path
+      }))
+    };
+  }
 }
 
 const projectStore = new ProjectStore();

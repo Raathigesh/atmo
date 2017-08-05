@@ -11,6 +11,8 @@ interface IHandlerOptions {
   onCertPath: (certPath: string) => void;
   onKeyPath: (keyPath: string) => void;
   onAssetPath: (assetPath: string) => void;
+  onOpenProject: (content: string) => void;
+  onSuccessfulProjectSave: (name: string, path: string) => void;
 }
 
 export default function Handler(callbacks: IHandlerOptions) {
@@ -34,11 +36,17 @@ export default function Handler(callbacks: IHandlerOptions) {
       callbacks.onKeyPath(arg.path[0]);
     } else if (arg.action === "AssetPath") {
       callbacks.onAssetPath(arg.path[0]);
+    } else if (arg.action === "OpenProject") {
+      callbacks.onOpenProject(arg.content);
     }
   });
 
   ipcRenderer.on("deployed", (event: any, baseUrl: string) => {
     callbacks.deployed(baseUrl);
+  });
+
+  ipcRenderer.on("onSaveSuccess", (event: any, arg) => {
+    callbacks.onSuccessfulProjectSave(arg.name, arg.path);
   });
 }
 
@@ -46,12 +54,11 @@ export function fetchInitialConfig() {
   ipcRenderer.send("hello");
 }
 
-export function openProject() {
-  ipcRenderer.send("open");
-}
-
 export function save(spec: any) {
-  ipcRenderer.send("save", spec);
+  ipcRenderer.send("save", {
+    name: this.name,
+    spec
+  });
 }
 
 export function saveToken(token: string) {
@@ -68,4 +75,8 @@ export function deployProject(spec: any) {
 
 export function openExternalUrlInBrowser(url: string) {
   ipcRenderer.send("openUrl", url);
+}
+
+export function updateRecentProjects(recentProjects) {
+  ipcRenderer.send("recentProjects", recentProjects);
 }
