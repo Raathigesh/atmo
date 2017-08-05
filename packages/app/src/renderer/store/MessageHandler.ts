@@ -54,10 +54,11 @@ export function fetchInitialConfig() {
   ipcRenderer.send("hello");
 }
 
-export function save(spec: any) {
+export function save(name: string, spec: any, pathToSave: string) {
   ipcRenderer.send("save", {
-    name: this.name,
-    spec
+    name,
+    spec,
+    pathToSave
   });
 }
 

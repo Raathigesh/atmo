@@ -35,16 +35,27 @@ export function listen(callbacks: ICallbacks = {}) {
   });
 
   ipcMain.on("save", (event, arg) => {
-    dialog.showSaveDialog({}, filename => {
-      jsonfile.writeFile(filename, arg.spec, function(err) {
+    if (arg.pathToSave) {
+      jsonfile.writeFile(arg.pathToSave, arg.spec, function(err) {
         if (!err) {
           event.sender.send("onSaveSuccess", {
             name: arg.name,
-            path: filename
+            path: arg.pathToSave
           });
         }
       });
-    });
+    } else {
+      dialog.showSaveDialog({}, filename => {
+        jsonfile.writeFile(filename, arg.spec, function(err) {
+          if (!err) {
+            event.sender.send("onSaveSuccess", {
+              name: arg.name,
+              path: filename
+            });
+          }
+        });
+      });
+    }
   });
 
   ipcMain.on("open", (event, args) => {

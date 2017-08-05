@@ -1,4 +1,11 @@
-import { observable, action, runInAction, autorun, computed } from "mobx";
+import {
+  observable,
+  action,
+  runInAction,
+  autorun,
+  computed,
+  IObservableArray
+} from "mobx";
 import { appStore } from "./AppStore";
 import notification from "./NotificationStore";
 import Preference from "./Preference";
@@ -22,9 +29,10 @@ export interface IRecentProject {
 export class ProjectStore {
   @observable name: string = "";
   @observable baseUrl: string = "";
-  @observable recentProjects: IRecentProject[] = [];
+  @observable recentProjects: IObservableArray<IRecentProject> = observable([]);
   @observable preference: Preference = new Preference();
   @observable deployments: Deployments = new Deployments();
+  @observable savedUrl: string = null;
 
   constructor() {
     MessageHandler({
@@ -60,8 +68,9 @@ export class ProjectStore {
         viewState.closeProjectIntroDialog();
       },
       onSuccessfulProjectSave: (name: string, path: string) => {
+        this.savedUrl = path;
         this.setRecentProject(name, path);
-        updateRecentProjects(this.toJson().recentProjects);
+        this.syncRecentProjects();
       }
     });
 
@@ -74,7 +83,7 @@ export class ProjectStore {
 
   @action.bound
   public save() {
-    save(appStore.toJson());
+    save(this.name, appStore.toJson(), this.savedUrl);
   }
 
   @action.bound
@@ -92,17 +101,31 @@ export class ProjectStore {
 
   @action.bound
   public setRecentProject(name: string, path: string) {
-    this.recentProjects.push({
-      name,
-      path
-    });
+    if (
+      this.recentProjects.filter(project => project.path === path).length === 0
+    ) {
+      this.recentProjects.push({
+        name,
+        path
+      });
+    }
   }
 
   @action.bound
   public setRecentProjects(recentProjects: any[]) {
+    this.recentProjects.clear();
     recentProjects.map(project => {
       this.recentProjects.push(project);
     });
+  }
+
+  @action.bound
+  public deleteRecentProject(path: string) {
+    const projectToDelete = this.recentProjects.find(
+      project => project.path === path
+    );
+    this.recentProjects.remove(projectToDelete);
+    this.syncRecentProjects();
   }
 
   @action.bound
@@ -162,6 +185,15 @@ export class ProjectStore {
     this.preference.setZeitToken(zeitToken);
     this.preference.setPort(specObj.server.port);
     appStore.initializeFromObject(specObj.endpoints);
+  }
+
+  syncRecentProjects() {
+    updateRecentProjects(
+      this.recentProjects.map(project => ({
+        name: project.name,
+        path: project.path
+      }))
+    );
   }
 
   toJson() {

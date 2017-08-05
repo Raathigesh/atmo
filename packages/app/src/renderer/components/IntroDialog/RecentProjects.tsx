@@ -1,10 +1,12 @@
 import * as React from "react";
 import { List, Header, Icon, Message } from "semantic-ui-react";
+import { observer } from "mobx-react";
 import { IRecentProject } from "../../store/ProjectStore";
 import styled from "styled-components";
 
 interface IRecentProjects {
   recentProjects: IRecentProject[];
+  onDeleteRecentProject: (path: string) => void;
 }
 
 const NoRecentProjectContainer = styled.div`
@@ -13,7 +15,10 @@ const NoRecentProjectContainer = styled.div`
   color: #3d3c3c;
 `;
 
-export default function RecentProjects({ recentProjects }: IRecentProjects) {
+function RecentProjects({
+  recentProjects,
+  onDeleteRecentProject
+}: IRecentProjects) {
   if (recentProjects.length === 0) {
     return (
       <NoRecentProjectContainer>
@@ -32,7 +37,13 @@ export default function RecentProjects({ recentProjects }: IRecentProjects) {
           return (
             <List.Item>
               <List.Content floated="right">
-                <Icon link name="close" />
+                <Icon
+                  link
+                  name="close"
+                  onClick={() => {
+                    onDeleteRecentProject(recentProject.path);
+                  }}
+                />
               </List.Content>
               <List.Icon name="cube" />
               <List.Content>
@@ -50,3 +61,5 @@ export default function RecentProjects({ recentProjects }: IRecentProjects) {
     </div>
   );
 }
+
+export default observer(RecentProjects);

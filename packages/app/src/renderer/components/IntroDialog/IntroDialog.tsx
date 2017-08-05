@@ -11,6 +11,7 @@ import {
   Message
 } from "semantic-ui-react";
 import styled from "styled-components";
+import { observer } from "mobx-react";
 import { IRecentProject } from "../../store/ProjectStore";
 import RecentProjects from "./RecentProjects";
 
@@ -19,6 +20,7 @@ interface IIntroDialog {
   onCreateProject: (name: string) => void;
   openProject: () => void;
   recentProjects: IRecentProject[];
+  onRecentProjectDelete: (path: string) => void;
 }
 
 const Logo = styled.img`
@@ -36,11 +38,12 @@ const LogoHeader = styled(Header)`
   text-align: center;
 `;
 
-export default function IntroDialog({
+function IntroDialog({
   open,
   recentProjects,
   openProject,
-  onCreateProject
+  onCreateProject,
+  onRecentProjectDelete
 }: IIntroDialog) {
   return (
     <Modal dimmer="blurring" open={open}>
@@ -79,7 +82,10 @@ export default function IntroDialog({
             </Grid.Column>
 
             <RecentProjectColumn width={8}>
-              <RecentProjects recentProjects={recentProjects} />
+              <RecentProjects
+                recentProjects={recentProjects}
+                onDeleteRecentProject={onRecentProjectDelete}
+              />
             </RecentProjectColumn>
           </Grid.Row>
         </Grid>
@@ -87,3 +93,5 @@ export default function IntroDialog({
     </Modal>
   );
 }
+
+export default observer(IntroDialog);
