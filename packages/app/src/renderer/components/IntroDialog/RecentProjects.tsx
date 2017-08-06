@@ -7,6 +7,7 @@ import styled from "styled-components";
 interface IRecentProjects {
   recentProjects: IRecentProject[];
   onDeleteRecentProject: (path: string) => void;
+  onProjectClick: (path: string) => void;
 }
 
 const NoRecentProjectContainer = styled.div`
@@ -17,7 +18,8 @@ const NoRecentProjectContainer = styled.div`
 
 function RecentProjects({
   recentProjects,
-  onDeleteRecentProject
+  onDeleteRecentProject,
+  onProjectClick
 }: IRecentProjects) {
   if (recentProjects.length === 0) {
     return (
@@ -27,6 +29,7 @@ function RecentProjects({
       </NoRecentProjectContainer>
     );
   }
+
   return (
     <div>
       <Header as="h5" dividing>
@@ -35,7 +38,7 @@ function RecentProjects({
       <List>
         {recentProjects.map(recentProject => {
           return (
-            <List.Item>
+            <List.Item key={recentProject.path}>
               <List.Content floated="right">
                 <Icon
                   link
@@ -47,7 +50,12 @@ function RecentProjects({
               </List.Content>
               <List.Icon name="cube" />
               <List.Content>
-                <List.Header as="a">
+                <List.Header
+                  as="a"
+                  onClick={() => {
+                    onProjectClick(recentProject.path);
+                  }}
+                >
                   {recentProject.name}
                 </List.Header>
                 <List.Description>

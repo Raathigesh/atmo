@@ -22,6 +22,7 @@ export default class Deployments {
       .getDeployments()
       .then(deployments => {
         this.recentDeployments.clear();
+
         deployments
           .filter(deployment => deployment.name === this.name)
           .map(deployment => {

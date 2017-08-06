@@ -21,6 +21,7 @@ interface IIntroDialog {
   openProject: () => void;
   recentProjects: IRecentProject[];
   onRecentProjectDelete: (path: string) => void;
+  onProjectClick: (path: string) => void;
 }
 
 const Logo = styled.img`
@@ -43,8 +44,10 @@ function IntroDialog({
   recentProjects,
   openProject,
   onCreateProject,
-  onRecentProjectDelete
+  onRecentProjectDelete,
+  onProjectClick
 }: IIntroDialog) {
+  let createProjectInput = null;
   return (
     <Modal dimmer="blurring" open={open}>
       <Modal.Content image>
@@ -59,21 +62,27 @@ function IntroDialog({
                   />
                 </LogoHeader>
                 <Input
+                  ref={element => (createProjectInput = element)}
                   placeholder="Give the project a name"
                   fluid
-                  action={{
-                    color: "orange",
-                    labelPosition: "right",
-                    icon: "arrow right",
-                    content: "Create"
-                  }}
                   defaultValue=""
                   onKeyPress={event => {
                     if (event.key === "Enter") {
                       onCreateProject(event.target.value);
                     }
                   }}
-                />
+                  action
+                >
+                  <input />
+                  <Button
+                    content="Create"
+                    icon="right arrow"
+                    labelPosition="right"
+                    onClick={() => {
+                      onCreateProject(createProjectInput.inputRef.value);
+                    }}
+                  />
+                </Input>
                 <Divider horizontal>Or</Divider>
                 <Button basic color="orange" onClick={openProject} fluid>
                   Open a saved project
@@ -85,6 +94,7 @@ function IntroDialog({
               <RecentProjects
                 recentProjects={recentProjects}
                 onDeleteRecentProject={onRecentProjectDelete}
+                onProjectClick={onProjectClick}
               />
             </RecentProjectColumn>
           </Grid.Row>

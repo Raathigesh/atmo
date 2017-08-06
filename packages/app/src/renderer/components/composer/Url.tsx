@@ -22,7 +22,8 @@ const options = [
   { key: "post", text: "POST", value: "post" },
   { key: "put", text: "PUT", value: "put" },
   { key: "patch", text: "PATCH", value: "patch" },
-  { key: "delete", text: "DELETE", value: "delete" }
+  { key: "delete", text: "DELETE", value: "delete" },
+  { key: "options", text: "OPTIONS", value: "options" }
 ];
 
 const PreviewUrl = ({

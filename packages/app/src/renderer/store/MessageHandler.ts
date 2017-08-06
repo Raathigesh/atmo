@@ -36,7 +36,10 @@ export default function Handler(callbacks: IHandlerOptions) {
       callbacks.onKeyPath(arg.path[0]);
     } else if (arg.action === "AssetPath") {
       callbacks.onAssetPath(arg.path[0]);
-    } else if (arg.action === "OpenProject") {
+    } else if (
+      arg.action === "OpenProject" ||
+      arg.action === "readSpecByPath"
+    ) {
       callbacks.onOpenProject(arg.content);
     }
   });

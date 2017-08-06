@@ -37,7 +37,7 @@ interface ISideBar {
 const MinimalSidebar = styled(Sidebar)`
     background-color: #2d2d2d !important;
     color: gray;
-  `;
+`;
 
 const SideBarItem = styled(Menu.Item)`
   background-color: #1b1b1b !important;
@@ -54,8 +54,8 @@ const Logo = styled.img`
 `;
 
 function displayUrl(url: string) {
-  if (url.length > 20) {
-    return `${url.substring(0, 20)}...`;
+  if (url.length > 16) {
+    return `${url.substring(0, 16)}...`;
   }
 
   return url;

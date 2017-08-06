@@ -71,11 +71,14 @@ export class ProjectStore {
         this.savedUrl = path;
         this.setRecentProject(name, path);
         this.syncRecentProjects();
+        notification.success("Your changes have been saved");
       }
     });
 
     autorun(() => {
-      this.deployments.initialize(this.preference.zeitToken, this.name);
+      if (this.preference.zeitToken) {
+        this.deployments.initialize(this.preference.zeitToken, this.name);
+      }
     });
 
     fetchInitialConfig();
@@ -169,6 +172,14 @@ export class ProjectStore {
   @action.bound
   createNewProject(name: string) {
     this.name = name;
+  }
+
+  @action.bound
+  readSpecByPath(path: string) {
+    openDialog({
+      action: "readSpecByPath",
+      path
+    });
   }
 
   @action.bound

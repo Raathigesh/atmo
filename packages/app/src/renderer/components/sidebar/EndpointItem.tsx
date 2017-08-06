@@ -22,6 +22,7 @@ interface IUrl {
 
 const MethodLabel = styled(Label)`
   background-color: #ff6a4d !important;
+  font-size: 10px !important;
 `;
 
 const EndpointDragHandle = styled(Icon)`

@@ -46,19 +46,31 @@ export function listen(callbacks: ICallbacks = {}) {
       });
     } else {
       dialog.showSaveDialog({}, filename => {
-        jsonfile.writeFile(filename, arg.spec, function(err) {
-          if (!err) {
-            event.sender.send("onSaveSuccess", {
-              name: arg.name,
-              path: filename
-            });
-          }
-        });
+        if (filename) {
+          jsonfile.writeFile(filename, arg.spec, function(err) {
+            if (!err) {
+              event.sender.send("onSaveSuccess", {
+                name: arg.name,
+                path: filename
+              });
+            }
+          });
+        }
       });
     }
   });
 
   ipcMain.on("open", (event, args) => {
+    if (args.action === "readSpecByPath") {
+      event.sender.send("open", {
+        action: args.action,
+        path: args.path,
+        content: jsonfile.readFileSync(args.path)
+      });
+
+      return;
+    }
+
     dialog.showOpenDialog({}, filename => {
       if (
         args.action === "CertPath" ||

@@ -7,7 +7,27 @@ export class Notification {
 
   @action
   success(message: string) {
-    this.level = "info";
+    this.show(message, "success");
+  }
+
+  @action
+  info(message: string) {
+    this.show(message, "info");
+  }
+
+  @action
+  error(message: string) {
+    this.show(message, "error");
+  }
+
+  @action
+  warning(message: string) {
+    this.show(message, "warning");
+  }
+
+  @action
+  show(message: string, level: string) {
+    this.level = level;
     this.message = message;
 
     setTimeout(

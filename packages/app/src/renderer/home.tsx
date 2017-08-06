@@ -98,6 +98,7 @@ export default class Home extends React.Component<IHome, {}> {
               onCreateProject={this.handleCreateNewProject}
               recentProjects={project.recentProjects}
               onRecentProjectDelete={project.deleteRecentProject}
+              onProjectClick={project.readSpecByPath}
             />
             <RemoteDeploy
               projectName={project.name}
