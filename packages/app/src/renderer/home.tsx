@@ -26,6 +26,7 @@ import { Notification } from "./store/NotificationStore";
 import Notify from "./components/Notification";
 import RemoteDeploy from "./components/RemoteDeploy";
 import { bind } from "decko";
+import KeyHandler from "./components/KeyHandler";
 
 const Container = styled.div`
   display: flex;
@@ -76,12 +77,18 @@ export default class Home extends React.Component<IHome, {}> {
           />
           <Sidebar.Pusher>
             <Notify message={notification.message} level={notification.level} />
-            <Composer
-              baseUrl={project.baseUrl}
-              onUrlClick={project.openUrl}
-              endpoint={state.currentEndpoint}
-              setUrl={state.currentEndpoint.setUrl}
-            />
+            <KeyHandler
+              onDeploy={project.deploy}
+              onEndpoint={state.addEndpoint}
+              onSave={project.save}
+            >
+              <Composer
+                baseUrl={project.baseUrl}
+                onUrlClick={project.openUrl}
+                endpoint={state.currentEndpoint}
+                setUrl={state.currentEndpoint.setUrl}
+              />
+            </KeyHandler>
             <ProjectPreference
               open={view.isProjectPreferenceOpen}
               setZeitToken={project.setZeitToken}

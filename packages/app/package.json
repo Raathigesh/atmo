@@ -28,6 +28,7 @@
     "less-plugin-rewrite-import": "^0.1.1",
     "now-client-isomorphic": "0.0.3",
     "react-addons-perf": "^15.4.2",
+    "react-hotkeys": "^0.10.0",
     "semantic-ui-react": "^0.71.0"
   },
   "devDependencies": {
