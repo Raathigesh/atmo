@@ -117,9 +117,11 @@ export class ProjectStore {
   @action.bound
   public setRecentProjects(recentProjects: any[]) {
     this.recentProjects.clear();
-    recentProjects.map(project => {
-      this.recentProjects.push(project);
-    });
+    if (recentProjects) {
+      recentProjects.map(project => {
+        this.recentProjects.push(project);
+      });
+    }
   }
 
   @action.bound
