@@ -23,13 +23,10 @@ export function listen(callbacks: ICallbacks = {}) {
 
   ipcMain.on("zeitToken", (event, token) => {
     ZeitToken.set(token);
-    console.log("Zeit token set:" + token);
-    console.log("Zeit token :" + ZeitToken.get());
     callbacks.onProjectPreference && callbacks.onProjectPreference(token);
   });
 
   ipcMain.on("recentProjects", (event, recentProjects) => {
-    console.log(JSON.stringify(recentProjects));
     RecentProjects.set(recentProjects);
     callbacks.onRecentProjects && callbacks.onRecentProjects(recentProjects);
   });
@@ -67,11 +64,15 @@ export function listen(callbacks: ICallbacks = {}) {
         path: args.path,
         content: jsonfile.readFileSync(args.path)
       });
-
       return;
     }
 
-    dialog.showOpenDialog({}, filename => {
+    const dialogOptions: any = {};
+    if (args.action === "OpenProject") {
+      dialogOptions.filters = [{ name: "JSON", extensions: ["json"] }];
+    }
+
+    dialog.showOpenDialog(dialogOptions, filename => {
       if (
         args.action === "CertPath" ||
         args.action === "KeyPath" ||
@@ -82,11 +83,13 @@ export function listen(callbacks: ICallbacks = {}) {
           path: filename
         });
       } else if (args.action === "OpenProject") {
-        event.sender.send("open", {
-          action: args.action,
-          path: filename,
-          content: jsonfile.readFileSync(filename[0])
-        });
+        if (filename) {
+          event.sender.send("open", {
+            action: args.action,
+            path: filename,
+            content: jsonfile.readFileSync(filename[0])
+          });
+        }
       }
     });
   });
