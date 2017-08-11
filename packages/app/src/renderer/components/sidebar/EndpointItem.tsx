@@ -16,6 +16,7 @@ interface IUrl {
   link?: string;
   method: string;
   active: boolean;
+  isEnabled: boolean;
   onClick: (id: string) => void;
   onDelete: (id: string) => void;
 }
@@ -29,9 +30,17 @@ const EndpointDragHandle = styled(Icon)`
     cursor: grabbing;
 `;
 
-const Url = ({ id, label, link, method, active, onClick, onDelete }: IUrl) => {
+const Url = ({
+  id,
+  label,
+  link,
+  method,
+  active,
+  isEnabled,
+  onClick,
+  onDelete
+}: IUrl) => {
   let Reorder = SortableHandle(EndpointDragHandle);
-
   return (
     <Menu.Item
       key={id}
@@ -43,19 +52,21 @@ const Url = ({ id, label, link, method, active, onClick, onDelete }: IUrl) => {
       }}
       active={active}
     >
-      <MethodLabel>
-        {method.toUpperCase()}
-      </MethodLabel>
-      <Icon name="circle thin" />
       <Reorder name="resize vertical" />
       {label}
       <Icon
         name="trash outline"
+        disabled={!isEnabled}
         onClick={event => {
           event.stopPropagation();
-          onDelete(id);
+          if (isEnabled) {
+            onDelete(id);
+          }
         }}
       />
+      <MethodLabel>
+        {method.toUpperCase()}
+      </MethodLabel>
     </Menu.Item>
   );
 };

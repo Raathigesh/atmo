@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 interface IUrl {
   baseUrl: string;
   url: string;
+  method: string;
   onUrlChange: (url: string) => void;
   onMethodChange: (method: string) => void;
   onUrlClick: (url: string) => void;
@@ -52,6 +53,7 @@ const PreviewUrl = ({
 const Url = ({
   url,
   baseUrl,
+  method,
   onUrlChange,
   onMethodChange,
   onUrlClick
@@ -71,7 +73,7 @@ const Url = ({
             basic
             floating
             options={options}
-            defaultValue="get"
+            value={method}
             onChange={(event, data) => onMethodChange(data.value as string)}
           />
         }

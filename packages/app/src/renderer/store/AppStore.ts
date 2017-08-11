@@ -8,7 +8,8 @@ export default class AppStore {
   @observable currentEndpoint: Endpoint;
 
   constructor() {
-    this.addEndpoint("/");
+    const initialEndpoint = this.addEndpoint("/");
+    initialEndpoint.headers.setJsonContentType();
   }
 
   @bind
@@ -25,6 +26,7 @@ export default class AppStore {
 
     this.currentEndpoint = endpoint;
     this.endpoints.push(endpoint);
+    return endpoint;
   }
 
   @bind

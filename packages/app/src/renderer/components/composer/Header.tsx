@@ -28,7 +28,7 @@ const HeaderRow = observer(
   ({ header, onRemove, onKeyChange, onValueChange }: IHeaderRow) => {
     return (
       <Table.Row>
-        <Table.Cell collapsing>
+        {/* <Table.Cell collapsing>
           <Checkbox
             slider
             checked={header.active}
@@ -36,7 +36,7 @@ const HeaderRow = observer(
               header.toggleActive();
             }}
           />
-        </Table.Cell>
+        </Table.Cell> */}
         <Table.Cell>
           <SlimInput
             value={header.key}

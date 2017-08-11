@@ -47,6 +47,7 @@ const Composer = ({ endpoint, baseUrl, onUrlClick }: IComponser) => {
             <Url
               baseUrl={baseUrl}
               url={endpoint.url}
+              method={endpoint.method}
               onUrlChange={endpoint.setUrl}
               onMethodChange={endpoint.setMethod}
               onUrlClick={onUrlClick}

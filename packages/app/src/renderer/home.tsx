@@ -74,6 +74,7 @@ export default class Home extends React.Component<IHome, {}> {
             save={project.save}
             deploy={project.deploy}
             remoteDeploy={view.openRemoteDeployDialog}
+            closeProject={project.closeProject}
           />
           <Sidebar.Pusher>
             <Notify message={notification.message} level={notification.level} />

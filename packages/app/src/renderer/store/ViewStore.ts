@@ -26,6 +26,11 @@ export default class ViewStore {
   }
 
   @action.bound
+  openProjectIntroDialog() {
+    this.isProjectIntro = true;
+  }
+
+  @action.bound
   closeProjectIntroDialog() {
     this.isProjectIntro = false;
   }

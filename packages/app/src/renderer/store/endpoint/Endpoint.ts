@@ -17,7 +17,7 @@ export default class Endpoint {
   constructor() {
     this.id = shortid.generate();
     this.headers = new Headers();
-    this.response = new Response();
+    this.response = new Response("json");
   }
 
   @action.bound

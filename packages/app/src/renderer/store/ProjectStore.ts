@@ -207,6 +207,12 @@ export class ProjectStore {
     );
   }
 
+  @action.bound
+  closeProject() {
+    appStore.reset();
+    viewState.openProjectIntroDialog();
+  }
+
   toJson() {
     return {
       recentProjects: this.recentProjects.map(project => ({

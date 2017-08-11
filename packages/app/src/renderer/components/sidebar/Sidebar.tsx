@@ -5,7 +5,8 @@ import {
   Sidebar,
   Icon,
   Label,
-  Dropdown
+  Dropdown,
+  Button
 } from "semantic-ui-react";
 import { observer } from "mobx-react";
 import styled from "styled-components";
@@ -32,6 +33,7 @@ interface ISideBar {
   save: () => void;
   deploy: () => void;
   remoteDeploy: () => void;
+  closeProject: () => void;
 }
 
 const MinimalSidebar = styled(Sidebar)`
@@ -45,11 +47,13 @@ const SideBarItem = styled(Menu.Item)`
     props.highlight
       ? "5px solid #ff6a4d !important;"
       : "5px solid #3c3c3c !important;"};
+  width: ${props => (props.divide ? "50%" : "100%")};
+  float: ${props => (props.float === "right" ? "right" : "")};
 `;
 
 const Logo = styled.img`
   height: 40px !important;
-  margin-left: 36px !important;
+  margin-left: 20px !important;
   width: 183px !important;
 `;
 
@@ -57,7 +61,6 @@ function displayUrl(url: string) {
   if (url.length > 16) {
     return `${url.substring(0, 16)}...`;
   }
-
   return url;
 }
 
@@ -71,7 +74,8 @@ function Side({
   openPreferenceDialog,
   save,
   deploy,
-  remoteDeploy
+  remoteDeploy,
+  closeProject
 }: ISideBar) {
   const UrlContainer = SortableContainer(Menu.Menu);
   const urls = endpoints.map((endpoint, index) => {
@@ -86,6 +90,7 @@ function Side({
         method={endpoint.method}
         active={endpoint.id === currentEndpoint.id}
         onDelete={onEndpointDelete}
+        isEnabled={endpoints.length > 1}
       />
     );
   });
@@ -109,22 +114,33 @@ function Side({
         <Icon name="plus" />
         New Endpoint
       </SideBarItem>
-      <SideBarItem name="browse" as="a" color="blue" onClick={deploy} highlight>
+      <SideBarItem name="browse" as="a" onClick={deploy} highlight>
         <Icon name="wizard" />
         Deploy
       </SideBarItem>
-      <SideBarItem name="browse" as="a" color="blue" onClick={remoteDeploy}>
+      <SideBarItem name="browse" as="a" onClick={remoteDeploy}>
         <Icon name="cloud" />
         Remote Deploy
-      </SideBarItem>
-      <SideBarItem name="browse" as="a" color="blue" onClick={save}>
-        <Icon name="save" />
-        Save
       </SideBarItem>
       <SideBarItem name="browse" as="a" onClick={openPreferenceDialog}>
         <Icon name="options" />
         Project Settings
       </SideBarItem>
+      <SideBarItem
+        name="browse"
+        as="a"
+        divide
+        float="right"
+        onClick={closeProject}
+      >
+        <Icon name="window close outline" />
+        Close
+      </SideBarItem>
+      <SideBarItem name="browse" as="a" divide onClick={save}>
+        <Icon name="save" />
+        Save
+      </SideBarItem>
+
       <Menu.Item>
         <UrlContainer
           useDragHandle
