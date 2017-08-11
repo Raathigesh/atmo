@@ -52,12 +52,15 @@ const Composer = ({ endpoint, baseUrl, onUrlClick }: IComponser) => {
               onUrlClick={onUrlClick}
             />
 
-            <Headers headers={endpoint.headers} currentEndpoint={endpoint} />
+            <Headers
+              headers={endpoint.headers.headers}
+              currentEndpoint={endpoint}
+            />
 
             <Section title="Response Type">
               <Response
                 activeItem={endpoint.response.contentType}
-                setActiveItem={endpoint.response.setType}
+                setActiveItem={endpoint.changeResponseType}
               />
             </Section>
 

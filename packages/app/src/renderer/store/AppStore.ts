@@ -59,7 +59,7 @@ export default class AppStore {
       endpoint.response.setResponseContent(ep.response.content);
 
       for (let header of ep.headers) {
-        endpoint.addHeader(header.key, header.value);
+        endpoint.headers.addHeader(header.key, header.value);
       }
 
       this.endpoints.push(endpoint);

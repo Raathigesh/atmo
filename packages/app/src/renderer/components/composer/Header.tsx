@@ -39,13 +39,13 @@ const HeaderRow = observer(
         </Table.Cell>
         <Table.Cell>
           <SlimInput
-            defaultValue={header.key}
+            value={header.key}
             onChange={(event, data) => onKeyChange(data.value)}
           />
         </Table.Cell>
         <Table.Cell>
           <SlimInput
-            defaultValue={header.value}
+            value={header.value}
             onChange={(event, data) => onValueChange(data.value)}
           />
         </Table.Cell>
@@ -73,14 +73,18 @@ const Headers = ({ headers, currentEndpoint }: IHeader) => {
     <HeaderRow
       key={index}
       header={header}
-      onRemove={currentEndpoint.removeHeader}
+      onRemove={currentEndpoint.headers.removeHeader}
       onKeyChange={header.setKey}
       onValueChange={header.setValue}
     />
   );
 
   const headerComponents = (
-    <Header as="h5" floated="right" onClick={() => currentEndpoint.addHeader()}>
+    <Header
+      as="h5"
+      floated="right"
+      onClick={() => currentEndpoint.headers.addHeader()}
+    >
       <Icon.Group>
         <Icon name="add circle" color="grey" />
       </Icon.Group>

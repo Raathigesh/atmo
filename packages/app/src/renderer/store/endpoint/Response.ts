@@ -1,7 +1,7 @@
 import { observable, action, computed } from "mobx";
 import { bind } from "decko";
 
-type ResponseType = "json" | "xml" | "javascript" | "text";
+export type ResponseType = "json" | "xml" | "javascript" | "text";
 
 export default class Response {
   @observable contentType: ResponseType;
@@ -12,24 +12,27 @@ export default class Response {
     this.content = responseContent;
   }
 
-  @bind
-  @action
+  @action.bound
   setType(value: ResponseType) {
     this.contentType = value;
 
     if (this.contentType === "javascript") {
       this.content = `
-      // Following variables are available for you to use
-      // request: express js request object
-      // response: express js response object
-      `;
+// Following variables are available for you to use
+// request: express js request object
+// response: express js response object
+
+response.set('Content-Type', 'application/json');
+response.send({
+  message: 'Hello from atmo!'
+});
+`;
     } else {
       this.content = "";
     }
   }
 
-  @bind
-  @action
+  @action.bound
   setResponseContent(response: string) {
     this.content = response;
   }
@@ -39,7 +42,6 @@ export default class Response {
     if (this.contentType === "text") {
       return "markdown"; // Ace editor does not understand text
     }
-
     return this.contentType;
   }
 
