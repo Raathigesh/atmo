@@ -90,7 +90,12 @@ function responseCallback(req, res, endpoint) {
     if (endpoint.response.contentType === "javascript") {
         var request = req;
         var response = res;
-        eval(endpoint.response.content);
+        if (typeof endpoint.response.content === "function") {
+            endpoint.response.content(req, res);
+        }
+        else {
+            eval(endpoint.response.content);
+        }
     }
     else {
         res.send(endpoint.response.content);

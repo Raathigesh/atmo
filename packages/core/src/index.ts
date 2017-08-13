@@ -110,7 +110,11 @@ function responseCallback(
   if (endpoint.response.contentType === "javascript") {
     const request = req;
     const response = res;
-    eval(endpoint.response.content);
+    if (typeof endpoint.response.content === "function") {
+      endpoint.response.content(req, res);
+    } else {
+      eval(endpoint.response.content);
+    }
   } else {
     res.send(endpoint.response.content);
   }
