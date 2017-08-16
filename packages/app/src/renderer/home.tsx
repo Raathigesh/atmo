@@ -62,7 +62,7 @@ export default class Home extends React.Component<IHome, {}> {
     const { state, view, project, notification } = this.props;
     return (
       <Container>
-        <Sidebar.Pushable as={Segment}>
+        <Sidebar.Pushable>
           <Side
             onEndpointSelection={state.setCurrentEndpoint}
             addEndpoint={state.addEndpoint}
