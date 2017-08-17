@@ -76,8 +76,10 @@ export default class AppStore {
     const spec = {
       endpoints: this.endpoints.map(endpoint => endpoint.toJson()),
       server: {
-        port: 9000,
-        staticFolder: "."
+        port: projectStore.preference.port,
+        staticFolder: projectStore.preference.assetsDirectory,
+        certificatePath: projectStore.preference.certificatePath,
+        keyPath: projectStore.preference.keyPath
       },
       preference: projectStore.preference.toJson()
     };

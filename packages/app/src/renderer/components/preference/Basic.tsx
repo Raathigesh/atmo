@@ -19,9 +19,10 @@ function BasicPreference({ preference, browseAssetPath }: IBasicPreference) {
         placeholder=""
         fluid
         floated="right"
+        type="number"
         value={preference.port}
-        onChange={(event: any, value: any) => {
-          preference.setPort(value);
+        onChange={(event: any, data: any) => {
+          preference.setPort(data.value);
         }}
       />
       <Header size="tiny">

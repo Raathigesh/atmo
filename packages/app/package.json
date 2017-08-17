@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/es6-promise": "0.0.32",
-    "atmo-core": "^0.2.0",
+    "atmo-core": "^0.3.0",
     "body-parser": "^1.17.2",
     "decko": "^1.2.0",
     "electron": "^1.6.11",

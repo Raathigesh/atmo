@@ -18,7 +18,7 @@ export default class Headers {
 
   @action.bound
   setContentTypeForResponseType(responseType: ResponseType) {
-    if (responseType === "json") {
+    if (responseType === "json" || responseType === "javascript") {
       this.setJsonContentType();
     } else if (responseType === "xml") {
       this.setXmlContentType();

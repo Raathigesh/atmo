@@ -8,7 +8,7 @@ export default class Preference {
   @observable assetsDirectory: string = "";
 
   @action
-  setZeitToken(token: string) {
+  setZeitToken(token: string = "") {
     this.zeitToken = token;
   }
 
@@ -34,7 +34,7 @@ export default class Preference {
 
   @computed
   get isZeitTokenConfigured() {
-    return this.zeitToken !== "";
+    return this.zeitToken.trim() !== "";
   }
 
   toJson() {
