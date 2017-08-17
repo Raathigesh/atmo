@@ -28,6 +28,10 @@ import RemoteDeploy from "./components/RemoteDeploy";
 import { bind } from "decko";
 import KeyHandler from "./components/KeyHandler";
 
+const Pushable = styled(Sidebar.Pushable)`
+  overflow-x: visible !important;
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
 import { observable, action, computed } from "mobx";
 import { bind } from "decko";
-
+const prettier = require("prettier");
 export type ResponseType = "json" | "xml" | "javascript" | "text";
 
 export default class Response {
@@ -50,6 +50,17 @@ response.send({
       contentType: this.contentType,
       content: this.content
     };
+  }
+
+  @action.bound
+  prettifyResponse() {
+    let options = {};
+
+    if (this.contentType === "json") {
+      options = { parser: "json" };
+    }
+
+    this.content = prettier.format(this.content, options);
   }
 
   static deserialize({

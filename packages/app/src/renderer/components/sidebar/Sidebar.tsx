@@ -96,7 +96,7 @@ function Side({
   });
 
   return (
-    <MinimalSidebar as={Menu} animation="push" visible={true} vertical inverted>
+    <MinimalSidebar as={Menu} visible={true} vertical inverted>
       <Menu.Item>
         <Logo
           className="ui mini right spaced image"

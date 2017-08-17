@@ -80,6 +80,7 @@ const Composer = ({ endpoint, baseUrl, onUrlClick }: IComponser) => {
             mode={endpoint.response.typeForEditor}
             code={endpoint.response.content}
             onChange={endpoint.response.setResponseContent}
+            onPrettify={endpoint.response.prettifyResponse}
           />
         </div>
       </SplitPanel>
