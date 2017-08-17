@@ -32,13 +32,9 @@ interface ISpec {
   endpoints: IEndpoint[];
   server: {
     port: number;
-    staticFolder: string;
-  };
-  preference?: {
-    zeitToken: string;
-    certificatePath: string;
-    keyPath: string;
-    assetsDirectory: string;
+    staticFolder?: string;
+    certificatePath?: string;
+    keyPath?: string;
   };
 }
 

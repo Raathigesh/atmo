@@ -40,14 +40,10 @@ function createServer(spec: spec) {
   app = express();
   let protocol = "http";
 
-  if (
-    spec.preference &&
-    spec.preference.certificatePath &&
-    spec.preference.keyPath
-  ) {
+  if (spec.server.certificatePath && spec.server.keyPath) {
     const options = {
-      key: fs.readFileSync(spec.preference.keyPath),
-      cert: fs.readFileSync(spec.preference.certificatePath),
+      key: fs.readFileSync(spec.server.keyPath),
+      cert: fs.readFileSync(spec.server.certificatePath),
       requestCert: false,
       rejectUnauthorized: false
     };
@@ -61,8 +57,8 @@ function createServer(spec: spec) {
   app.use(bodyParser());
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  if (spec.preference && spec.preference.assetsDirectory) {
-    app.use(express.static(spec.preference.assetsDirectory));
+  if (spec.server.staticFolder) {
+    app.use(express.static(spec.server.staticFolder));
   }
 
   server.listen(spec.server.port, () => {

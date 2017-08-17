@@ -34,12 +34,10 @@ function createServer(spec) {
     }
     app = express();
     var protocol = "http";
-    if (spec.preference &&
-        spec.preference.certificatePath &&
-        spec.preference.keyPath) {
+    if (spec.server.certificatePath && spec.server.keyPath) {
         var options = {
-            key: fs.readFileSync(spec.preference.keyPath),
-            cert: fs.readFileSync(spec.preference.certificatePath),
+            key: fs.readFileSync(spec.server.keyPath),
+            cert: fs.readFileSync(spec.server.certificatePath),
             requestCert: false,
             rejectUnauthorized: false
         };
@@ -52,8 +50,8 @@ function createServer(spec) {
     enableDestroy(server);
     app.use(bodyParser());
     app.use(bodyParser.urlencoded({ extended: true }));
-    if (spec.preference && spec.preference.assetsDirectory) {
-        app.use(express.static(spec.preference.assetsDirectory));
+    if (spec.server.staticFolder) {
+        app.use(express.static(spec.server.staticFolder));
     }
     server.listen(spec.server.port, function () {
         console.log("http://localhost:" + spec.server.port);
