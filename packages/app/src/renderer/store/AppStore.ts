@@ -74,6 +74,7 @@ export default class AppStore {
 
   toJson() {
     const spec = {
+      name: projectStore.name,
       endpoints: this.endpoints.map(endpoint => endpoint.toJson()),
       server: {
         port: projectStore.preference.port,

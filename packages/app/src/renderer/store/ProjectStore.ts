@@ -172,7 +172,7 @@ export class ProjectStore {
   }
 
   @action.bound
-  createNewProject(name: string) {
+  createNewProject(name: string = "Unnamed project") {
     this.name = name;
   }
 
@@ -192,6 +192,7 @@ export class ProjectStore {
       keyPath,
       zeitToken
     } = specObj.preference;
+    this.name = specObj.name;
     this.preference.setAssetsDirectory(assetsDirectory);
     this.preference.setCertificatePath(certificatePath);
     this.preference.setKeyPath(keyPath);
@@ -211,17 +212,9 @@ export class ProjectStore {
 
   @action.bound
   closeProject() {
+    this.savedUrl = "";
     appStore.reset();
     viewState.openProjectIntroDialog();
-  }
-
-  toJson() {
-    return {
-      recentProjects: this.recentProjects.map(project => ({
-        name: project.name,
-        path: project.path
-      }))
-    };
   }
 }
 
