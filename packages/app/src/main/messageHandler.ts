@@ -70,6 +70,8 @@ export function listen(callbacks: ICallbacks = {}) {
     const dialogOptions: any = {};
     if (args.action === "OpenProject") {
       dialogOptions.filters = [{ name: "JSON", extensions: ["json"] }];
+    } else if (args.action === "AssetPath") {
+      dialogOptions.properties = ["openDirectory"];
     }
 
     dialog.showOpenDialog(dialogOptions, filename => {
