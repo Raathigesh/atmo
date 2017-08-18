@@ -42,18 +42,28 @@ export function listen(callbacks: ICallbacks = {}) {
         }
       });
     } else {
-      dialog.showSaveDialog({}, filename => {
-        if (filename) {
-          jsonfile.writeFile(filename, arg.spec, function(err) {
-            if (!err) {
-              event.sender.send("onSaveSuccess", {
-                name: arg.name,
-                path: filename
-              });
+      dialog.showSaveDialog(
+        {
+          filters: [
+            {
+              name: "Json",
+              extensions: ["json"]
             }
-          });
+          ]
+        },
+        filename => {
+          if (filename) {
+            jsonfile.writeFile(filename, arg.spec, function(err) {
+              if (!err) {
+                event.sender.send("onSaveSuccess", {
+                  name: arg.name,
+                  path: filename
+                });
+              }
+            });
+          }
         }
-      });
+      );
     }
   });
 
@@ -98,32 +108,5 @@ export function listen(callbacks: ICallbacks = {}) {
 
   ipcMain.on("openUrl", (event, url) => {
     shell.openExternal(url);
-  });
-
-  ipcMain.on("remoteDeploy", () => {
-    const headers = new Headers();
-    headers.append("Authorization", "Bearer 1ZpKjO1Oh57uF1ofotxMID2h");
-    return fetch("https://api.zeit.co/now/instant", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify({
-        package: {
-          name: "my-instant-deployment",
-          dependencies: {
-            "sign-bunny": "1.0.0"
-          },
-          scripts: {
-            start: "node index"
-          }
-        },
-        "index.js":
-          'require("http").Server((req, res) => {' +
-          'res.setHeader("Content-Type", "text/plain; charset=utf-8");' +
-          'res.end(require("sign-bunny")("Hi there!"));' +
-          "}).listen();"
-      })
-    }).then(function(res) {
-      console.log(res.json());
-    });
   });
 }

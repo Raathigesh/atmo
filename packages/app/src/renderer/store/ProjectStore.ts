@@ -172,8 +172,12 @@ export class ProjectStore {
   }
 
   @action.bound
-  createNewProject(name: string = "Unnamed project") {
-    this.name = name;
+  createNewProject(name: string) {
+    if (name === "") {
+      this.name = "Unnamed project";
+    } else {
+      this.name = name;
+    }
   }
 
   @action.bound
@@ -182,6 +186,22 @@ export class ProjectStore {
       action: "readSpecByPath",
       path
     });
+  }
+
+  syncRecentProjects() {
+    updateRecentProjects(
+      this.recentProjects.map(project => ({
+        name: project.name,
+        path: project.path
+      }))
+    );
+  }
+
+  @action.bound
+  closeProject() {
+    this.savedUrl = "";
+    appStore.reset();
+    viewState.openProjectIntroDialog();
   }
 
   @action.bound
@@ -199,22 +219,6 @@ export class ProjectStore {
     this.preference.setZeitToken(zeitToken);
     this.preference.setPort(specObj.server.port);
     appStore.initializeFromObject(specObj.endpoints);
-  }
-
-  syncRecentProjects() {
-    updateRecentProjects(
-      this.recentProjects.map(project => ({
-        name: project.name,
-        path: project.path
-      }))
-    );
-  }
-
-  @action.bound
-  closeProject() {
-    this.savedUrl = "";
-    appStore.reset();
-    viewState.openProjectIntroDialog();
   }
 }
 
