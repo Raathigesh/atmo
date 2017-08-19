@@ -129,7 +129,10 @@ export default class Home extends React.Component<IHome, {}> {
             />
             <CloseConfirmation
               isOpen={view.isCloseConfirmationOpen}
-              onConfirmation={project.closeProject}
+              onConfirmation={() => {
+                project.closeProject();
+                view.closeCloseConfirmation();
+              }}
               onDecline={view.closeCloseConfirmation}
             />
           </Sidebar.Pusher>

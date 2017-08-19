@@ -55,7 +55,8 @@ response.send({
 
     return {
       contentType: this.contentType,
-      content: eval(`(${content})`)
+      content: eval(`(${content})`),
+      rawContent: content
     };
   }
 

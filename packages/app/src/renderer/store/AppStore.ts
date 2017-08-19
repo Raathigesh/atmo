@@ -58,7 +58,7 @@ export default class AppStore {
       endpoint.setResponseCode(ep.statusCode);
       endpoint.setUrl(ep.url);
       endpoint.response.setType(ep.response.contentType);
-      endpoint.response.setResponseContent(ep.response.content);
+      endpoint.response.setResponseContent(ep.response.rawContent);
 
       for (let header of ep.headers) {
         endpoint.headers.addHeader(header.key, header.value);
