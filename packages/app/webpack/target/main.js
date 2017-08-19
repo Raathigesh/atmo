@@ -25,7 +25,12 @@ const config = (module.exports = merge(
       devtoolModuleFilenameTemplate: "[absolute-resource-path]"
     },
 
-    plugins: [new CopyWebpackPlugin([{ from: "./package.json" }])]
+    plugins: [
+      new CopyWebpackPlugin([
+        { from: "./package.json" },
+        { from: "./src/assets" }
+      ])
+    ]
   },
   // If production, use clean from production config
   common.isProduction ? {} : common.parts.clean(common.paths.build),

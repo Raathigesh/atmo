@@ -35,6 +35,6 @@ const config = (module.exports = merge(
   common.parts.loadImages(),
   common.parts.loadFonts(),
   common.parts.lint(),
-  common.isProduction ? common.parts.minify() : {},
+  // common.isProduction ? common.parts.minify() : {},
   common.isProduction ? common.parts.extractCss() : {}
 ));

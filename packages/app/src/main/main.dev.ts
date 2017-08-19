@@ -56,7 +56,8 @@ app.on("ready", async () => {
     height: 728,
     webPreferences: {
       webSecurity: false
-    }
+    },
+    icon: join(__dirname, "assets/icons/png/64x64.png")
   });
 
   mainWindow.loadURL(

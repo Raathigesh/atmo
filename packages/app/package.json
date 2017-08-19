@@ -11,8 +11,10 @@
     "dev-main": "webpack --watch --config ./webpack/target/main",
     "dev-renderer": "webpack-dev-server --config ./webpack/target/renderer",
     "dev": "concurrently \"npm run dev-renderer\" \"npm run dev-main\"",
-    "app": "electron-packager ./app Atmo",
-    "shipit": "npm run build && npm run app"
+    "app": "electron-packager --icon=src/assets/icons/win/icon.ico ./app Atmo",
+    "app-mac": "electron-packager --icon=src/assets/icons/mac/icon.icns ./app Atmo",
+    "shipit": "npm run build && npm run app",
+    "shipit-mac": "npm run build && npm run app-mac"
   },
   "repository": "git@github.com:Raathigesh/atmo.git",
   "author": "Raathigeshan <raathigesh92@gmail.com>",
