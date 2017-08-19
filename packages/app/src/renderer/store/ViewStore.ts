@@ -4,6 +4,7 @@ export default class ViewStore {
   @observable isProjectPreferenceOpen = false;
   @observable isProjectIntro = true;
   @observable isRemoteDeployOpen = false;
+  @observable isCloseConfirmationOpen = false;
 
   @action.bound
   openProjectPreferenceDialog() {
@@ -33,6 +34,16 @@ export default class ViewStore {
   @action.bound
   closeProjectIntroDialog() {
     this.isProjectIntro = false;
+  }
+
+  @action.bound
+  openCloseConfirmation() {
+    this.isCloseConfirmationOpen = true;
+  }
+
+  @action.bound
+  closeCloseConfirmation() {
+    this.isCloseConfirmationOpen = false;
   }
 }
 

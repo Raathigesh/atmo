@@ -46,9 +46,16 @@ response.send({
   }
 
   toJson() {
+    let content = null;
+    if (!this.content) {
+      content = "{}";
+    } else {
+      content = this.content;
+    }
+
     return {
       contentType: this.contentType,
-      content: this.content
+      content: eval(`(${content})`)
     };
   }
 

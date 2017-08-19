@@ -30,7 +30,7 @@ interface IEditor {
 }
 
 function isPrettifyAvailable(mode) {
-  return mode === "json" || mode === "javascript";
+  return mode === "javascript";
 }
 
 function Editor({ className, mode, code, onChange, onPrettify }: IEditor) {

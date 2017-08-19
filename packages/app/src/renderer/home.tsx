@@ -27,6 +27,7 @@ import Notify from "./components/Notification";
 import RemoteDeploy from "./components/RemoteDeploy";
 import { bind } from "decko";
 import KeyHandler from "./components/KeyHandler";
+import CloseConfirmation from "./components/CloseConfirmation";
 
 const Pushable = styled(Sidebar.Pushable)`
   overflow-x: visible !important;
@@ -78,7 +79,7 @@ export default class Home extends React.Component<IHome, {}> {
             save={project.save}
             deploy={project.deploy}
             remoteDeploy={view.openRemoteDeployDialog}
-            closeProject={project.closeProject}
+            closeProject={view.openCloseConfirmation}
           />
           <Sidebar.Pusher>
             <Notify message={notification.message} level={notification.level} />
@@ -125,6 +126,11 @@ export default class Home extends React.Component<IHome, {}> {
               isFetching={project.deployments.isFetching}
               fetchDeployments={project.deployments.getRecentDeployments}
               isTokenConfigured={project.preference.isZeitTokenConfigured}
+            />
+            <CloseConfirmation
+              isOpen={view.isCloseConfirmationOpen}
+              onConfirmation={project.closeProject}
+              onDecline={view.closeCloseConfirmation}
             />
           </Sidebar.Pusher>
         </Sidebar.Pushable>

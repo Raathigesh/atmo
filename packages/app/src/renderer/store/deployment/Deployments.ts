@@ -59,12 +59,12 @@ export default class Deployments {
     return this.now
       .createDeployment({
         package: {
-          name: this.name,
+          name: this.name.replace(/\s/g, "_"),
           dependencies: {
-            "atmo-core": "0.1.0"
+            "atmo-core": "0.3.0"
           },
           scripts: {
-            start: "node index"
+            start: "node index.js"
           }
         },
         "index.js": `require("atmo-core").default().start(JSON.parse('${JSON.stringify(

@@ -29,6 +29,14 @@ interface IPreference {
   fetchDeployments: () => void;
 }
 
+function prefixProtocol(url) {
+  if (!/^https?:\/\//i.test(url)) {
+    return `http://${url}`;
+  }
+
+  return url;
+}
+
 const RemoteDeploy = ({
   projectName,
   open,
@@ -80,10 +88,10 @@ const RemoteDeploy = ({
                       <Table.Cell>
                         <a
                           onClick={() => {
-                            openInBrowser(deployment.url);
+                            openInBrowser(prefixProtocol(deployment.url));
                           }}
                         >
-                          {deployment.url}
+                          {prefixProtocol(deployment.url)}
                         </a>
                       </Table.Cell>
                       <Table.Cell>
