@@ -21,6 +21,9 @@ Atmo makes creating mock web services for demos, presentations and experiments r
 
 > Mac
 
+## Get atmo classic
+You are looking at the new Atmo, which is an electron app. But the initial version was a CLI tool. [Find atmo classic here](https://github.com/Raathigesh/atmo/tree/classic).
+
 ## Contribute
 ### Installing dependencies
 ```sh
