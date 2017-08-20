@@ -39,7 +39,6 @@ export default class Preference {
 
   toJson() {
     return {
-      zeitToken: this.zeitToken,
       certificatePath: this.certificatePath,
       keyPath: this.keyPath,
       assetsDirectory: this.assetsDirectory

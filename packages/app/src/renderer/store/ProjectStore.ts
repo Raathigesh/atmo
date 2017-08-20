@@ -241,7 +241,6 @@ export class ProjectStore {
     this.preference.setAssetsDirectory(assetsDirectory);
     this.preference.setCertificatePath(certificatePath);
     this.preference.setKeyPath(keyPath);
-    this.preference.setZeitToken(zeitToken);
     this.preference.setPort(specObj.server.port);
     appStore.initializeFromObject(specObj.endpoints);
   }
