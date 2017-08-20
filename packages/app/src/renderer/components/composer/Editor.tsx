@@ -60,19 +60,7 @@ function Editor({
         value={code}
         onChange={onChange}
       />
-      <Footer>
-        {isPrettifyAvailable(mode) &&
-          <PrettifyButton
-            compact
-            size="mini"
-            content="Prettify"
-            icon="code"
-            labelPosition="right"
-            onClick={() => {
-              onPrettify();
-            }}
-          />}
-      </Footer>
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,7 @@
-const { ipcRenderer } = require("electron");
+const ipcRenderer = {
+  on: (name: string, call?: any) => {},
+  send: (event: string, obj?: any) => {}
+};
 
 interface IHandlerOptions {
   hello: (

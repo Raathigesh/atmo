@@ -2,7 +2,7 @@ import { observable, action } from "mobx";
 
 export default class ViewStore {
   @observable isProjectPreferenceOpen = false;
-  @observable isProjectIntro = true;
+  @observable isProjectIntro = false;
   @observable isRemoteDeployOpen = false;
   @observable isCloseConfirmationOpen = false;
 
@@ -38,7 +38,7 @@ export default class ViewStore {
 
   @action.bound
   openCloseConfirmation() {
-    this.isCloseConfirmationOpen = true;
+    // this.isCloseConfirmationOpen = true;
   }
 
   @action.bound

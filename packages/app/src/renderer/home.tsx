@@ -13,7 +13,6 @@ import {
   Dropdown,
   Label
 } from "semantic-ui-react";
-import DevTools from "mobx-react-devtools";
 import Side from "./components/sidebar/Sidebar";
 import ProjectPreference from "./components/preference/Preference";
 import Endpoint from "./store/endpoint/Endpoint";
@@ -83,18 +82,12 @@ export default class Home extends React.Component<IHome, {}> {
           />
           <Sidebar.Pusher>
             <Notify message={notification.message} level={notification.level} />
-            <KeyHandler
-              onDeploy={project.deploy}
-              onEndpoint={state.addEndpoint}
-              onSave={project.save}
-            >
-              <Composer
-                baseUrl={project.baseUrl}
-                onUrlClick={project.openUrl}
-                endpoint={state.currentEndpoint}
-                setUrl={state.currentEndpoint.setUrl}
-              />
-            </KeyHandler>
+            <Composer
+              baseUrl={project.baseUrl}
+              onUrlClick={project.openUrl}
+              endpoint={state.currentEndpoint}
+              setUrl={state.currentEndpoint.setUrl}
+            />
             <ProjectPreference
               open={view.isProjectPreferenceOpen}
               setZeitToken={project.setZeitToken}

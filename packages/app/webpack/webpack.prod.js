@@ -12,7 +12,6 @@ const config = (module.exports = merge.smart(
   rendererTarget,
   {
     // Use same target for both main and renderer processes
-    target: "electron",
     devtool: "source-map"
   },
   common.parts.clean(common.paths.build),

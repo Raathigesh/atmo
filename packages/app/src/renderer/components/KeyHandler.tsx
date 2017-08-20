@@ -1,5 +1,4 @@
 import * as React from "react";
-import { HotKeys } from "react-hotkeys";
 
 interface IKeyHandler {
   onEndpoint: () => void;
@@ -26,9 +25,5 @@ export default function KeyHandler({
     newEndpoint: onEndpoint
   };
 
-  return (
-    <HotKeys keyMap={keyMap} handlers={handlers}>
-      {children}
-    </HotKeys>
-  );
+  return <div />;
 }

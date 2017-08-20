@@ -23,9 +23,15 @@ const spec: ISpec = {
 
 const server = atmoServer();
 
-server.start(spec).then(() => {
-  console.log("Server started..");
-});
+server
+  .start(
+    JSON.parse(
+      '{"name":"Atmo","endpoints":[{"url":"/","method":"get","headers":[{"key":"Content-Type","value":"application/json"}],"response":{"contentType":"json","content":{"sample":45}},"statusCode":"200","delay":0}],"server":{"port":9000,"staticFolder":"","certificatePath":"","keyPath":""},"preference":{"zeitToken":"1ZpKjO1Oh57uF1ofotxMID2h","certificatePath":"","keyPath":"","assetsDirectory":""}}'
+    )
+  )
+  .then(() => {
+    console.log("Server started..");
+  });
 
 server.start(spec).then(() => {
   console.log("Server started again..");
