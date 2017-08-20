@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="./docs/atmo-logo.png" alt="Atmo" >
   <h3 align="center">Mock data for your prototypes and demos</h3>
-  <img src="./docs/screen.png" alt="Atmo" style="margin-top: 15px">
+  <img src="./docs/atmo-screen.png" alt="Atmo" style="margin-top: 15px">
 
 </h1>
 
