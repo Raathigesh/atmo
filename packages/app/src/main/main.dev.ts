@@ -46,7 +46,6 @@ app.on("ready", async () => {
     onDeploy: (spec: any, event: any) => {
       server.start(spec).then((baseUrl: string) => {
         event.sender.send("deployed", baseUrl);
-        console.log("redeployed..");
       });
     }
   });
