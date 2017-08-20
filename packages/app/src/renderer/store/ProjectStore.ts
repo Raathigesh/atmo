@@ -24,6 +24,7 @@ import MessageHandler, {
 export interface IRecentProject {
   name: string;
   path: string;
+  createdDate: string;
 }
 
 export class ProjectStore {
@@ -69,7 +70,7 @@ export class ProjectStore {
       },
       onSuccessfulProjectSave: (name: string, path: string) => {
         this.savedUrl = path;
-        this.setRecentProject(name, path);
+        this.setRecentProject(name, path, new Date().toISOString());
         this.syncRecentProjects();
         notification.success("Your changes have been saved");
       }
@@ -103,25 +104,48 @@ export class ProjectStore {
   }
 
   @action.bound
-  public setRecentProject(name: string, path: string) {
-    if (
-      this.recentProjects.filter(project => project.path === path).length === 0
-    ) {
+  public setRecentProject(name: string, path: string, createdDate: string) {
+    const filters = this.recentProjects.filter(
+      project => project.path === path
+    );
+
+    if (filters.length === 0) {
       this.recentProjects.push({
         name,
-        path
+        path,
+        createdDate
       });
+    } else {
+      const projectToUpdate = filters[0];
+      projectToUpdate.name = name;
+      projectToUpdate.createdDate = createdDate;
     }
+    this.sortRecentProjects();
   }
 
   @action.bound
   public setRecentProjects(recentProjects: any[]) {
     this.recentProjects.clear();
-    if (recentProjects) {
-      recentProjects.map(project => {
+    if (!recentProjects) {
+      return;
+    }
+
+    const updatedRecentProjects = recentProjects
+      .filter((item, i) => i < 5)
+      .forEach(project => {
         this.recentProjects.push(project);
       });
-    }
+
+    this.sortRecentProjects();
+  }
+
+  @action.bound
+  private sortRecentProjects() {
+    this.recentProjects = this.recentProjects.sort((a, b) => {
+      if (new Date(b.createdDate) < new Date(a.createdDate)) return -1;
+      if (new Date(b.createdDate) > new Date(a.createdDate)) return 1;
+      return 0;
+    });
   }
 
   @action.bound
@@ -192,7 +216,8 @@ export class ProjectStore {
     updateRecentProjects(
       this.recentProjects.map(project => ({
         name: project.name,
-        path: project.path
+        path: project.path,
+        createdDate: project.createdDate
       }))
     );
   }
