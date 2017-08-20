@@ -50,7 +50,17 @@ function AdvancedPreference({
 
       <Header size="tiny" dividing>
         Certificate
-        <Header.Subheader>Configure SSL certificates</Header.Subheader>
+        <Header.Subheader>
+          {`Configure SSL. `}
+          <a
+            href="#"
+            onClick={() => {
+              onOpenUrl("https://zeit.co/account/tokens");
+            }}
+          >
+            Here's how.
+          </a>
+        </Header.Subheader>
       </Header>
 
       <Input

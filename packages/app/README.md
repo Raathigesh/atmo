@@ -1,15 +1,33 @@
 <h1 align="center">
-  Atmo
+  <img src="./docs/logo.png" alt="Atmo" >
+  <h3 align="center">Mock data for your prototypes and demos</h3>
+  <img src="./docs/screen.png" alt="Atmo" style="margin-top: 15px">
+
 </h1>
 
-Atmo makes creating mock web services for demos, presentations and experiments ridiculously easy. It's getting even better with this full rewrite.
+Atmo makes creating mock web services for demos, presentations and experiments ridiculously easy.
 
-## Installing dependencies
+## Features
+- Mock Http endpoints
+- SSL support
+- Static assets directory
+- Returns JSON/XML/Text
+- Write custom scripts with JS
+- Deploy with a single click (via Zeit's Now)
+
+## Download
+
+> Windows
+
+> Mac
+
+## Contribute
+### Installing dependencies
 ```sh
 npm install
 ```
 
-## Running the build
+### Running the build
 Following will start building the scripts for main and renderer processes.
 
 ```sh
@@ -21,4 +39,7 @@ Open an another console and run the following command to start the shell.
 ```sh
 npm start
 ```
+
+## License
+MIT © [Raathigeshan](https://twitter.com/Raathigeshan)
 
