@@ -26,6 +26,7 @@ interface IEditor {
   code: string;
   onChange: (code: string) => void;
   className?: string;
+  width: number;
   onPrettify: () => void;
 }
 
@@ -33,7 +34,14 @@ function isPrettifyAvailable(mode) {
   return mode === "javascript";
 }
 
-function Editor({ className, mode, code, onChange, onPrettify }: IEditor) {
+function Editor({
+  className,
+  mode,
+  code,
+  width,
+  onChange,
+  onPrettify
+}: IEditor) {
   return (
     <div>
       <AceEditor
@@ -41,10 +49,14 @@ function Editor({ className, mode, code, onChange, onPrettify }: IEditor) {
         fontSize={14}
         theme="github"
         name="UNIQUE_ID_OF_DIV"
-        editorProps={{ $blockScrolling: true }}
+        editorProps={{
+          $blockScrolling: true,
+          hScrollBarAlwaysVisible: true
+        }}
         className={className}
+        wrapEnabled={false}
+        width={`calc(100vw - ${width + 260}px)`}
         height="calc(100vh - 40px)"
-        width="100%"
         value={code}
         onChange={onChange}
       />

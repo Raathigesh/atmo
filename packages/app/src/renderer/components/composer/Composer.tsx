@@ -34,58 +34,75 @@ const ControlPanel = styled.div`
   height: 100%;
 `;
 
-const Composer = ({ endpoint, baseUrl, onUrlClick }: IComponser) => {
-  return (
-    <ComposerCard>
-      <SplitPanel
-        split="vertical"
-        defaultSize={600}
-        paneStyle={{ overflow: "auto" }}
-      >
-        <ControlPanel>
-          <Segment basic>
-            <Url
-              baseUrl={baseUrl}
-              url={endpoint.url}
-              method={endpoint.method}
-              onUrlChange={endpoint.setUrl}
-              onMethodChange={endpoint.setMethod}
-              onUrlClick={onUrlClick}
-            />
+class Composer extends React.Component<IComponser, { width: number }> {
+  constructor() {
+    super();
+    this.state = {
+      width: 600
+    };
+  }
 
-            <Headers
-              headers={endpoint.headers.headers}
-              currentEndpoint={endpoint}
-            />
-
-            <Section title="Response Type">
-              <Response
-                activeItem={endpoint.response.contentType}
-                setActiveItem={endpoint.changeResponseType}
+  render() {
+    const { endpoint, baseUrl, onUrlClick } = this.props;
+    return (
+      <ComposerCard>
+        <SplitPanel
+          split="vertical"
+          defaultSize={600}
+          paneStyle={{ overflow: "auto" }}
+          minSize={490}
+          onChange={size => {
+            this.setState({
+              width: size
+            });
+          }}
+        >
+          <ControlPanel>
+            <Segment basic>
+              <Url
+                baseUrl={baseUrl}
+                url={endpoint.url}
+                method={endpoint.method}
+                onUrlChange={endpoint.setUrl}
+                onMethodChange={endpoint.setMethod}
+                onUrlClick={onUrlClick}
               />
-            </Section>
 
-            <Section title="Response Code">
-              <ResponseCode
-                responseCode={endpoint.statusCode}
-                setResponseCode={endpoint.setResponseCode}
+              <Headers
+                headers={endpoint.headers.headers}
+                currentEndpoint={endpoint}
               />
-            </Section>
 
-            <Delay value={endpoint.delay} onChange={endpoint.setDelay} />
-          </Segment>
-        </ControlPanel>
-        <div>
-          <Editor
-            mode={endpoint.response.typeForEditor}
-            code={endpoint.response.content}
-            onChange={endpoint.response.setResponseContent}
-            onPrettify={endpoint.response.prettifyResponse}
-          />
-        </div>
-      </SplitPanel>
-    </ComposerCard>
-  );
-};
+              <Section title="Response Type">
+                <Response
+                  activeItem={endpoint.response.contentType}
+                  setActiveItem={endpoint.changeResponseType}
+                />
+              </Section>
+
+              <Section title="Response Code">
+                <ResponseCode
+                  responseCode={endpoint.statusCode}
+                  setResponseCode={endpoint.setResponseCode}
+                />
+              </Section>
+
+              <Delay value={endpoint.delay} onChange={endpoint.setDelay} />
+            </Segment>
+          </ControlPanel>
+          <div>
+            <Editor
+              mode={endpoint.response.typeForEditor}
+              code={endpoint.response.content}
+              width={this.state.width}
+              onChange={endpoint.response.setResponseContent}
+              onPrettify={endpoint.response.prettifyResponse}
+            />
+          </div>
+        </SplitPanel>
+      </ComposerCard>
+    );
+  }
+}
 
 export default observer(Composer);
