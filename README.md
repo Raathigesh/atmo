@@ -1,41 +1,45 @@
 <h1 align="center">
-  Atmo v2
+  <img src="./docs/logo.png" alt="Atmo" >
+  <h3 align="center">Mock data for your prototypes and demos</h3>
+  <img src="./docs/screen.png" alt="Atmo" style="margin-top: 15px">
+
 </h1>
 
-Atmo has two packages as follows and uses lerna to manages them in a single repository
+Atmo makes creating mock web services for demos, presentations and experiments ridiculously easy.
 
-- app - The electron app
-- core - The core API server
+## Features
+- Mock Http endpoints
+- SSL support
+- Static assets directory
+- Returns JSON/XML/Text
+- Write custom scripts with JS
+- Deploy with a single click (via Zeit's Now)
 
-## Installing lerna
-You have to install lerna globally
+## Download
+
+> Windows
+
+> Mac
+
+## Contribute
+### Installing dependencies
 ```sh
-npm install -g lerna
+npm install
 ```
 
-## Installing dependencies
-Since the repository is managed by lerna, let lerna install the dependencies for all the packages. Execute the following command.
-```sh
-lerna bootstrap
-```
-
-## Starting developement
-Go into the app directory
-```sh
-cd packages\app
-```
-
-Run the following commands in two separate consoles
-
+### Running the build
 Following will start building the scripts for main and renderer processes.
+
 ```sh
 npm run dev
 ```
 
 Open an another console and run the following command to start the shell.
+
 ```sh
 npm start
 ```
 
-Now you shoudl see the electron app launch. 
+## License
+MIT © [Raathigeshan](https://twitter.com/Raathigeshan)
 
