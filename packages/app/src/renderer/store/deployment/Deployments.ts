@@ -56,6 +56,11 @@ export default class Deployments {
   @action.bound
   deploy(spec: any) {
     this.isDeploying = true;
+
+    for (const endpoint of spec.endpoints) {
+      delete endpoint.response.rawContent;
+    }
+
     return this.now
       .createDeployment({
         package: {
@@ -74,6 +79,9 @@ export default class Deployments {
       .then(() => {
         this.isDeploying = false;
         this.getRecentDeployments();
+      })
+      .catch(() => {
+        this.isDeploying = false;
       });
   }
 }

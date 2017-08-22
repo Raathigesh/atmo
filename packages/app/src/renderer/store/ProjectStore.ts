@@ -202,6 +202,11 @@ export class ProjectStore {
     } else {
       this.name = name;
     }
+
+    if (appStore.endpoints.length === 0) {
+      const initialEndpoint = appStore.addEndpoint("/");
+      initialEndpoint.headers.setJsonContentType();
+    }
   }
 
   @action.bound
