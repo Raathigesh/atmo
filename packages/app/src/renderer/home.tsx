@@ -13,7 +13,6 @@ import {
   Dropdown,
   Label
 } from "semantic-ui-react";
-import DevTools from "mobx-react-devtools";
 import Side from "./components/sidebar/Sidebar";
 import ProjectPreference from "./components/preference/Preference";
 import Endpoint from "./store/endpoint/Endpoint";
@@ -25,7 +24,6 @@ import Preference from "./store/Preference";
 import { Notification } from "./store/NotificationStore";
 import Notify from "./components/Notification";
 import RemoteDeploy from "./components/RemoteDeploy";
-import { bind } from "decko";
 import KeyHandler from "./components/KeyHandler";
 import CloseConfirmation from "./components/CloseConfirmation";
 
@@ -56,12 +54,11 @@ interface IHome {
 @inject("notification")
 @observer
 export default class Home extends React.Component<IHome, {}> {
-  @bind
-  handleCreateNewProject(projectName: string) {
+  handleCreateNewProject = (projectName: string) => {
     const { view, project } = this.props;
     view.closeProjectIntroDialog();
     project.createNewProject(projectName);
-  }
+  };
 
   render() {
     const { state, view, project, notification } = this.props;

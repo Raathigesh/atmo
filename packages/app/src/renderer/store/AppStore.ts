@@ -1,5 +1,4 @@
 import { observable, action, computed, IObservableArray } from "mobx";
-import { bind } from "decko";
 import Endpoint from "./endpoint/Endpoint";
 import projectStore from "./ProjectStore";
 
@@ -12,14 +11,12 @@ export default class AppStore {
     initialEndpoint.headers.setJsonContentType();
   }
 
-  @bind
-  @action
+  @action.bound
   setCurrentEndpoint(id: string) {
     this.currentEndpoint = this.endpoints.find(endpoint => endpoint.id === id);
   }
 
-  @bind
-  @action
+  @action.bound
   addEndpoint(url: string = "") {
     const endpoint = new Endpoint();
     endpoint.setUrl(url);
@@ -29,15 +26,13 @@ export default class AppStore {
     return endpoint;
   }
 
-  @bind
-  @action
+  @action.bound
   deleteEndpoint(id: string) {
     this.setCurrentEndpoint(this.endpoints[0].id);
     this.endpoints.remove(this.endpoints.find(endpoint => endpoint.id === id));
   }
 
-  @bind
-  @action
+  @action.bound
   moveEndpoint(fromIndex: number, toIndex: number) {
     this.endpoints.move(fromIndex, toIndex);
   }

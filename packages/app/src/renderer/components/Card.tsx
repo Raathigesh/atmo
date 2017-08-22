@@ -1,5 +1,4 @@
 import * as React from "react";
-import { css } from "glamor";
 
 interface ICard {
   className?: string;

@@ -8,7 +8,6 @@ import {
   SortableHandle,
   arrayMove
 } from "react-sortable-hoc";
-(window as any).Perf = require("react-addons-perf");
 
 interface IUrl {
   id: string;
@@ -47,7 +46,6 @@ const Url = ({
       as="a"
       name="search"
       onClick={() => {
-        (window as any).Perf.start();
         onClick(id);
       }}
       active={active}

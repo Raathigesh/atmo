@@ -1,5 +1,4 @@
 import { observable, action } from "mobx";
-import { bind } from "decko";
 
 export class Notification {
   @observable level: string = "info";

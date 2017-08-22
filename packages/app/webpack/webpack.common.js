@@ -85,7 +85,7 @@ const parts = (exports.parts = {
       loaders: [
         {
           test: /\.js?$/,
-          exclude: /node_modules/,
+          include: /prettier/,
           use: {
             loader: "babel-loader",
             options: {
@@ -111,11 +111,11 @@ const parts = (exports.parts = {
   // after using setFreeVariable
   minify: () => ({
     plugins: [
-      new webpack.optimize.UglifyJsPlugin({
+      /*new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false
         }
-      })
+      }) */
     ]
   }),
 

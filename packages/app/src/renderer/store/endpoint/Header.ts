@@ -1,6 +1,5 @@
 import { observable, action } from "mobx";
 const shortid = require("shortid");
-import { bind } from "decko";
 
 export default class Header {
   @observable id: string = "";
@@ -15,20 +14,17 @@ export default class Header {
     this.active = active;
   }
 
-  @bind
-  @action
+  @action.bound
   setKey(value: string) {
     this.key = value;
   }
 
-  @bind
-  @action
+  @action.bound
   setValue(value: string) {
     this.value = value;
   }
 
-  @bind
-  @action
+  @action.bound
   toggleActive() {
     this.active = !this.active;
   }

@@ -1,5 +1,4 @@
 import { observable, action, computed } from "mobx";
-import { bind } from "decko";
 const prettier = require("prettier");
 export type ResponseType = "json" | "xml" | "javascript" | "text";
 
