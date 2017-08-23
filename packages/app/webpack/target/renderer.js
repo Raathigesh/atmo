@@ -28,7 +28,7 @@ const config = (module.exports = merge(
     join(common.paths.source, "renderer/index.html")
   ),
   common.parts.compileTypescript(),
-  common.parts.compileJavaScript(),
+  common.isProduction ? common.parts.compileJavaScript() : {},
   common.isProduction
     ? common.parts.setupProdStyles()
     : common.parts.setupStyles(),

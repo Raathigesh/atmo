@@ -24,24 +24,33 @@ export default class Deployments {
       .then(deployments => {
         this.recentDeployments.clear();
 
-        deployments
-          .filter(deployment => deployment.name === this.name)
-          .map(deployment => {
-            this.recentDeployments.push(
-              new Deployment(
-                deployment.uid,
-                deployment.name,
-                deployment.url,
-                deployment.created,
-                this.now
-              )
-            );
-          });
+        deployments.filter((deployment, i) => i < 10).map(deployment => {
+          this.recentDeployments.push(
+            new Deployment(
+              deployment.uid,
+              deployment.name,
+              deployment.url,
+              deployment.created,
+              this.now
+            )
+          );
+        });
+
+        this.sortDeployments();
         this.isFetching = false;
       })
       .catch(() => {
         this.isFetching = false;
       });
+  }
+
+  @action.bound
+  sortDeployments() {
+    this.recentDeployments = this.recentDeployments.sort((a, b) => {
+      if (new Date(b.date) < new Date(a.date)) return -1;
+      if (new Date(b.date) > new Date(a.date)) return 1;
+      return 0;
+    });
   }
 
   @action.bound

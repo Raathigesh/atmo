@@ -10,6 +10,7 @@ import {
   Segment,
   Message
 } from "semantic-ui-react";
+import styled from "styled-components";
 import Preference from "../store/Preference";
 import Deployment from "../store/deployment/Deployment";
 import { observer } from "mobx-react";
@@ -36,6 +37,8 @@ function prefixProtocol(url) {
 
   return url;
 }
+
+const DeploymentUrl = styled.a`cursor: pointer;`;
 
 const RemoteDeploy = ({
   projectName,
@@ -83,16 +86,23 @@ const RemoteDeploy = ({
                   return (
                     <Table.Row key={i}>
                       <Table.Cell>
-                        {deployment.date.toString()}
+                        {deployment.date.toLocaleString("en-us", {
+                          weekday: "long",
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit"
+                        })}
                       </Table.Cell>
                       <Table.Cell>
-                        <a
+                        <DeploymentUrl
                           onClick={() => {
                             openInBrowser(prefixProtocol(deployment.url));
                           }}
                         >
                           {prefixProtocol(deployment.url)}
-                        </a>
+                        </DeploymentUrl>
                       </Table.Cell>
                       <Table.Cell>
                         <Icon
@@ -107,6 +117,13 @@ const RemoteDeploy = ({
                   );
                 })}
               </Table.Body>
+              <Table.Footer fullWidth>
+                <Table.Row>
+                  <Table.HeaderCell colSpan="3">
+                    Shows the last 10 deployments.
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Footer>
             </Table>}
         </Segment>
       </Modal.Content>

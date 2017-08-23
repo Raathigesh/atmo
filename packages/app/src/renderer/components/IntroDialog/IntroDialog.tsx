@@ -78,6 +78,8 @@ function IntroDialog({
                     content="Create"
                     icon="right arrow"
                     labelPosition="right"
+                    basic
+                    color="orange"
                     onClick={() => {
                       onCreateProject(createProjectInput.inputRef.value);
                     }}
