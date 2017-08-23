@@ -46,16 +46,22 @@ response.send({
 
   toJson() {
     let content = null;
-    if (!this.content) {
+    if (!this.content && this.contentType === "json") {
       content = "{}";
     } else {
       content = this.content;
     }
 
+    if (this.contentType === "json") {
+      content = eval(`(${content})`);
+    } else {
+      content = btoa(this.content);
+    }
+
     return {
       contentType: this.contentType,
-      content: eval(`(${content})`),
-      rawContent: content
+      content,
+      rawContent: this.content
     };
   }
 

@@ -1,6 +1,7 @@
 const { default: NowClient } = require("now-client-isomorphic");
 import { observable, action, IObservableArray, runInAction } from "mobx";
 import Deployment from "./Deployment";
+import notifications from "../NotificationStore";
 
 export default class Deployments {
   now: any;
@@ -66,7 +67,7 @@ export default class Deployments {
         package: {
           name: this.name.replace(/\s/g, "_"),
           dependencies: {
-            "atmo-core": "0.3.0"
+            "atmo-core": "0.5.0"
           },
           scripts: {
             start: "node index.js"
@@ -81,6 +82,7 @@ export default class Deployments {
         this.getRecentDeployments();
       })
       .catch(() => {
+        notifications.error("Deployment failed!");
         this.isDeploying = false;
       });
   }

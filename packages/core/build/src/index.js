@@ -86,7 +86,7 @@ function addRoute(serverApp, endpoint) {
 function responseCallback(req, res, endpoint) {
     setHeaders(res, endpoint.headers);
     res.status(endpoint.statusCode);
-    var content = null;
+    var content = endpoint.response.content;
     if (endpoint.response.contentType !== "json") {
         content = atob(endpoint.response.content);
     }

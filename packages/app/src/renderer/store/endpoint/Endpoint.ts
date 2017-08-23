@@ -4,6 +4,7 @@ const shortid = require("shortid");
 import { bind } from "decko";
 import { observable, action, IObservableArray } from "mobx";
 import Headers from "./Headers";
+import initialJson from "./initialJsonContent";
 
 export default class Endpoint {
   @observable id: string;
@@ -17,7 +18,7 @@ export default class Endpoint {
   constructor() {
     this.id = shortid.generate();
     this.headers = new Headers();
-    this.response = new Response("json");
+    this.response = new Response("json", initialJson);
   }
 
   @action.bound

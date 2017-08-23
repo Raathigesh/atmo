@@ -104,7 +104,7 @@ function responseCallback(
   setHeaders(res, endpoint.headers);
   res.status(endpoint.statusCode);
 
-  let content = null;
+  let content = endpoint.response.content;
 
   if (endpoint.response.contentType !== "json") {
     content = atob(endpoint.response.content);
