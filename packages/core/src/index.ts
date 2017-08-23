@@ -6,6 +6,7 @@ import * as https from "https";
 const enableDestroy = require("server-destroy");
 // tslint:disable-next-line
 const Promise = require("bluebird");
+const atob = require("atob");
 import spec, { IEndpoint, IHeader } from "./spec";
 let app: express.Express;
 let server = null;
@@ -103,16 +104,18 @@ function responseCallback(
   setHeaders(res, endpoint.headers);
   res.status(endpoint.statusCode);
 
+  let content = null;
+
+  if (endpoint.response.contentType !== "json") {
+    content = atob(endpoint.response.content);
+  }
+
   if (endpoint.response.contentType === "javascript") {
     const request = req;
     const response = res;
-    if (typeof endpoint.response.content === "function") {
-      endpoint.response.content(req, res);
-    } else {
-      eval(endpoint.response.content);
-    }
+    eval(content);
   } else {
-    res.send(endpoint.response.content);
+    res.send(content);
   }
 }
 

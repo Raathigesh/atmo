@@ -1,6 +1,6 @@
 {
   "name": "atmo-core",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Core atmo api server",
   "engineStrict": true,
   "engines": {
@@ -32,9 +32,10 @@
     "url": "https://github.com/Raathigesh/atmo/issues"
   },
   "dependencies": {
+    "atob": "^2.0.3",
     "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "server-destroy": "^1.0.1",
-    "body-parser": "^1.17.2"
+    "server-destroy": "^1.0.1"
   }
 }

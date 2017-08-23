@@ -7,6 +7,7 @@ var http = require("http");
 var https = require("https");
 var enableDestroy = require("server-destroy");
 var Promise = require("bluebird");
+var atob = require("atob");
 var app;
 var server = null;
 function atmoServer() {
@@ -85,18 +86,17 @@ function addRoute(serverApp, endpoint) {
 function responseCallback(req, res, endpoint) {
     setHeaders(res, endpoint.headers);
     res.status(endpoint.statusCode);
+    var content = null;
+    if (endpoint.response.contentType !== "json") {
+        content = atob(endpoint.response.content);
+    }
     if (endpoint.response.contentType === "javascript") {
         var request = req;
         var response = res;
-        if (typeof endpoint.response.content === "function") {
-            endpoint.response.content(req, res);
-        }
-        else {
-            eval(endpoint.response.content);
-        }
+        eval(content);
     }
     else {
-        res.send(endpoint.response.content);
+        res.send(content);
     }
 }
 function setHeaders(res, headers) {
