@@ -24,7 +24,7 @@ import Preference from "./store/Preference";
 import { Notification } from "./store/NotificationStore";
 import Notify from "./components/Notification";
 import RemoteDeploy from "./components/RemoteDeploy";
-import KeyHandler from "./components/KeyHandler";
+import BindShortcuts from "./Shortcuts";
 import CloseConfirmation from "./components/CloseConfirmation";
 
 const Pushable = styled(Sidebar.Pushable)`
@@ -60,6 +60,27 @@ export default class Home extends React.Component<IHome, {}> {
     project.createNewProject(projectName);
   };
 
+  componentDidMount() {
+    const { view, project, state } = this.props;
+    BindShortcuts({
+      onNewEndpoint() {
+        if (!view.isProjectIntro) {
+          state.addEndpoint("/");
+        }
+      },
+      onSave() {
+        if (!view.isProjectIntro) {
+          project.save();
+        }
+      },
+      onDeploy() {
+        if (!view.isProjectIntro) {
+          project.deploy();
+        }
+      }
+    });
+  }
+
   render() {
     const { state, view, project, notification } = this.props;
     return (
@@ -80,18 +101,12 @@ export default class Home extends React.Component<IHome, {}> {
           />
           <Sidebar.Pusher>
             <Notify message={notification.message} level={notification.level} />
-            <KeyHandler
-              onDeploy={project.deploy}
-              onEndpoint={state.addEndpoint}
-              onSave={project.save}
-            >
-              <Composer
-                baseUrl={project.baseUrl}
-                onUrlClick={project.openUrl}
-                endpoint={state.currentEndpoint}
-                setUrl={state.currentEndpoint.setUrl}
-              />
-            </KeyHandler>
+            <Composer
+              baseUrl={project.baseUrl}
+              onUrlClick={project.openUrl}
+              endpoint={state.currentEndpoint}
+              setUrl={state.currentEndpoint.setUrl}
+            />
             <ProjectPreference
               open={view.isProjectPreferenceOpen}
               setZeitToken={project.setZeitToken}

@@ -1,7 +1,6 @@
 import Header from "./Header";
 import Response, { ResponseType } from "./Response";
 const shortid = require("shortid");
-import { bind } from "decko";
 import { observable, action, IObservableArray } from "mobx";
 import Headers from "./Headers";
 import initialJson from "./initialJsonContent";

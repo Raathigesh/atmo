@@ -27,6 +27,7 @@
     "electron-settings": "^3.1.1",
     "express": "^4.15.3",
     "less-plugin-rewrite-import": "^0.1.1",
+    "mousetrap": "^1.6.1",
     "now-client-isomorphic": "0.0.3",
     "prettier": "^1.5.3",
     "react-hotkeys": "^0.10.0",
@@ -89,6 +90,9 @@
     "webpack-merge": "^2.5.0"
   },
   "babel": {
-    "presets": ["env", "es2015"]
+    "presets": [
+      "env",
+      "es2015"
+    ]
   }
 }
