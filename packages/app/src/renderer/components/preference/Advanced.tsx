@@ -75,8 +75,8 @@ function AdvancedPreference({
             onClick={browseCertPath}
           />
         }
-        onChange={(event: any, value: any) => {
-          preference.setCertificatePath(value);
+        onChange={(event: any, data: any) => {
+          preference.setCertificatePath(data.value);
         }}
         value={preference.certificatePath}
       />
@@ -94,8 +94,8 @@ function AdvancedPreference({
           />
         }
         value={preference.keyPath}
-        onChange={(event: any, value: any) => {
-          preference.setKeyPath(value);
+        onChange={(event: any, data: any) => {
+          preference.setKeyPath(data.value);
         }}
       />
     </div>

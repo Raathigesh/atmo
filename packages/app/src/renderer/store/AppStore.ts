@@ -43,6 +43,10 @@ export default class AppStore {
     this.endpoints.clear();
   }
 
+  /**
+   * Re-initializes the store from the saved
+   * project file
+   */
   @action.bound
   initializeFromObject(endpoints) {
     this.reset();
@@ -63,6 +67,7 @@ export default class AppStore {
       this.endpoints.push(endpoint);
     }
 
+    // set the first endpoint as the selected one
     if (this.endpoints.length > 0) {
       this.setCurrentEndpoint(this.endpoints[0].id);
     }
