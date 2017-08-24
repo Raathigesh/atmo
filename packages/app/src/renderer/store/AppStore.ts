@@ -20,6 +20,7 @@ export default class AppStore {
   addEndpoint(url: string = "") {
     const endpoint = new Endpoint();
     endpoint.setUrl(url);
+    endpoint.headers.setJsonContentType();
 
     this.currentEndpoint = endpoint;
     this.endpoints.push(endpoint);
