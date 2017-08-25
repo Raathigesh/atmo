@@ -63,7 +63,7 @@ export default class MenuBuilder {
       ]
     };
     const subMenuAbout = {
-      label: "Electron",
+      label: "Atmo",
       submenu: [
         {
           label: "Quit",
@@ -75,7 +75,7 @@ export default class MenuBuilder {
       ]
     };
     const subMenuHelp = {
-      label: "Atmo",
+      label: "Help",
       submenu: [
         {
           label: "Learn More",
@@ -100,13 +100,13 @@ export default class MenuBuilder {
       ]
     };
 
-    return [subMenuAbout, subMenuHelp];
+    return [EditMenu, subMenuAbout, subMenuHelp];
   }
 
   buildDefaultTemplate() {
     const templateDefault = [
       {
-        label: "Atmo",
+        label: "Help",
         submenu: [
           {
             label: "Learn More",
