@@ -59,12 +59,7 @@ export default class MenuBuilder {
           label: "Select All",
           accelerator: "CmdOrCtrl+A",
           selector: "selectAll:"
-        }
-      ]
-    };
-    const subMenuAbout = {
-      label: "Atmo",
-      submenu: [
+        },
         {
           label: "Quit",
           accelerator: "Command+Q",
@@ -74,6 +69,7 @@ export default class MenuBuilder {
         }
       ]
     };
+
     const subMenuHelp = {
       label: "Help",
       submenu: [
@@ -100,7 +96,7 @@ export default class MenuBuilder {
       ]
     };
 
-    return [EditMenu, subMenuAbout, subMenuHelp];
+    return [EditMenu, subMenuHelp];
   }
 
   buildDefaultTemplate() {
