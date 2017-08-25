@@ -106,6 +106,7 @@ export default class Home extends React.Component<IHome, {}> {
               onUrlClick={project.openUrl}
               endpoint={state.currentEndpoint}
               setUrl={state.currentEndpoint.setUrl}
+              onDocumentation={project.openUrl}
             />
             <ProjectPreference
               open={view.isProjectPreferenceOpen}

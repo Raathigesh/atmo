@@ -15,7 +15,14 @@ const Footer = styled.div`
 `;
 
 const PrettifyButton = styled(Button)`
-  margin-left: 41px !important;
+  margin-left: 50px !important;
+  margin-top: 10px !important;
+  background: #767676 !important;
+  color: white !important;
+`;
+
+const DocumentationButton = styled(Button)`
+  margin-left: 20px !important;
   margin-top: 10px !important;
   background: #767676 !important;
   color: white !important;
@@ -28,6 +35,7 @@ interface IEditor {
   className?: string;
   width: number;
   onPrettify: () => void;
+  onDocumentation: (url: string) => void;
 }
 
 function isPrettifyAvailable(mode) {
@@ -40,7 +48,8 @@ function Editor({
   code,
   width,
   onChange,
-  onPrettify
+  onPrettify,
+  onDocumentation
 }: IEditor) {
   return (
     <div>
@@ -70,6 +79,19 @@ function Editor({
             labelPosition="right"
             onClick={() => {
               onPrettify();
+            }}
+          />}
+        {isPrettifyAvailable(mode) &&
+          <DocumentationButton
+            compact
+            size="mini"
+            content="Syntax guide"
+            icon="book"
+            labelPosition="right"
+            onClick={() => {
+              onDocumentation(
+                "https://github.com/Raathigesh/atmo/blob/next/packages/app/docs/custom-script.md"
+              );
             }}
           />}
       </Footer>

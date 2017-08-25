@@ -19,6 +19,7 @@ interface IComponser {
   endpoint: Endpoint;
   onUrlClick: (url: string) => void;
   setUrl: (url: string) => void;
+  onDocumentation: (url: string) => void;
 }
 
 const ComposerCard = styled(Card)`
@@ -97,6 +98,7 @@ class Composer extends React.Component<IComponser, { width: number }> {
               width={this.state.width}
               onChange={endpoint.response.setResponseContent}
               onPrettify={endpoint.response.prettifyResponse}
+              onDocumentation={this.props.onDocumentation}
             />
           </div>
         </SplitPanel>
