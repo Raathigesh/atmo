@@ -17,9 +17,15 @@ Atmo makes creating mock web services for demos, presentations and experiments r
 
 ## Download
 
-> Windows
+> [Windows](https://github.com/Raathigesh/atmo/releases/download/1.0.0/Atmo-win32-x64.zip)
 
-> Mac
+> [OS X](https://github.com/Raathigesh/atmo/releases/download/1.0.0/Atmo-darwin-x64.zip)
+
+## Shortcuts
+- > `Ctrl + N` | `Cmd + N` - Create a new endpoint
+- > `Ctrl + D` | `Cmd + D` - Deploy the project
+- > `Ctrl + S` | `Cmd + DS` - Save the project
+
 
 ## Get atmo classic
 You are looking at the new Atmo, which is an electron app. But the initial version was a CLI tool. [Find atmo classic here](https://github.com/Raathigesh/atmo/tree/classic).
