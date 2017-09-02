@@ -1,7 +1,7 @@
 import { observable, action, IObservableArray } from "mobx";
 const shortid = require("shortid");
 import { ResponseType } from "./Response";
-import Header from "./header";
+import Header from "./Header";
 
 export default class Headers {
   @observable headers: IObservableArray<Header> = observable([]);
