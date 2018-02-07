@@ -5,7 +5,7 @@ import SideBar from './SideBar';
 import HttpRequestPanel from './http/RequestPanel';
 import SocketPanel from './socket/SocketPanel';
 import GraphqlPanel from './graphql/GraphqlPanel';
-import JsonServerPanel from './jsonServer/jsonServerPanel';
+import JsonServerPanel from './jsonServer/JsonServerPanel';
 import LogPanel from './LogPanel';
 import {observer} from 'mobx-react';
 import Status from './Status';

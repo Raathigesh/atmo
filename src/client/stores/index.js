@@ -10,7 +10,7 @@ import SocketEndpoint from '../models/socket/SocketEndpoint';
 import GraphqlEndpoint from '../models/graphql/GraphqlEndpoint';
 import initialGraphqlSchema from '../models/graphql/InitialSchema';
 import JsonServerEndpoint from '../models/jsonServer/JsonServerEndpoint';
-import initialJsonServerDb from '../models/jsonServer/initialJsonServerDb';
+import initialJsonServerDb from '../models/jsonServer/InitialJsonServerDb';
 import ProxyEndpoint from '../models/proxy/ProxyEndpoint';
 import { initial, deploying, deployed, failed } from '../models/Statuses';
 import jsonStringfy from 'json-stringify-pretty-compact';
