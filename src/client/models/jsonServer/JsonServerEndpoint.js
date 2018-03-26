@@ -15,6 +15,10 @@ export default class JsonServerEndpoint {
     this.model = model;
   }
 
+  setUrl(url) {
+    this.url = url;
+  }
+
   @computed get displayEndpoint() {
     return this.url;
   }
