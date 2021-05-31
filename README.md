@@ -13,7 +13,7 @@ Atmo makes creating mock web services for demos, presentations and experiments r
 - Static assets directory
 - Returns JSON/XML/Text
 - Write custom scripts with JS
-- Deploy with a single click (via Zeit's Now)
+- Deploy with a single click (via Vercel)
 
 ## Download
 
